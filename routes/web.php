@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+Route::get('/dashboard', 'admin\AdminConroller@index')->name('dash');
+//Route::get('/dashboard', 'admin\AdminConroller@dashboard')->name('dash');
 
 Route::get('/', function () {
-    return view('front_end.index');
+    return view('welcome');
 });
