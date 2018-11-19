@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('front_end.index');
 });
