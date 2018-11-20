@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Student Management | Home :: IIT</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="student management" />
@@ -17,10 +17,12 @@
 
     <!-- font-awesome icons CSS -->
     <link href="{{asset('/')}}back_end/css/font-awesome.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
     <!-- //font-awesome icons CSS-->
 
     <!-- side nav css file -->
     <link href='{{asset('/')}}back_end/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+
     <!-- //side nav css file -->
 
     <!-- js-->
@@ -116,7 +118,12 @@
     <!-- //header-ends -->
 
     <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="main-page">
     @yield('body')
+
+        </div>
+    </div>
     <!--main content ends-->
 
     <!--footer-->

@@ -176,7 +176,7 @@
                 <li class="dropdown profile_details_drop">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <div class="profile_img">
-                            <span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
+                            <span class="prfil-img"><img src="{{asset('/')}}back_end/images/2.jpg" alt=""> </span>
                             <div class="user-name">
                                 <p>Admin Name</p>
                                 <span>Administrator</span>

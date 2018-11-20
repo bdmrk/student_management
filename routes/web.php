@@ -10,9 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Home index routing
+Route::get('/', 'front\HomeController@index')->name('home');
+
+//admin index routing
 Route::get('/dashboard', 'admin\AdminConroller@index')->name('dash');
 //Route::get('/dashboard', 'admin\AdminConroller@dashboard')->name('dash');
+Route::prefix('admin')->group (
+    function() {
+        Route::resource('studentAdd', 'admin\StudentController');
+    }
+);
 
-Route::get('/', function () {
-    return view('welcome');
-});

@@ -1,8 +1,7 @@
 @extends('admin.admin_master')
 
 @section('body')
-    <div id="page-wrapper">
-        <div class="main-page">
+
             <div class="col_3">
                 <div class="col-md-3 widget widget1">
                     <div class="r3_counter_box">
@@ -176,25 +175,25 @@
                         <!-- start content_slider -->
                         <div id="owl-demo" class="owl-carousel text-center">
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider1.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider2.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider2.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider3.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider3.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider4.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider4.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider5.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider5.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider6.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider6.jpg" alt="name">
                             </div>
                             <div class="item">
-                                <img class="lazyOwl img-responsive" data-src="images/slider7.jpg" alt="name">
+                                <img class="lazyOwl img-responsive" data-src="{{asset('/')}}back_end/images//slider7.jpg" alt="name">
                             </div>
 
                         </div>
@@ -209,7 +208,7 @@
                         <h2>Inbox</h2>
                         <div class="scrollbar" id="style-1">
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//1.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">Michael Chris</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -218,7 +217,7 @@
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/4.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//4.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">Alexander</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -227,7 +226,7 @@
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//3.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">Daniel Lucas</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -236,7 +235,7 @@
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/2.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//2.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">Jackson Jacob</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -245,7 +244,7 @@
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//1.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">David Samuel</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -255,7 +254,7 @@
                             </div>
 
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/4.jpg' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//4.jpg' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">laura Smith</a></h5>
                                     <p>Hey ! There I'm available.</p>
@@ -275,7 +274,7 @@
                         <h3>chat</h3>
                         <div class="scrollbar" id="style-3">
                             <div class="activity-row activity-row1">
-                                <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/><span>06:01 AM</span></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//1.jpg' class="img-responsive" alt=""/><span>06:01 AM</span></div>
                                 <div class="col-xs-5 activity-img1">
                                     <div class="activity-desc-sub">
                                         <h5>Michael Chris</h5>
@@ -293,11 +292,11 @@
                                         <p>Hi,How are you ? What about our next meeting?</p>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt=""/><span>06:02 AM</span></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//3.jpg' class="img-responsive" alt=""/><span>06:02 AM</span></div>
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="activity-row activity-row1">
-                                <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/><span>06:05 AM</span></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//1.jpg' class="img-responsive" alt=""/><span>06:05 AM</span></div>
                                 <div class="col-xs-5 activity-img1">
                                     <div class="activity-desc-sub">
                                         <h5>Michael Chris</h5>
@@ -315,7 +314,7 @@
                                         <p>Wow that's great</p>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt=""/><span>06:20 PM</span></div>
+                                <div class="col-xs-3 activity-img"><img src='{{asset('/')}}back_end/images//3.jpg' class="img-responsive" alt=""/><span>06:20 PM</span></div>
                                 <div class="clearfix"> </div>
                             </div>
                         </div>
@@ -389,6 +388,5 @@
 
             </div>
 
-        </div>
-    </div>
+
     @endsection
