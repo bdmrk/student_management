@@ -25,8 +25,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="grids.html"><i class="fa fa-angle-right"></i> Add Teachers</a></li>
-                        <li><a href="media.html"><i class="fa fa-angle-right"></i> Manage Teachers </a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Add Teachers</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Teachers </a></li>
                     </ul>
                 </li>
 
@@ -38,7 +38,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('studentAdd.index')}}"><i class="fa fa-angle-right"></i> Add Student</a></li>
-                        <li><a href="media.html"><i class="fa fa-angle-right"></i> Manage Student </a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Student </a></li>
                     </ul>
                 </li>
 
@@ -49,8 +49,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="grids.html"><i class="fa fa-angle-right"></i> Add Courses</a></li>
-                        <li><a href="media.html"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Add Courses</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
                     </ul>
                 </li>
             </ul>
