@@ -16,16 +16,16 @@
                     {{Form::open(['route'=>'studentAdd.index', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
-                        <label class="control-label col-md-4">First Name</label>
+                        <label class="control-label col-md-4" >First Name</label>
                         <div class="col-md-8">
-                            <input type="text" name="first_name" class="form-control"/>
+                            <input type="text" name="first_name" class="form-control" placeholder="Mahabubur Rahman"/>
                             <span class="text-danger">{{$errors->has('first_name') ? $errors->first('first_name') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Second Name</label>
                         <div class="col-md-8">
-                            <input type="text" name="second_name" class="form-control"/>
+                            <input type="text" name="second_name" class="form-control" placeholder="Kausar"/>
                             <span class="text-danger">{{$errors->has('second_name') ? $errors->first('second_name') : ''}}</span>
                         </div>
                     </div>
@@ -33,21 +33,21 @@
                     <div class="form-group">
                         <label class="control-label col-md-4">Date of Birth</label>
                         <div class="col-md-8">
-                            <input type="text" name="dob" class="form-control"/>
-                            <span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}}</span>
+                            <input type="text" name="dob" class="form-control" placeholder="18/03/1992"/>
+                            <span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}} </span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Contact Number</label>
                         <div class="col-md-8">
-                            <input type="text" name="contact_number" class="form-control"/>
+                            <input type="text" name="contact_number" class="form-control" placeholder="01839590972"/>
                             <span class="text-danger">{{$errors->has('contact_number') ? $errors->first('contact_number') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Email</label>
                         <div class="col-md-8">
-                            <input type="text" name="email" class="form-control"/>
+                            <input type="text" name="email" class="form-control" placeholder="hostkausar@gmail.com"/>
                             <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                         </div>
                     </div>
@@ -67,17 +67,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-4">Present Address</label>
+                        <label class="control-label col-md-4">Address</label>
                         <div class="col-md-8">
-                            <textarea type="text" name="present_address" class="form-control"> </textarea>
-                            <span class="text-danger">{{$errors->has('present_address') ? $errors->first('present_address') : ''}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Parmanent Address</label>
-                        <div class="col-md-8">
-                            <textarea type="text" name="parmanent_address" class="form-control"> </textarea>
-                            <span class="text-danger">{{$errors->has('parmanent_address') ? $errors->first('parmanent_address') : ''}}</span>
+                            <textarea type="text"id="editor" name="address" class="form-control"> </textarea>
+                            <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                         </div>
                     </div>
 
@@ -106,7 +99,7 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <input type="submit" value="Save" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Save Student" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
 

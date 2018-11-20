@@ -35,7 +35,7 @@ class Studentcontroller extends Controller
      */
     public function store(Request $request)
     {
-        return view('admin.students.student_add');
+        
     }
 
     /**

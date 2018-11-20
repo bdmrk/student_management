@@ -104,6 +104,14 @@
         });
     </script>
     <!-- //requried-jsfiles-for owl -->
+
+    <!--CK Editor-->
+    <script src="{{asset('/')}}back_end/ckeditor/ckeditor.js"></script>
+    <script src="{{asset('/')}}back_end/ckeditor/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/css/samples.css">
+    <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <!--CK Editor Ends-->
+
 </head>
 <body class="cbp-spmenu-push">
 <div class="main-content">
@@ -551,5 +559,10 @@
 <script src="{{asset('/')}}back_end/js/bootstrap.js"> </script>
 <!-- //Bootstrap Core JavaScript -->
 
+<!--CK Editor-->
+<script>
+    initSample();
+</script>
+<!--CK Editor-->
 </body>
 </html>
