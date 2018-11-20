@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h1><a class="navbar-brand" href="{{route('dash')}}"><span class="fas fa-chalkboard"></span> IIT<span class="dashboard_text">Student Dashboard</span></a></h1>
+            <h1><a class="navbar-brand" href="{{route('dash')}}"><span class="fas fa-chalkboard"></span> PGDIT, JU<span class="dashboard_text">Student Dashboard</span></a></h1>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="sidebar-menu">

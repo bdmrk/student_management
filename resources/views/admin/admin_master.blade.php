@@ -135,7 +135,9 @@
     <!--main content ends-->
 
     <!--footer-->
+    <div class="footer">
     @include('admin.includes.footer')
+    </div>
     <!--footer-->
 
 </div>
