@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="sidebar-menu">
-                
+
                 <li class="treeview">
                     <a href="{{route('dash')}}">
                         <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
