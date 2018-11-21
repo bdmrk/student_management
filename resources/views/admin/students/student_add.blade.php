@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="text-center text-success"> Student Register</h3>
+                    <h3 class="text-center "> Student Register</h3>
                 </div>
                 <div class="panel-body">
                     <h4 class="text-center text-success">{{Session::get('message')}}</h4>
@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4">Address</label>
                         <div class="col-md-8">
-                            <textarea type="text"id="editor" name="address" class="form-control"> </textarea>
+                            <textarea type="text" name="address" class="form-control"> </textarea>
                             <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                         </div>
                     </div>
