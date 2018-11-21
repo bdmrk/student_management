@@ -19,7 +19,13 @@ Route::get('/dashboard', 'admin\AdminConroller@index')->name('dash');
 //Route::get('/dashboard', 'admin\AdminConroller@dashboard')->name('dash');
 Route::prefix('admin')->group (
     function() {
-        Route::resource('studentAdd', 'admin\StudentController');
+        Route::resource('/studentAdd', 'admin\StudentController');
+        //Route::resource('/test', 'admin\Test');
+        Route::resource('/semester', 'admin\SemesterController');
     }
 );
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

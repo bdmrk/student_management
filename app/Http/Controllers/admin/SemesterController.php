@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Model\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class Studentcontroller extends Controller
+class SemesterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class Studentcontroller extends Controller
      */
     public function index()
     {
-        return view('admin.students.student_add');
+        //
     }
 
     /**
@@ -24,7 +25,7 @@ class Studentcontroller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.semester.create_semester');
     }
 
     /**
@@ -35,7 +36,13 @@ class Studentcontroller extends Controller
      */
     public function store(Request $request)
     {
-
+        $semester = new Semester();
+        $semester->semester_name = $request->input('semester_name');
+        $semester->start_date = $request->input('starting_date');
+        $semester->end_date = $request->ending_date;
+        $semester->publication_status = $request->publication_status;
+        $semester->save();
+        return 'success';
     }
 
     /**
