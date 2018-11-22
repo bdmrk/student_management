@@ -112,6 +112,8 @@
     <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <!--CK Editor Ends-->
 
+
+
 </head>
 <body class="cbp-spmenu-push">
 <div class="main-content">

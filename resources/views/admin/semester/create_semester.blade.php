@@ -39,10 +39,10 @@ Add Semester
 
 
                 <div class="form-group">
-                    <label class="control-label col-md-4">Publication Status</label>
+                    <label class="control-label col-md-4">Status</label>
                     <div class="col-md-8">
-                        <label><input type="radio"  checked name="publication_status" value="1"/>Published</label>
-                        <label><input type="radio"  name="publication_status" value="0"/>Unpublished</label>
+                        <label><input type="radio"  checked name="status" value="1"/>Active</label>
+                        <label><input type="radio"  name="status" value="0"/>Inactive</label>
                     </div>
                 </div>
 

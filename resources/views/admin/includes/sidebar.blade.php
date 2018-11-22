@@ -62,7 +62,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('semester.create')}}"><i class="fa fa-angle-right"></i> Add Semester</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Semester </a></li>
+                        <li><a href="{{route('semester.index')}}"><i class="fa fa-angle-right"></i> Manage Semester </a></li>
                     </ul>
                 </li>
 
