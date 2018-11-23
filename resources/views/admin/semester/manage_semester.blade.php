@@ -44,7 +44,7 @@
                                     <a href="{{route('semester.edit',['id'=>$semester->id])}})}}" class="btn btn-success btn-xs">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    <a href="{{route('semester.destroy',['id'=>$semester->id])}})}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure!!')">
+                                    <a href="{{route('semester.destroy', ($semester->id))}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure!!')">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </td>

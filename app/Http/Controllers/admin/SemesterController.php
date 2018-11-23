@@ -90,10 +90,11 @@ class SemesterController extends Controller
     public function destroy($id)
     {
 
-            $semester = Semester::find($id);
-            $semester->delete();
-            //Session::flash('message', "Semester deleted successfully");
-        return redirect('admin/semester.index')->with('message','Semester Deleted Succesfully');
+//        $semester = Semester::findOrFail($id);
+//        $semester->delete();
+        $semester = Semester::find($id);
+        $semester->delete();
+        return redirect('admin/semester');
 
 
     }
