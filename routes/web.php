@@ -22,17 +22,10 @@ Route::prefix('admin')->group (
         Route::resource('/studentAdd', 'admin\StudentController');
         //Route::resource('/test', 'admin\Test');
         Route::resource('/semester', 'admin\SemesterController');
+        Route::get('/semester/change-status/{id}', 'admin\SemesterController@changeStatus')->name('semester.change-status');
     }
 );
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
