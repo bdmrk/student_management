@@ -12,17 +12,18 @@
 */
 
 // Home index routing
-Route::get('/', 'front\HomeController@index')->name('home');
+Route::get('/', 'frontend\HomeController@index')->name('home');
 
-//admin index routing
-Route::get('/dashboard', 'admin\AdminConroller@index')->name('dash');
-//Route::get('/dashboard', 'admin\AdminConroller@dashboard')->name('dash');
-Route::prefix('admin')->group (
+//backend index routing
+Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
+//Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
+Route::prefix('backend')->group (
     function() {
-        Route::resource('/students', 'admin\StudentController');
-        //Route::resource('/test', 'admin\Test');
-        Route::resource('/semester', 'admin\SemesterController');
-        Route::get('/semester/change-status/{id}', 'admin\SemesterController@changeStatus')->name('semester.change-status');
+        Route::resource('/students', 'backend\StudentController');
+        //Route::resource('/test', 'backend\Test');
+        Route::resource('/semester', 'backend\SemesterController');
+        Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
+        Route::resource('/subjects', 'backend\SubjectController');
     }
 );
 

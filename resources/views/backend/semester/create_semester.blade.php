@@ -1,4 +1,4 @@
-@extends('admin.admin_master')
+@extends('backend.admin_master')
 
 @section('title')
 Add Semester

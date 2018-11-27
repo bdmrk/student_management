@@ -44,6 +44,29 @@
 
                 <li class="treeview">
                     <a href="#">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Semester</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('semester.create')}}"><i class="fa fa-angle-right"></i> Add Semester</a></li>
+                        <li><a href="{{route('semester.index')}}"><i class="fa fa-angle-right"></i> Manage Semester </a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fas fa-book-open"></i>
+                        <span>Subject</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('subjects.create')}}"><i class="fa fa-angle-right"></i> Add Subjects</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Subjects </a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
                         <i class="fas fa-book-reader"></i>
                         <span>Courses</span>
                         <i class="fa fa-angle-left pull-right"></i>
@@ -54,17 +77,6 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Semester</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('semester.create')}}"><i class="fa fa-angle-right"></i> Add Semester</a></li>
-                        <li><a href="{{route('semester.index')}}"><i class="fa fa-angle-right"></i> Manage Semester </a></li>
-                    </ul>
-                </li>
 
                 <li class="treeview">
                     <a href="#">
@@ -99,6 +111,18 @@
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-angle-right"></i> Add Exam</a></li>
                         <li><a href="#"><i class="fa fa-angle-right"></i> Manage Exam </a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fas fa-marker"></i>
+                        <span>Marks</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Add Marks</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Marks </a></li>
                     </ul>
                 </li>
 

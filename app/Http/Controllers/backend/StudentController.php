@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('admin.students.student_add');
+        return view('backend.students.student_add');
     }
 
     /**

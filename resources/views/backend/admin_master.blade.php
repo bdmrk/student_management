@@ -119,12 +119,12 @@
 <div class="main-content">
     <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
         <!--left-fixed -navigation-->
-        @include('admin.includes.sidebar')
+        @include('backend.includes.sidebar')
     </div>
     <!--left-fixed -navigation-->
 
     <!-- header-starts -->
-    @include('admin.includes.header')
+    @include('backend.includes.header')
     <!-- //header-ends -->
 
     <!-- main content start-->
@@ -138,7 +138,7 @@
 
     <!--footer-->
     <div class="footer">
-    @include('admin.includes.footer')
+    @include('backend.includes.footer')
     </div>
     <!--footer-->
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 
 use App\Model\Semester;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class SemesterController extends Controller
     public function index()
     {
         $semesters = Semester::all();
-        return view('admin.semester.manage_semester', ['semesters'=>$semesters]);
+        return view('backend.semester.manage_semester', ['semesters'=>$semesters]);
     }
 
     /**
@@ -27,7 +27,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('admin.semester.create_semester');
+        return view('backend.semester.create_semester');
     }
 
     /**
@@ -44,7 +44,7 @@ class SemesterController extends Controller
         $semester->end_date = $request->input('ending_date');
         $semester->status = $request->input('status');
         $semester->save();
-       return redirect('admin/semester/create')->with('message','Semester Saved Succesfully');
+       return redirect('backend/semester/create')->with('message','Semester Saved Succesfully');
     }
 
     /**
@@ -67,7 +67,7 @@ class SemesterController extends Controller
     public function edit($id)
     {
         $data['semester'] = Semester::find($id);
-        return view('admin.semester.edit', $data);
+        return view('backend.semester.edit', $data);
     }
 
     /**
@@ -101,7 +101,7 @@ class SemesterController extends Controller
 //        $semester->delete();
         $semester = Semester::find($id);
         $semester->delete();
-        return redirect('admin/semester');
+        return redirect('backend/semester');
 
 
     }
