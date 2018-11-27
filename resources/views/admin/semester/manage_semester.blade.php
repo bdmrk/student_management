@@ -32,29 +32,26 @@
                                 <td>{{$semester->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 <td>
                                     @if($semester->status ==1)
-                                        <a href="{{ route('semester.change-status', $semester->id) }}" class="btn btn-info btn-xs">
+                                        <a href="{{ route('semester.change-status', $semester->id) }}" class="btn btn-info btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-up"></span>
                                         </a>
                                     @else
-                                        <a href="{{ route('semester.change-status', $semester->id) }}" class="btn btn-warning btn-xs">
+                                        <a href="{{ route('semester.change-status', $semester->id) }}" class="btn btn-warning btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-down"></span>
                                         </a>
                                     @endif
 
-                                    <a href="{{route('semester.edit',['id'=>$semester->id])}}" class="btn btn-success btn-xs">
+                                    <a href="{{route('semester.edit',['id'=>$semester->id])}}" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    
                                     <form method="post" action="{{ route('semester.destroy', ($semester->id)) }}">
                                         {{ csrf_field() }}
                                         {{ method_field("delete") }}
-                                        <button class="btn btn-danger btn-xs"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
+                                        <button class="btn btn-danger btn-xs pull-left"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
-
-
                     </table>
                 </div>
             </div>

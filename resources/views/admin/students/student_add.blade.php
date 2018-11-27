@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
                     <h4 class="text-center text-success">{{Session::get('message')}}</h4>
-                    {{Form::open(['route'=>'studentAdd.index', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
+                    {{Form::open(['route'=>'students.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
                         <label class="control-label col-md-4" >First Name</label>

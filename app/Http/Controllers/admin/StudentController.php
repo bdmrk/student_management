@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Model\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
-class SemesterController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class SemesterController extends Controller
      */
     public function index()
     {
-        $semesters = Semester::all();
-        return view('admin.semester.manage_semester', ['semesters'=>$semesters]);
+
     }
 
     /**
@@ -27,7 +24,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('admin.semester.create_semester');
+        return view('admin.students.student_add');
     }
 
     /**
@@ -38,13 +35,7 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
-        $semester = new Semester();
-        $semester->semester_name = $request->input('semester_name');
-        $semester->start_date = $request->input('starting_date');
-        $semester->end_date = $request->input('ending_date');
-        $semester->status = $request->input('status');
-        $semester->save();
-       return redirect('admin/semester/create')->with('message','Semester Saved Succesfully');
+        //
     }
 
     /**
@@ -89,15 +80,6 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
-
-//        $semester = Semester::findOrFail($id);
-//        $semester->delete();
-        $semester = Semester::find($id);
-        $semester->delete();
-        return redirect('admin/semester');
-
-
+        //
     }
-
 }
-

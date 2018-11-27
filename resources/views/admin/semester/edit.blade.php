@@ -58,7 +58,6 @@
                             <input type="submit" value="Create" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
-
                     {{Form::close()}}
                 </div>
             </div>

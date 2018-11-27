@@ -37,7 +37,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('studentAdd.index')}}"><i class="fa fa-angle-right"></i> Add Student</a></li>
+                        <li><a href="{{route('students.create')}}"><i class="fa fa-angle-right"></i> Add Student</a></li>
                         <li><a href="#"><i class="fa fa-angle-right"></i> Manage Student </a></li>
                     </ul>
                 </li>
