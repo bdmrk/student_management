@@ -66,7 +66,8 @@ class SemesterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['semester'] = Semester::find($id);
+        return view('admin.semester.edit', $data);
     }
 
     /**
@@ -78,7 +79,13 @@ class SemesterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $semester = Semester::find($id);
+        $semester->semester_name = $request->input('semester_name');
+        $semester->start_date = $request->input('starting_date');
+        $semester->end_date = $request->input('ending_date');
+        $semester->status = $request->input('status');
+        $semester->save();
+        return redirect()->route("semester.edit", $id);
     }
 
     /**
@@ -97,6 +104,14 @@ class SemesterController extends Controller
         return redirect('admin/semester');
 
 
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $semester =  Semester::find($request->id);
+        $semester->status = !$semester->status;
+        $semester->save();
+        return redirect()->route('semester.index');
     }
 
 }
