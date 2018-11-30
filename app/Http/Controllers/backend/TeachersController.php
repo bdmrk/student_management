@@ -9,11 +9,7 @@ use Image;
 
 class TeachersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $teachers = Teacher::all();
@@ -21,22 +17,11 @@ class TeachersController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('backend.teachers.add_teachers');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
 
 
@@ -85,59 +70,66 @@ class TeachersController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $data['teacher'] = Teacher::find($id);
         return view('backend.teachers.edit_teachers', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+
+
+
+    public function update(Request $request)
     {
-        $teachers = Teacher::find($id);
-        $teachers->first_name = $request->input('first_name');
-        $teachers->second_name = $request->input('second_name');
-        $teachers->designation = $request->input('designation');
-        $teachers->contact_number = $request->input('contact_number');
-        $teachers->email = $request->input('email');
-        $teachers->father_name = $request->input('father_name');
-        $teachers->mother_name = $request->input('mother_name');
-        $teachers->address = $request->input('address');
-        $teachers->gender = $request->input('gender');
-        $teachers->status = $request->input('status');
-        $teachers->save();
-        return redirect()->route("teachers.edit", $id);
+        $teacherImage = $request->file('teacher_photo');
+        if($teacherImage) {
+            $teacher = Teacher::find($request->id);
+            unlink($teacher->teacher_photo);
+            $imageName = $teacherImage->getClientOriginalName();
+            $directory = 'images/teachers/';
+            $imageUrl = $directory.$imageName;
+            Image::make($teacherImage)->save($imageUrl);
+
+            $teacher->first_name = $request->input('first_name');
+            $teacher->second_name = $request->input('second_name');
+            $teacher->designation = $request->input('designation');
+            $teacher->contact_number = $request->input('contact_number');
+            $teacher->email = $request->input('email');
+            $teacher->father_name = $request->input('father_name');
+            $teacher->mother_name = $request->input('mother_name');
+            $teacher->address = $request->input('address');
+            $teacher->teacher_photo = $imageUrl;
+            $teacher->gender = $request->input('gender');
+            $teacher->status = $request->input('status');
+            $teacher->save();
+            return redirect()->route('teachers.index')->with('message', "Teacher is Updated Successfully");
+        } else {
+            $teacher = Teacher::find($request->id);
+            $teacher->first_name = $request->input('first_name');
+            $teacher->second_name = $request->input('second_name');
+            $teacher->designation = $request->input('designation');
+            $teacher->contact_number = $request->input('contact_number');
+            $teacher->email = $request->input('email');
+            $teacher->father_name = $request->input('father_name');
+            $teacher->mother_name = $request->input('mother_name');
+            $teacher->address = $request->input('address');
+            $teacher->gender = $request->input('gender');
+            $teacher->status = $request->input('status');
+            $teacher->save();
+            return redirect()->route('teachers.create');
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $teacher = Teacher::find($id);
