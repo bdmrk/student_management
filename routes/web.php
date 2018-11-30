@@ -15,6 +15,7 @@ Route::prefix('backend')->group (
         Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
         Route::resource('/subjects', 'backend\SubjectController');
         Route::resource('/teachers', 'backend\TeachersController');
+        Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
     }
 );
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +36,26 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $studentImage = $request->file('student_photo');
+        $imageName = $studentImage->getClientOriginalname();
+        $directory = 'images/students/';
+        $imageUrl = $directory.$imageName;
+        $studentImage->move($directory, $imageName);
+
+        $students = new Student();
+        $students->first_name = $request->input('first_name');
+        $students->second_name = $request->input('second_name');
+        //$teachers->dob = $request->input('dob');
+        $students->contact_number = $request->input('contact_number');
+        $students->email = $request->input('email');
+        $students->father_name = $request->input('father_name');
+        $students->mother_name = $request->input('mother_name');
+        $students->address = $request->input('address');
+        $students->student_photo = $imageUrl;
+        $students->gender = $request->input('gender');
+        $students->status = $request->input('status');
+        $students->save();
+        return redirect()->route('students.create')->with('message', "Student is Created Successfully");
     }
 
     /**

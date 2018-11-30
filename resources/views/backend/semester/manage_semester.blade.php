@@ -31,6 +31,7 @@
                                 <td>{{$semester->end_date}}</td>
                                 <td>{{$semester->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 <td>
+
                                     @if($semester->status ==1)
                                         <a href="{{ route('semester.change-status', $semester->id) }}" class="btn btn-info btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-up"></span>
