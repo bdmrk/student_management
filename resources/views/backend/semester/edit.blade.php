@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <input type="submit" value="Create" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Update" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
                     {{Form::close()}}

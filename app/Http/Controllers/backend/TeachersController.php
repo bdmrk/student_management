@@ -70,7 +70,6 @@ class TeachersController extends Controller
     }
 
 
-
     public function show($id)
     {
         //
@@ -84,14 +83,11 @@ class TeachersController extends Controller
     }
 
 
-
-
-
     public function update(Request $request)
     {
         $teacherImage = $request->file('teacher_photo');
         if($teacherImage) {
-            $teacher = Teacher::find($request->id);
+            $teacher = Teacher::findorfail($request->id);
             unlink($teacher->teacher_photo);
             $imageName = $teacherImage->getClientOriginalName();
             $directory = 'images/teachers/';
@@ -110,9 +106,10 @@ class TeachersController extends Controller
             $teacher->gender = $request->input('gender');
             $teacher->status = $request->input('status');
             $teacher->save();
-            return redirect()->route('teachers.index')->with('message', "Teacher is Updated Successfully");
+            return redirect('backend.teachers.manage_teachers');
+            //return redirect()->route('teachers.index')->with('message', "Teacher is Updated Successfully");
         } else {
-            $teacher = Teacher::find($request->id);
+            $teacher = Teacher::findorfail($request->id);
             $teacher->first_name = $request->input('first_name');
             $teacher->second_name = $request->input('second_name');
             $teacher->designation = $request->input('designation');
@@ -124,7 +121,7 @@ class TeachersController extends Controller
             $teacher->gender = $request->input('gender');
             $teacher->status = $request->input('status');
             $teacher->save();
-            return redirect()->route('teachers.create');
+            return redirect('backend.teachers.manage_teachers');
         }
 
     }
@@ -134,7 +131,7 @@ class TeachersController extends Controller
     {
         $teacher = Teacher::find($id);
         $teacher->delete();
-        return redirect()->route('teachers.index')->with('message',"Teachers is deleted successfully");
+        return redirect()->route('teachers.create')->with('message',"Teachers is deleted successfully");
     }
 
     public function changeStatus(Request $request)
@@ -142,6 +139,6 @@ class TeachersController extends Controller
         $teacher =  Teacher::find($request->id);
         $teacher->status = !$teacher->status;
         $teacher->save();
-        return redirect()->route('teachers.index');
+        return redirect()->route('teachers.create');
     }
 }

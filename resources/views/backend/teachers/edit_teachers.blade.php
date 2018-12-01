@@ -110,7 +110,7 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <input type="submit" value="Save Student" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Update Teacher" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
 
