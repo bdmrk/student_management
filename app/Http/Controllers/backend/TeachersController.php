@@ -58,7 +58,6 @@ class TeachersController extends Controller
         $teachers->gender = $request->input('gender');
         $teachers->status = $request->input('status');
         $teachers->save();
-
     }
 
     public function store(Request $request )
@@ -83,46 +82,33 @@ class TeachersController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $teacherImage = $request->file('teacher_photo');
-        if($teacherImage) {
-            $teacher = Teacher::findorfail($request->id);
+        $teacher = Teacher::find($id);
+
+        if($request->hasFile('teacher_photo')) {
+            $teacherImage = $request->file('teacher_photo');
             unlink($teacher->teacher_photo);
             $imageName = $teacherImage->getClientOriginalName();
             $directory = 'images/teachers/';
-            $imageUrl = $directory.$imageName;
+            $imageUrl = $directory . $imageName;
             Image::make($teacherImage)->save($imageUrl);
-
-            $teacher->first_name = $request->input('first_name');
-            $teacher->second_name = $request->input('second_name');
-            $teacher->designation = $request->input('designation');
-            $teacher->contact_number = $request->input('contact_number');
-            $teacher->email = $request->input('email');
-            $teacher->father_name = $request->input('father_name');
-            $teacher->mother_name = $request->input('mother_name');
-            $teacher->address = $request->input('address');
             $teacher->teacher_photo = $imageUrl;
-            $teacher->gender = $request->input('gender');
-            $teacher->status = $request->input('status');
-            $teacher->save();
-            return redirect('backend.teachers.manage_teachers');
-            //return redirect()->route('teachers.index')->with('message', "Teacher is Updated Successfully");
-        } else {
-            $teacher = Teacher::findorfail($request->id);
-            $teacher->first_name = $request->input('first_name');
-            $teacher->second_name = $request->input('second_name');
-            $teacher->designation = $request->input('designation');
-            $teacher->contact_number = $request->input('contact_number');
-            $teacher->email = $request->input('email');
-            $teacher->father_name = $request->input('father_name');
-            $teacher->mother_name = $request->input('mother_name');
-            $teacher->address = $request->input('address');
-            $teacher->gender = $request->input('gender');
-            $teacher->status = $request->input('status');
-            $teacher->save();
-            return redirect('backend.teachers.manage_teachers');
         }
+        $teacher->first_name = $request->input('first_name');
+        $teacher->second_name = $request->input('second_name');
+        $teacher->designation = $request->input('designation');
+        $teacher->contact_number = $request->input('contact_number');
+        $teacher->email = $request->input('email');
+        $teacher->father_name = $request->input('father_name');
+        $teacher->mother_name = $request->input('mother_name');
+        $teacher->address = $request->input('address');
+        $teacher->gender = $request->input('gender');
+        $teacher->status = $request->input('status');
+        //dd($teacher);
+        $teacher->save();
+           return redirect()->route('teachers.index')->with('message', "Teacher Updated successfully");
+
 
     }
 

@@ -37,6 +37,7 @@
                             {{--<span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}} </span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
+
                     <div class="form-group">
                         <label class="control-label col-md-4">Designation</label>
                         <div class="col-md-8">
