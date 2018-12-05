@@ -11,11 +11,16 @@ Route::prefix('backend')->group (
     function() {
 
         Route::resource('/students', 'backend\StudentController');
+
         Route::resource('/semester', 'backend\SemesterController');
+
         Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
         Route::resource('/subjects', 'backend\SubjectController');
+
         Route::resource('/teachers', 'backend\TeachersController');
         Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
+
+        Route::resource('/syllabus', 'backend\SyllabusController');
     }
 );
 

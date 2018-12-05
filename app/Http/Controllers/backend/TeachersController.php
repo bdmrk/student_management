@@ -108,8 +108,6 @@ class TeachersController extends Controller
         //dd($teacher);
         $teacher->save();
            return redirect()->route('teachers.index')->with('message', "Teacher Updated successfully");
-
-
     }
 
 
