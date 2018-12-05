@@ -76,7 +76,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('syllabus.create')}}"><i class="fa fa-angle-right"></i> Add Syllabus</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Syllabus </a></li>
+                        <li><a href="{{route('syllabus.index')}}"><i class="fa fa-angle-right"></i> Manage Syllabus </a></li>
                     </ul>
                 </li>
 

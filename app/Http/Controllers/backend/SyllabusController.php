@@ -15,7 +15,8 @@ class SyllabusController extends Controller
      */
     public function index()
     {
-        //
+        $syllabuses = Syllabus::all();
+        return view('backend.syllabuses.manage_syllabus', ['syllabuses' =>$syllabuses]);
     }
 
     /**
@@ -63,7 +64,8 @@ class SyllabusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['syllabus'] = Syllabus::find($id);
+        return view('backend.syllabuses.edit_syllabus', $data);
     }
 
     /**
@@ -75,7 +77,12 @@ class SyllabusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $semester = Syllabus::find($id);
+        $semester->syllabus_name = $request->input('syllabus_name');
+        $semester->description = $request->input('description');
+        $semester->status = $request->input('status');
+        $semester->save();
+        return redirect()->route("syllabus.index", $id)->with('message', "Syllabus Updated Successfully");
     }
 
     /**
@@ -86,6 +93,17 @@ class SyllabusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $syllabus = Syllabus::find($id);
+        $syllabus->delete();
+        return redirect()->route('syllabus.index')->with('message', "Syllabus Deleted Successfully");
+    }
+
+    public  function  changeStatus(Request $request){
+
+        $syllabus =  Syllabus::find($request->id);
+        $syllabus->status = !$syllabus->status;
+        $syllabus->save();
+        return redirect()->route('semester.index');
+
     }
 }
