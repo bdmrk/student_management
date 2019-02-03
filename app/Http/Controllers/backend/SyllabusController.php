@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\Syllabus;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,8 @@ class SyllabusController extends Controller
      */
     public function create()
     {
-        return view('backend.syllabuses.create_syllabus');
+        $data['programs'] = Program::all();
+        return view('backend.syllabuses.create_syllabus', $data);
     }
 
     /**
@@ -37,6 +39,11 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'syllabus_name' => 'required|unique:syllabus|max:255',
+            'program' => 'required|integer',
+            'status' => 'required',
+        ]);
         $syllabues = new Syllabus();
         $syllabues->syllabus_name = $request->input('syllabus_name');
         $syllabues->description = $request->input('description');

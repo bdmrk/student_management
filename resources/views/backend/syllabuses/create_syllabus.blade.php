@@ -30,6 +30,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-4">Program</label>
+                        <div class="col-md-8">
+                            <select name="program" class="form-control">
+                                @foreach($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->program_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-4">Status</label>
                         <div class="col-md-8">
                             <label><input type="radio"  checked name="status" value="1"/>Active</label>

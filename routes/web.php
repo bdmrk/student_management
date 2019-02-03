@@ -23,6 +23,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/syllabus', 'backend\SyllabusController');
         Route::get('/teachers/change-status/{id}', 'backend\SyllabusController@changeStatus')->name('syllabus.change-status');
+        Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     }
 );
 
