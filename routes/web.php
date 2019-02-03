@@ -3,12 +3,13 @@
 // Home index routing
 Route::get('/', 'frontend\HomeController@index')->name('home');
 
-//admin main path
-Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
+
 
 //Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
-Route::prefix('backend')->group (
+Route::prefix('admin')->middleware('auth')->group (
     function() {
+        //admin main path
+Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/students', 'backend\StudentController');
 

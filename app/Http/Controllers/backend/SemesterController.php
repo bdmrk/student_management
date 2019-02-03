@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Model\Semester;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;

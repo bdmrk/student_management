@@ -18,6 +18,9 @@ class CreateSyllabiTable extends Migration
             $table->string('syllabus_name');
             $table->string('description');
             $table->tinyInteger('status');
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
