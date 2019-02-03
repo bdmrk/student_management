@@ -18,6 +18,7 @@ ManageSyllabus
                         <th>SL NO</th>
                         <th>Syllabus</th>
                         <th>Description</th>
+                        <th>Program</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
