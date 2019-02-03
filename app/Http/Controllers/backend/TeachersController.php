@@ -6,6 +6,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Image;
+use Auth;
 
 class TeachersController extends Controller
 {
@@ -57,6 +58,7 @@ class TeachersController extends Controller
         $teachers->teacher_photo = $imageUrl;
         $teachers->gender = $request->input('gender');
         $teachers->status = $request->input('status');
+        $teachers->created_by = Auth::user()->id;
         $teachers->save();
     }
 

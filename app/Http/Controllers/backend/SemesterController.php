@@ -6,6 +6,7 @@ use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Auth;
 
 class SemesterController extends Controller
 {
@@ -43,6 +44,7 @@ class SemesterController extends Controller
         $semester->start_date = $request->input('starting_date');
         $semester->end_date = $request->input('ending_date');
         $semester->status = $request->input('status');
+        $syllabus->created_by = Auth::user()->id;
         $semester->save();
        return redirect('backend/semester/create')->with('message','Semester Saved Succesfully');
     }
