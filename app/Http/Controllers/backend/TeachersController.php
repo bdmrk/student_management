@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Model\Teacher;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Image;

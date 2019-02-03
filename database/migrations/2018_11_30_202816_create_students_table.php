@@ -26,6 +26,9 @@ class CreateStudentsTable extends Migration
             $table->string('student_photo');
             $table->tinyInteger('gender');
             $table->tinyInteger('status');
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
