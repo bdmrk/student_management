@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -54,6 +55,7 @@ class StudentController extends Controller
         $students->student_photo = $imageUrl;
         $students->gender = $request->input('gender');
         $students->status = $request->input('status');
+        $students->created_by = Auth::user()->id;
         $students->save();
         return redirect()->route('students.create')->with('message', "Student is Created Successfully");
     }

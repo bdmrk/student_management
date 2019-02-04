@@ -12,26 +12,30 @@
                     <h3 class="text-center "> Create Syllabus</h3>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{Session::get('errorMessage')}}</h4>
+                    <div class="row">
+                        <div class="col-md-8 pull-right">
+                            @include('backend.includes.message')
+                        </div>
+                    </div>
                     {{Form::open(['route'=>'syllabus.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
-                        <label class="control-label col-md-4" >Syllabus Name</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3" >Syllabus Name</label>
+                        <div class="col-md-6">
                         <input type="text" value="{{ old('syllabus_name') }}" name="syllabus_name" class="form-control" placeholder="January_2018"/>
                             <span class="text-danger">{{$errors->has('syllabus_name') ? $errors->first('syllabus_name') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4">Description</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3">Description</label>
+                        <div class="col-md-6">
                             <textarea type="text" name="description" class="form-control"> </textarea>
                             <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4">Program</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3">Program</label>
+                        <div class="col-md-6">
                             <select name="program" class="form-control">
                                 @foreach($programs as $program)
                                     <option value="{{ $program->id }}">{{ $program->program_name }}</option>
@@ -40,15 +44,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4">Status</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3">Status</label>
+                        <div class="col-md-6">
                             <label><input type="radio"  checked name="status" value="1"/>Active</label>
                             <label><input type="radio"  name="status" value="0"/>Inactive</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
+                        <div class="col-md-9 col-md-offset-3">
                             <input type="submit" value="Create Syllabus" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
