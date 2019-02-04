@@ -12,27 +12,31 @@
                     <h3 class="text-center ">  Edit Syllabus</h3>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{ Session::get('message') }}</h4>
+                    <div class="row">
+                        <div class="col-md-9 pull-right">
+                            @include('backend.includes.message')
+                        </div>
+                    </div>
                     {{Form::open(['route'=>['syllabus.update', $syllabus->id], 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
                     {{ method_field("put") }}
                     <div class="form-group">
-                        <label class="control-label col-md-4" >Syllabus Name</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3" >Syllabus Name</label>
+                        <div class="col-md-6">
                             <input type="text" name="syllabus_name" class="form-control" value="{{ $syllabus->syllabus_name }}" placeholder="Spring"/>
                             <span class="text-danger">{{$errors->has('syllabus_name') ? $errors->first('syllabus_name') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4">Description </label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3">Description </label>
+                        <div class="col-md-6">
                             <textarea type="text" name="description" class="form-control" > {{ $syllabus->description }}</textarea>
                             <span class="text-danger">{{$errors->has('description') ? $errors->first('description') : ''}}</span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-4">Status</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-3">Status</label>
+                        <div class="col-md-6">
 
                             @if($syllabus->status)
                                 <label><input type="radio"  checked name="status" value="1"/>Active</label>
