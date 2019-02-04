@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-8 pull-right">
+                        <div class="col-md-9 pull-right">
                             @include('backend.includes.message')
                         </div>
                     </div>
