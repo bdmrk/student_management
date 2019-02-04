@@ -12,7 +12,11 @@
                     <h3 class="text-center "> Create Course</h3>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{Session::get('errorMessage')}}</h4>
+                        <div class="row">
+                                <div class="col-md-9 pull-right">
+                                    @include('backend.includes.message')
+                                </div>
+                            </div>
                     {{Form::open(['route'=>'course.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
@@ -25,14 +29,23 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" >Course Code</label>
                         <div class="col-md-6">
-                        <input type="text" value="{{ old('course_code') }}" name="course_name" class="form-control" placeholder="OPP-203"/>
+                        <input type="text" value="{{ old('course_code') }}" name="course_code" class="form-control" placeholder="OPP-203"/>
                             <span class="text-danger">{{$errors->has('course_code') ? $errors->first('course_code') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
+                            <label class="control-label col-md-3" >Course Credit</label>
+                            <div class="col-md-6">
+                            <input type="text" value="{{ old('course_credit') }}" name="course_credit" class="form-control" placeholder="3"/>
+                                <span class="text-danger">{{$errors->has('course_credit') ? $errors->first('course_credit') : ''}}</span>
+                            </div>
+                        </div>
+                        
+
+                    <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
                         <div class="col-md-6">
-                            <textarea type="text" name="description" class="form-control"> </textarea>
+                            <textarea type="text" name="description"  rows="5" class="form-control"> </textarea>
                             <span class="text-danger">{{$errors->has('description') ? $errors->first('description') : ''}}</span>
                         </div>
                     </div>
@@ -41,7 +54,9 @@
                         <label class="control-label col-md-3">Syllabus</label>
                         <div class="col-md-6">
                             <select name="syllabus" class="form-control">
-                               
+                                @foreach($sy as $s)
+                                    <option value="{{ $s->id }}">{{ $s->syllabus_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

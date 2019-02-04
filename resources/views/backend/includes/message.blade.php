@@ -1,5 +1,5 @@
 
-@if(Session::has('errorMessage'))
+@if(!Session::has('errorMessage'))
     <div class="alert alert-success" role="alert">
         <p>{{ Session::get('errorMessage') }}</p>
     </div>

@@ -1,7 +1,7 @@
 @extends('backend.admin_master')
 
 @section('title')
-    Edit Syllabus
+    Edit Course
 @endsection
 
 @section('body')
@@ -9,14 +9,14 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="text-center ">  Edit Syllabus</h3>
+                    <h3 class="text-center ">  Edit Course</h3>
                 </div>
                 <div class="panel-body">
                     <h4 class="text-center text-success">{{ Session::get('message') }}</h4>
-                    {{Form::open(['route'=>['syllabus.update', $syllabus->id], 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
+                    {{Form::open(['route'=>['course.update', $syllabus->id], 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
                     {{ method_field("put") }}
                     <div class="form-group">
-                        <label class="control-label col-md-4" >Syllabus Name</label>
+                        <label class="control-label col-md-4" >Course Title</label>
                         <div class="col-md-8">
                             <input type="text" name="syllabus_name" class="form-control" value="{{ $syllabus->syllabus_name }}" placeholder="Spring"/>
                             <span class="text-danger">{{$errors->has('syllabus_name') ? $errors->first('syllabus_name') : ''}}</span>

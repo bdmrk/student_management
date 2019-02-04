@@ -74,7 +74,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ route('course.create') }}"><i class="fa fa-angle-right"></i> Add Courses</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
+                        <li><a href="{{ route('course.index') }}"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
                     </ul>
                 </li>
 

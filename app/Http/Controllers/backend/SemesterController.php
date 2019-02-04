@@ -44,7 +44,7 @@ class SemesterController extends Controller
         $semester->start_date = $request->input('starting_date');
         $semester->end_date = $request->input('ending_date');
         $semester->status = $request->input('status');
-        $syllabus->created_by = Auth::user()->id;
+        $semester->created_by = Auth::user()->id;
         $semester->save();
        return redirect('backend/semester/create')->with('message','Semester Saved Succesfully');
     }
