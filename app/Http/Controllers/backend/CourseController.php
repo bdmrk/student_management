@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 
 class CourseController extends Controller
 {
@@ -14,7 +15,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view('backend.courses.create_course', ['courses' =>$courses]);
     }
 
     /**
@@ -24,7 +26,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-
+        //$data['courses'] = Course::all();
+        return view('backend.courses.create_course');
     }
 
     /**
