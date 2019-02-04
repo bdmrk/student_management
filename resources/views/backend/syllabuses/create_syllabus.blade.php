@@ -12,13 +12,13 @@
                     <h3 class="text-center "> Create Syllabus</h3>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+                    <h4 class="text-center text-success">{{Session::get('errorMessage')}}</h4>
                     {{Form::open(['route'=>'syllabus.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
                         <label class="control-label col-md-4" >Syllabus Name</label>
                         <div class="col-md-8">
-                            <input type="text" name="syllabus_name" class="form-control" placeholder="January_2018"/>
+                        <input type="text" value="{{ old('syllabus_name') }}" name="syllabus_name" class="form-control" placeholder="January_2018"/>
                             <span class="text-danger">{{$errors->has('syllabus_name') ? $errors->first('syllabus_name') : ''}}</span>
                         </div>
                     </div>
@@ -27,6 +27,16 @@
                         <div class="col-md-8">
                             <textarea type="text" name="description" class="form-control"> </textarea>
                             <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Program</label>
+                        <div class="col-md-8">
+                            <select name="program" class="form-control">
+                                @foreach($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->program_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

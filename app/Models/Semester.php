@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Semester extends Model
 {
+    protected $table = 'semesters';
+    public $timestamps = true;
 
 }
