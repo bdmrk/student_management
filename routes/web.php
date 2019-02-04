@@ -29,6 +29,10 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
        
        //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+        //Ajax Route
+
+        Route::get('/ajax/get-syllabus/{program_id}', 'backend\SyllabusController@getSyllabusByProgramId')->name('ajax.get-syllabus');
     }
 );
 

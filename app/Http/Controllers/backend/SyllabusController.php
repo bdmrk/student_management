@@ -93,11 +93,11 @@ class SyllabusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $semester = Syllabus::find($id);
-        $semester->syllabus_name = $request->input('syllabus_name');
-        $semester->description = $request->input('description');
-        $semester->status = $request->input('status');
-        $semester->save();
+        $syllabus = Syllabus::find($id);
+        $syllabus->syllabus_name = $request->input('syllabus_name');
+        $syllabus->description = $request->input('description');
+        $syllabus->status = $request->input('status');
+        $syllabus->save();
         return redirect()->route("syllabus.index", $id)->with('message', "Syllabus Updated Successfully");
     }
 
@@ -121,5 +121,17 @@ class SyllabusController extends Controller
         $syllabus->save();
         return redirect()->route('semester.index');
 
+    }
+
+    public function getSyllabusByProgramId($programId)
+    {
+        $syllabus = Syllabus::where('program_id', $programId)->get();
+            $options = ""; 
+
+            foreach ($syllabus as $sy) {
+                $options .= "<option value='" . $sy->id . "'>" . $sy->syllabus_name . "</option>";
+            }
+
+        return response()->json($options);
     }
 }

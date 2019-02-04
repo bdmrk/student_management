@@ -12,4 +12,9 @@ class Syllabus extends Model
     
     protected $table = 'syllabus';
     public $timestamps = true;
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id');
+    }
 }

@@ -51,15 +51,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3">Syllabus</label>
-                        <div class="col-md-6">
-                            <select name="syllabus" class="form-control">
-                                @foreach($sy as $s)
-                                    <option value="{{ $s->id }}">{{ $s->syllabus_name }}</option>
-                                @endforeach
-                            </select>
+                            <label class="control-label col-md-3">Program</label>
+                            <div class="col-md-6">
+                                <select name="program" class="form-control program">
+                                    <option value="">Select Your Program</option>
+                                    @foreach($programs as $p)
+                                        <option value="{{ $p->id }}">{{ $p->program_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
+
+                    <div class="form-group">
+                            <label class="control-label col-md-3">Syllabus</label>
+                            <div class="col-md-6">
+                                <select name="syllabus" class="form-control syllabus">
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                    
                     
                     <div class="form-group">
                         <label class="control-label col-md-3">Status</label>
@@ -80,5 +92,26 @@
         </div>
 
     </div>
+
+@endsection
+@section('script')
+<script>
+    
+
+    $(".program").change(function(){
+        
+        var id = $(this).val();
+        var hitUrl = "{{ url('/admin/ajax/get-syllabus') }}/" + id;
+        if (id != '') {
+            $.get(hitUrl, function(response){
+                if(response) {
+                    $(".syllabus").html(response);
+                } 
+            });
+        } else {
+            $(".syllabus").html('');
+        }
+    });
+</script>
 
 @endsection
