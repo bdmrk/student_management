@@ -21,8 +21,13 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
         Route::resource('/teachers', 'backend\TeachersController');
         Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
 
+        Route::resource('/course', 'backend\CourseController');
+        Route::get('/course/change-status/{id}', 'backend\CourseController@changeStatus')->name('course.change-status');
+
         Route::resource('/syllabus', 'backend\SyllabusController');
         Route::get('/teachers/change-status/{id}', 'backend\SyllabusController@changeStatus')->name('syllabus.change-status');
+       
+       //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     }
 );

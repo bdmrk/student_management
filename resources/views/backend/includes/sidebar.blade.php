@@ -54,20 +54,6 @@
                     </ul>
                 </li>
 
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fas fa-book-reader"></i>
-                        <span>Courses</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Add Courses</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
-                    </ul>
-                </li>
-
-
                 <li class="treeview">
                     <a href="#">
                         <i class="fas fa-book"></i>
@@ -77,6 +63,18 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('syllabus.create')}}"><i class="fa fa-angle-right"></i> Add Syllabus</a></li>
                         <li><a href="{{route('syllabus.index')}}"><i class="fa fa-angle-right"></i> Manage Syllabus </a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fas fa-book-reader"></i>
+                        <span>Courses</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('course.create') }}"><i class="fa fa-angle-right"></i> Add Courses</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Courses </a></li>
                     </ul>
                 </li>
 
