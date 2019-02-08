@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('second_name');
-            //$table->string('designation');
+            $table->date('dob');
             $table->string('contact_number');
             $table->string('email');
             $table->string('father_name');

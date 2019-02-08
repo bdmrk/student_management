@@ -12,14 +12,15 @@ Route::prefix('admin')->middleware('auth')->group (
 Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/students', 'backend\StudentController');
+        Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
+
 
         Route::resource('/semester', 'backend\SemesterController');
-
         Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
-        Route::resource('/subjects', 'backend\SubjectController');
+       
 
         Route::resource('/teachers', 'backend\TeachersController');
-        Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
+        Route::get('/teachers/change-status/{id}', 'backend\TeacherController@changeStatus')->name('k');
 
         Route::resource('/course', 'backend\CourseController');
         Route::get('/course/change-status/{id}', 'backend\CourseController@changeStatus')->name('course.change-status');

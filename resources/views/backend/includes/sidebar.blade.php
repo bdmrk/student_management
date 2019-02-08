@@ -38,7 +38,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('students.create')}}"><i class="fa fa-angle-right"></i> Add Student</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Student </a></li>
+                        <li><a href="{{route('students.index')}}"><i class="fa fa-angle-right"></i> Manage Student </a></li>
                     </ul>
                 </li>
 
