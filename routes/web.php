@@ -19,7 +19,8 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
         Route::resource('/subjects', 'backend\SubjectController');
 
         Route::resource('/teachers', 'backend\TeachersController');
-        Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
+        //Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
+        Route::get('/teacher/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teacher.change-status');
 
         Route::resource('/course', 'backend\CourseController');
         Route::get('/course/change-status/{id}', 'backend\CourseController@changeStatus')->name('course.change-status');

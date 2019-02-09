@@ -21,7 +21,7 @@
                             <th>Phone No</th>
                             <th>Email</th>
                             <th>Photo</th>
-                            <th>gender</th>
+                            <th>Gender</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -43,11 +43,11 @@
                                         <span class="glyphicon glyphicon-zoom-in"></span>
                                     </a>
                                     @if($teacher->status ==1)
-                                        <a href="{{ route('teachers.change-status', $teacher->id) }}" class="btn btn-info btn-xs pull-left">
+                                        <a href="{{ route('teacher.change-status', $teacher->id) }}" class="btn btn-info btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-up"></span>
                                         </a>
                                     @else
-                                        <a href="{{ route('teachers.change-status', $teacher->id) }}" class="btn btn-warning btn-xs pull-left">
+                                        <a href="{{ route('teacher.change-status', $teacher->id) }}" class="btn btn-warning btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-down"></span>
                                         </a>
                                     @endif
