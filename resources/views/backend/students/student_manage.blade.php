@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 @extends('backend.admin_master')
 
 @section('title')
@@ -68,4 +67,4 @@ ManageStudent
 
 </div>
 @endsection
->>>>>>> kausar
+
