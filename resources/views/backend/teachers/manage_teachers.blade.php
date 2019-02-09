@@ -43,28 +43,6 @@
                                     <a href="#" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-zoom-in"></span>
                                     </a>
-<<<<<<< HEAD
-                                    @if($teacher->status ==1)
-                                        <a href="{{ route('teacher.change-status', $teacher->id) }}" class="btn btn-info btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-up"></span>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('teacher.change-status', $teacher->id) }}" class="btn btn-warning btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-down"></span>
-                                        </a>
-                                    @endif
-=======
-
-                                   @if($teacher->status ==1)
-                            <a href="{{ route ('k', $teacher->id) }}" class="btn btn-info btn-xs pull-left">
-                                <span class="glyphicon glyphicon-arrow-up"></span>
-                            </a>
-                            @else
-                            <a href="{{ route ('k', $teacher->id) }}" class="btn btn-warning btn-xs pull-left">
-                                <span class="glyphicon glyphicon-arrow-down"></span>
-                            </a>
-                            @endif
->>>>>>> kausar
 
                                     <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-edit"></span>
