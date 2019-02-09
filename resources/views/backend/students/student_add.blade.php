@@ -34,13 +34,13 @@
                         </div>
                     </div>
 
-                    {{--<div class="form-group">
+                    <div class="form-group">
                         <label class="control-label col-md-3">Date of Birth</label>
                         <div class="col-md-6">
-                            <input type="text" name="dob" class="form-control" placeholder="18/03/1992"/>
+                            <input type="date" name="dob" class="form-control" placeholder="18/03/1992"/>
                             <span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}} </span>
                         </div>
-                    </div>--}}
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Contact Number</label>

@@ -12,15 +12,20 @@ Route::prefix('admin')->middleware('auth')->group (
 Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/students', 'backend\StudentController');
+        Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
+
 
         Route::resource('/semester', 'backend\SemesterController');
-
         Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
-        Route::resource('/subjects', 'backend\SubjectController');
+       
 
         Route::resource('/teachers', 'backend\TeachersController');
+<<<<<<< HEAD
         //Route::get('/teachers/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teachers.change-status');
         Route::get('/teacher/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teacher.change-status');
+=======
+        Route::get('/teachers/change-status/{id}', 'backend\TeacherController@changeStatus')->name('k');
+>>>>>>> kausar
 
         Route::resource('/course', 'backend\CourseController');
         Route::get('/course/change-status/{id}', 'backend\CourseController@changeStatus')->name('course.change-status');
@@ -33,7 +38,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         //Ajax Route
 
-        Route::get('/ajax/get-syllabus/{program_id}', 'backend\SyllabusController@getSyllabusByProgramId')->name('ajax.get-syllabus');
+        Route::get('/ajax/get-syllabus/{program_id}', 'backend\SyllabusController@getSyllabus')->name('ajax.get-syllabus');
     }
 );
 
