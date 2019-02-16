@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Model\Syllabus;
+use App\Models\Syllabus;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class SyllabusController extends Controller
 {
@@ -15,7 +17,8 @@ class SyllabusController extends Controller
      */
     public function index()
     {
-        $syllabuses = Syllabus::all();
+        //$syllabuses = Syllabus::all();
+        $syllabuses = Syllabus::with(['program'])->get();
         return view('backend.syllabuses.manage_syllabus', ['syllabuses' =>$syllabuses]);
     }
 
@@ -26,7 +29,8 @@ class SyllabusController extends Controller
      */
     public function create()
     {
-        return view('backend.syllabuses.create_syllabus');
+        $data['programs'] = Program::all();
+        return view('backend.syllabuses.create_syllabus', $data);
     }
 
     /**
@@ -37,12 +41,25 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
-        $syllabues = new Syllabus();
-        $syllabues->syllabus_name = $request->input('syllabus_name');
-        $syllabues->description = $request->input('description');
-        $syllabues->status = $request->input('status');
-        $syllabues->save();
-        return redirect()->route('syllabus.create')->with('message', "Syllabus Created Successfully");
+        $request->validate([
+            'syllabus_name' => 'required|unique:syllabus|max:255',
+            'program' => 'required|integer',
+            'status' => 'required'
+        ]);
+
+        try {
+            $syllabus = new Syllabus();
+            $syllabus->syllabus_name = $request->input('syllabus_name');
+            $syllabus->description = $request->input('description');
+            $syllabus->status = $request->input('status');
+            $syllabus->program_id = $request->input('program');
+            $syllabus->created_by = Auth::user()->id;
+            $syllabus->save();
+        } catch(\Exception $exception) {
+            return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
+        }
+      
+        return redirect()->route('syllabus.create')->with('successMessage', "Syllabus Created Successfully");
     }
 
     /**
@@ -64,6 +81,7 @@ class SyllabusController extends Controller
      */
     public function edit($id)
     {
+        $data['programs'] = Program::all();
         $data['syllabus'] = Syllabus::find($id);
         return view('backend.syllabuses.edit_syllabus', $data);
     }
@@ -76,12 +94,26 @@ class SyllabusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    
     {
-        $semester = Syllabus::find($id);
-        $semester->syllabus_name = $request->input('syllabus_name');
-        $semester->description = $request->input('description');
-        $semester->status = $request->input('status');
-        $semester->save();
+        $request->validate([
+            'syllabus_name' => 'required|max:255',
+            'description' => 'max:500',
+            'program' => 'required|integer',
+            'status' => 'required'
+        ]);
+
+        try {
+            $syllabus = Syllabus::find($id);
+            $syllabus->syllabus_name = $request->input('syllabus_name');
+            $syllabus->description = $request->input('description');
+            $syllabus->program_id = $request->input('program');
+            $syllabus->status = $request->input('status');
+            $syllabus->save();
+        } catch(\Exception $exception) {
+            return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
+        }
+      
         return redirect()->route("syllabus.index", $id)->with('message', "Syllabus Updated Successfully");
     }
 
@@ -105,5 +137,17 @@ class SyllabusController extends Controller
         $syllabus->save();
         return redirect()->route('semester.index');
 
+    }
+
+    public function getSyllabusByProgramId($programId)
+    {
+        $syllabus = Syllabus::where('program_id', $programId)->get();
+            $options = ""; 
+
+            foreach ($syllabus as $sy) {
+                $options .= "<option value='" . $sy->id . "'>" . $sy->syllabus_name . "</option>";
+            }
+
+        return response()->json($options);
     }
 }

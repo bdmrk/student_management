@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('second_name');
-            //$table->string('designation');
+            $table->date('dob');
             $table->string('contact_number');
             $table->string('email');
             $table->string('father_name');
@@ -26,6 +26,9 @@ class CreateStudentsTable extends Migration
             $table->string('student_photo');
             $table->tinyInteger('gender');
             $table->tinyInteger('status');
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

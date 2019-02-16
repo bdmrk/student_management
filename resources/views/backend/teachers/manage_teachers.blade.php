@@ -21,7 +21,7 @@
                             <th>Phone No</th>
                             <th>Email</th>
                             <th>Photo</th>
-                            <th>gender</th>
+                            <th>Gender</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -38,19 +38,11 @@
                                 </td>
                                 <td>{{$teacher->gender}}</td>
                                 <td>{{$teacher->status ==1 ? 'Active' : 'Inactive'}}</td>
+                                
                                 <td>
                                     <a href="#" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-zoom-in"></span>
                                     </a>
-                                    @if($teacher->status ==1)
-                                        <a href="{{ route('teachers.change-status', $teacher->id) }}" class="btn btn-info btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-up"></span>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('teachers.change-status', $teacher->id) }}" class="btn btn-warning btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-down"></span>
-                                        </a>
-                                    @endif
 
                                     <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-edit"></span>

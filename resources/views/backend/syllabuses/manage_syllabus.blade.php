@@ -18,6 +18,7 @@ ManageSyllabus
                         <th>SL NO</th>
                         <th>Syllabus</th>
                         <th>Description</th>
+                        <th>Program</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -27,6 +28,7 @@ ManageSyllabus
                         <td>{{$i++}}</td>
                         <td>{{$syllabus->syllabus_name}}</td>
                         <td>{{$syllabus->description}}</td>
+                        <td>{{$syllabus->program->program_name}}</td>
                         <td>{{$syllabus->status ==1 ? 'Active' : 'Inactive'}}</td>
                         <td>
 

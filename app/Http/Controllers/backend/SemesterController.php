@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Model\Semester;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
+use Auth;
 
 class SemesterController extends Controller
 {
@@ -38,13 +38,20 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
-        $semester = new Semester();
-        $semester->semester_name = $request->input('semester_name');
-        $semester->start_date = $request->input('starting_date');
-        $semester->end_date = $request->input('ending_date');
-        $semester->status = $request->input('status');
-        $semester->save();
-       return redirect('backend/semester/create')->with('message','Semester Saved Succesfully');
+        try {
+            $semester = new Semester();
+            $semester->semester_name = $request->input('semester_name');
+            $semester->start_date = $request->input('starting_date');
+            $semester->end_date = $request->input('ending_date');
+            $semester->status = $request->input('status');
+            $semester->created_by = Auth::user()->id;
+            $semester->save();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
+
+       return redirect('backend/semester/create')->with('successMessage','Semester Saved Succesfully');
+
     }
 
     /**
@@ -79,12 +86,16 @@ class SemesterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $semester = Semester::find($id);
-        $semester->semester_name = $request->input('semester_name');
-        $semester->start_date = $request->input('starting_date');
-        $semester->end_date = $request->input('ending_date');
-        $semester->status = $request->input('status');
-        $semester->save();
+        try {
+            $semester = Semester::findOrFail($id);
+            $semester->semester_name = $request->input('semester_name');
+            $semester->start_date = $request->input('starting_date');
+            $semester->end_date = $request->input('ending_date');
+            $semester->status = $request->input('status');
+            $semester->save();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
         return redirect()->route("semester.edit", $id);
     }
 
@@ -96,21 +107,25 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
-
-//        $semester = Semester::findOrFail($id);
-//        $semester->delete();
-        $semester = Semester::find($id);
-        $semester->delete();
+        try {
+            $semester = Semester::findOrFail($id);
+            $semester->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
         return redirect('backend/semester');
-
 
     }
 
     public function changeStatus(Request $request)
     {
-        $semester =  Semester::find($request->id);
-        $semester->status = !$semester->status;
-        $semester->save();
+        try {
+            $semester =  Semester::find($request->id);
+            $semester->status = !$semester->status;
+            $semester->save();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
         return redirect()->route('semester.index');
     }
 

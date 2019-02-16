@@ -190,7 +190,12 @@
                         <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                         <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
                         <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
-                        <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                        <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                             <button type='submit'><i class="fa fa-sign-out"></i> Logout</button> 
+                        </form>
+                        </li>
                     </ul>
                 </li>
             </ul>
