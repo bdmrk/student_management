@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
@@ -60,6 +61,7 @@ class CourseController extends Controller
             $course->course_credit = $request->input('course_credit');
             $course->description = $request->input('description');
             $course->syllabus_id = $request->input('syllabus');
+//            $course->syllabus_id = $request->input('prerequisite_course_id');
             $course->status = $request->input('status');
             $course->created_by = Auth::user()->id;
             $course->save();
@@ -140,5 +142,12 @@ class CourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCourseBySyllabusId($syllabusId)
+    {
+        $syllabus = Course::active()->where('syllabus_id', $syllabusId)->get();
+        $options = Helpers::makeOptions($syllabus, "id", "course_name");
+        return response()->json($options);
     }
 }

@@ -13,4 +13,9 @@ class Course extends Model
     {
         return $this->belongsTo(Syllabus::class, 'syllabus_id');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
 }

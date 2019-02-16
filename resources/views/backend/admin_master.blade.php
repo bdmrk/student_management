@@ -112,7 +112,7 @@
     <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <!--CK Editor Ends-->
 
-
+    @yield('style')
 
 </head>
 <body class="cbp-spmenu-push">

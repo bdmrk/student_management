@@ -1,4 +1,5 @@
 <?php
+namespace App\Http;
 /**
  * Created by PhpStorm.
  * User: latif
@@ -14,12 +15,12 @@ class Helpers
 
         foreach ($data as $option) {
 
-            $id = $option->{$idFieldName};
+            $id = $option->{$valueField};
             
             if ($selectId == $id) {
-                $options .= "<option value='" . $option->id . "' selected>" . $option->{$optionField} . "</option>";
+                $options .= "<option value='" . $option->{$valueField} . "' selected>" . $option->{$optionField} . "</option>";
             } else {
-                $options .= "<option value='" . $option->id . "'>" . $option->{$optionField} . "</option>";
+                $options .= "<option value='" . $option->{$valueField} . "'>" . $option->{$optionField} . "</option>";
             }
         }
 

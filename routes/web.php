@@ -42,6 +42,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
         //Ajax Route
 
         Route::get('/ajax/get-syllabus/{program_id}', 'backend\SyllabusController@getSyllabusByProgramId')->name('ajax.get-syllabus');
+        Route::get('/ajax/get-prerequisite-course-by-syllabus-id/{syllabus_id}', 'backend\CourseController@getCourseBySyllabusId');
     }
 );
 
