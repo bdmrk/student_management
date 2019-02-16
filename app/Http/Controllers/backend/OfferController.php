@@ -4,6 +4,11 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Syllabus;
+use App\Models\Program;
+use App\Models\Offer;
+use App\Models\Teacher;
 
 class OfferController extends Controller
 {
@@ -24,7 +29,10 @@ class OfferController extends Controller
      */
     public function create()
     {
-        //
+        $data['programs'] = Program::all();
+        $data['teachers'] = Teacher::active()->get();
+        
+        return view('backend.offer.create', $data);
     }
 
     /**

@@ -30,7 +30,13 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
         Route::resource('/syllabus', 'backend\SyllabusController');
         Route::get('/teachers/change-status/{id}', 'backend\SyllabusController@changeStatus')->name('syllabus.change-status');
        
-       //logout route
+        Route::resource('/offer', 'backend\OfferController');
+        Route::get('/offer/change-status/{id}', 'backend\OfferController@changeStatus')->name('syllabus.change-status');
+      
+      
+      
+      
+        //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
         //Ajax Route

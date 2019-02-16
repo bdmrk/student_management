@@ -85,8 +85,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Add Offer</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Manage Offer </a></li>
+                        <li><a href="{{ route('offer.create') }}"><i class="fa fa-angle-right"></i> Add Offer</a></li>
+                        <li><a href="{{ route('offer.index') }}"><i class="fa fa-angle-right"></i> Manage Offer </a></li>
                     </ul>
                 </li>
 

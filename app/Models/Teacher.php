@@ -13,4 +13,15 @@ class Teacher extends Model
     protected $table = "teachers";
 
     protected $fillable = ['first_name', 'second_name','designation', 'contact_number', 'email', 'father_name', 'mother_name', 'address', 'teacher_photo', 'gender', 'status'];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this-> first_name} {$this->last_name}";
+    }
 }
