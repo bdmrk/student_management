@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\Syllabus;
 use App\Models\Program;
+use Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -142,12 +143,7 @@ class SyllabusController extends Controller
     public function getSyllabusByProgramId($programId)
     {
         $syllabus = Syllabus::where('program_id', $programId)->get();
-            $options = ""; 
-
-            foreach ($syllabus as $sy) {
-                $options .= "<option value='" . $sy->id . "'>" . $sy->syllabus_name . "</option>";
-            }
-
+           $options = Helpers::makeOptions($syllabus, "id", "syllabus_name");
         return response()->json($options);
     }
 }
