@@ -3,6 +3,9 @@
 @section('title')
     Add Course
 @endsection
+@section('style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    @endsection
 
 @section('body')
     <div class="row">
@@ -70,7 +73,14 @@
                                 </select>
                             </div>
                         </div>
-
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Prerequisite</label>
+                        <div class="col-md-6">
+                            <select name="prerequisite_course_id" multiple class="form-control select2 prerequisite">
+                              
+                            </select>
+                        </div>
+                    </div>
                     
                     
                     <div class="form-group">
@@ -95,6 +105,8 @@
 
 @endsection
 @section('script')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
 
 
@@ -114,6 +126,28 @@
         } else {
             $(".syllabus").html('');
         }
+    });
+
+    $(".syllabus").change(function(){
+
+        var id = $(this).val();
+
+        var hitUrl = "{{ url('/admin/ajax/get-prerequisite-course-by-syllabus-id') }}/" + id;
+
+        if (id != '') {
+            $.get(hitUrl, function(response){
+                // alert(response);
+                if(response) {
+                    $(".prerequisite").html(response);
+                }
+            });
+        } else {
+            $(".syllabus").html('');
+        }
+    });
+
+    $(document).ready(function() {
+        $('.select2').select2();
     });
 </script>
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Helpers;
 use App\Models\Syllabus;
 use App\Models\Program;
-use Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
