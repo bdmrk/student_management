@@ -32,6 +32,7 @@ class CourseController extends Controller
     {
         
         $data['programs'] = Program::all();
+        
         return view('backend.courses.create_course', $data);
     }
 

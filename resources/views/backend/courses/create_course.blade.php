@@ -96,14 +96,17 @@
 @endsection
 @section('script')
 <script>
-    
+
 
     $(".program").change(function(){
         
         var id = $(this).val();
+      
         var hitUrl = "{{ url('/admin/ajax/get-syllabus') }}/" + id;
+        
         if (id != '') {
             $.get(hitUrl, function(response){
+               // alert(response);
                 if(response) {
                     $(".syllabus").html(response);
                 } 
