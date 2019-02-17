@@ -13,12 +13,6 @@
 3. https://git-scm.com/downloads
 4. https://getcomposer.org/download/ 
 
-## Necessary Software:
-1. https://www.apachefriends.org/download.html (7.3.1 / PHP 7.3.1)
-2. https://code.visualstudio.com/
-3. https://git-scm.com/downloads
-4. https://getcomposer.org/download/ 
-
 ## After Installation : Necessary Command
 1. create a folder in your xamp->htdocs-> foldername
 2. on visula code terminal -> paste the folder path-> 
