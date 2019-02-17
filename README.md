@@ -7,7 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## Necessary Software:
+1. https://www.apachefriends.org/download.html (7.3.1 / PHP 7.3.1)
+2. https://code.visualstudio.com/
+3. https://git-scm.com/downloads
+4. https://getcomposer.org/download/ 
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
