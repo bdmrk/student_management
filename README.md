@@ -12,6 +12,7 @@
 2. https://code.visualstudio.com/
 3. https://git-scm.com/downloads
 4. https://getcomposer.org/download/ 
+5. Create Github Account
 
 ## After Installation : Necessary Command
 1. create a folder in your xamp->htdocs-> foldername
