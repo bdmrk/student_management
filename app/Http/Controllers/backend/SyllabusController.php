@@ -95,7 +95,6 @@ class SyllabusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    
     {
         $request->validate([
             'syllabus_name' => 'required|max:255',
@@ -143,7 +142,8 @@ class SyllabusController extends Controller
     public function getSyllabusByProgramId($programId)
     {
         $syllabus = Syllabus::where('program_id', $programId)->get();
-           $options = Helpers::makeOptions($syllabus, "id", "syllabus_name");
+        $options = "<option value=''>Select Syllabus</option>";
+        $options .= Helpers::makeOptions($syllabus, "id", "syllabus_name");
         return response()->json($options);
     }
 }

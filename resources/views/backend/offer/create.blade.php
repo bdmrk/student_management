@@ -25,9 +25,10 @@
                                 <select name="program" class="form-control program">
                                     <option value="">Select Your Program</option>
                                     @foreach($programs as $p)
-                                        <option value="{{ $p->id }}">{{ $p->program_name }}</option>
+                                        <option value="{{ $p->id }}" @if(old('program') == $p->id) select @endif>{{ $p->program_name }}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('program') ? $errors->first('program') : ''}}</span>
                             </div>
                         </div>
 
@@ -35,29 +36,44 @@
                             <label class="control-label col-md-3">Syllabus</label>
                             <div class="col-md-6">
                                 <select name="syllabus" class="form-control syllabus">
-                                   
+                                    <option value="">Select Syllabus</option>
                                 </select>
+                                <span class="text-danger">{{$errors->has('syllabus') ? $errors->first('syllabus') : ''}}</span>
                             </div>
                         </div> 
 
                         <div class="form-group">
                             <label class="control-label col-md-3">Course</label>
                             <div class="col-md-6">
-                                <select name="course" class="form-control">
-                                   
+                                <select name="course" class="form-control course">
+                                    <option value="">Select Course</option>
                                 </select>
+                                <span class="text-danger">{{$errors->has('course') ? $errors->first('course') : ''}}</span>
                             </div>
-                        </div> 
+                        </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Semester</label>
+                        <div class="col-md-6">
+                            <select name="semester" class="form-control semester">
+                                <option value="">Select Semester</option>
+                                @foreach($semesters as $s)
+                                    <option value="{{ $s->id }}" @if(old('semester') == $s->id) select @endif>{{ $s->semester_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{$errors->has('course') ? $errors->first('course') : ''}}</span>
+                        </div>
+                    </div>
 
-                        <div class="form-group">
+                    <div class="form-group">
                             <label class="control-label col-md-3">Teacher</label>
                             <div class="col-md-6">
-                                <select name="program" class="form-control program">
+                                <select name="teacher" class="form-control">
                                     <option value="">Select Teacher</option>
                                     @foreach($teachers as $t)
                                         <option value="{{ $t->id }}">{{ $t->fullName }}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('teacher') ? $errors->first('teacher') : ''}}</span>
                             </div>
                         </div>
 
@@ -65,7 +81,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3" >Course Fee</label>
                             <div class="col-md-6">
-                            <input type="text" value="{{ old('course_fee') }}" name="course_fee" class="form-control" placeholder="Tk. 5000/-"/>
+                                <input type="text" value="{{ old('course_fee') }}" name="course_fee" class="form-control" placeholder="Tk. 5000/-"/>
                                 <span class="text-danger">{{$errors->has('course_fee') ? $errors->first('course_fee') : ''}}</span>
                             </div>
                         </div>
@@ -112,6 +128,26 @@
             });
         } else {
             $(".syllabus").html('');
+        }
+    });
+
+    $(".syllabus").change(function(){
+
+        var id = $(this).val();
+
+        var hitUrl = "{{ url('/admin/ajax/get-prerequisite-course-by-syllabus-id') }}/" + id;
+
+        if (id != '') {
+            $.get(hitUrl, function(response){
+                // alert(response);
+                if(response) {
+                    $(".course").html(response);
+                } else{
+                    $(".course").html('');
+                }
+            });
+        } else {
+            $(".course").html('');
         }
     });
 </script>

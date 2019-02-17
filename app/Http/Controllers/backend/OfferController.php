@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
@@ -19,7 +20,8 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //
+        $data['offers'] = Offer::with(['syllabus.program', 'course', 'semester', 'teacher'])->get();
+        return view('backend.offer.manage', $data);
     }
 
     /**
@@ -30,6 +32,7 @@ class OfferController extends Controller
     public function create()
     {
         $data['programs'] = Program::all();
+        $data['semesters'] = Semester::active()->get();
         $data['teachers'] = Teacher::active()->get();
         
         return view('backend.offer.create', $data);
@@ -43,7 +46,40 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'program' => 'required|integer',
+            'course' => 'required|integer',
+            'syllabus' => 'required|integer',
+            'teacher' => 'required|integer',
+            'semester' => 'required|integer',
+            'course_fee' => 'required|numeric'
+        ]);
+
+        try {
+            $hasOffer = Offer::where('syllabus_id', $request->input('course'))
+                ->where('course_id', $request->input('course'))
+                ->where('semester_id', $request->input('semester'))
+                ->get();
+
+            if ($hasOffer instanceof Offer) {
+                return redirect()->back()->withInput()->with('errorMessage', 'Already exist!');
+            }
+
+            $offer = new Offer();
+            $offer->course_id = $request->input('course');
+            $offer->syllabus_id = $request->input('syllabus');
+            $offer->semester_id = $request->input('semester');
+            $offer->teacher_id = $request->input('teacher');
+            $offer->course_fee = $request->input('course_fee');
+            $offer->created_by = auth()->user()->id;
+            $offer->status = $request->input('status');
+            $offer->save();
+            
+        } catch(\Exception $exception) {
+            return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
+        }
+
+        return redirect()->route("offer.index")->with('message', "Offer created Successfully");
     }
 
     /**

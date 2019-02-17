@@ -17,7 +17,7 @@ class CreateOffersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('course_id');
             $table->unsignedInteger('syllabus_id');
-            $table->unsignedInteger('semseter_id');
+            $table->unsignedInteger('semester_id');
             $table->unsignedInteger('teacher_id');
             $table->double('course_fee');
             $table->unsignedInteger('created_by');

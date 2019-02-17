@@ -65,8 +65,14 @@ class TeachersController extends Controller
     public function store(Request $request )
     {
         $this->teacherValidate($request);
-       $imageUrl = $this->imageUploade($request);
-       $this->teacherBasicInfoSave($request, $imageUrl);
+
+        if ($request->hasFile('teacher_photo')) {
+            $imageUrl = $this->imageUploade($request);
+        }  else {
+             $imageUrl = '';
+        }
+
+        $this->teacherBasicInfoSave($request, $imageUrl);
         return redirect()->route('teachers.create')->with('message', "Teacher is Created Successfully");
     }
 

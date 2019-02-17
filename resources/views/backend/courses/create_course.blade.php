@@ -69,7 +69,7 @@
                             <label class="control-label col-md-3">Syllabus</label>
                             <div class="col-md-6">
                                 <select name="syllabus" class="form-control syllabus">
-                                   
+                                    <option value="">Select Syllabus</option>
                                 </select>
                             </div>
                         </div>
@@ -139,10 +139,12 @@
                 // alert(response);
                 if(response) {
                     $(".prerequisite").html(response);
+                } else{
+                    $(".prerequisite").html('');
                 }
             });
         } else {
-            $(".syllabus").html('');
+            $(".prerequisite").html('');
         }
     });
 

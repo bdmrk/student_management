@@ -12,4 +12,8 @@ class Semester extends Model
     protected $table = 'semesters';
     public $timestamps = true;
 
+    public function scopeActive() {
+        return $this->where('status', true);
+    }
+
 }
