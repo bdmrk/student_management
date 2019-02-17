@@ -18,10 +18,12 @@
 2. on visula code terminal -> paste the folder path-> 
 cd G:\xamp2\htdocs\pgdit
 3. git colne https://github.com/bdmrk/student_management.git
-4. composer install
-5. open xamp and browse -> http://localhost/phpmyadmin
-6. create a database -> 
-7. go to visual code and edit .env file and there edit this portion -> 
+4. git checkout origin kausar
+5. git pull origin kausar
+6. composer install
+7. open xamp and browse -> http://localhost/phpmyadmin
+8. create a database -> 
+9. go to visual code and edit .env file and there edit this portion -> 
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
@@ -49,17 +51,6 @@ pass: 123456
 1. https://github.com/latif7
 2. https://github.com/bdmrk/
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
 ## Learning Laravel
 
