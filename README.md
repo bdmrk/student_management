@@ -13,6 +13,48 @@
 3. https://git-scm.com/downloads
 4. https://getcomposer.org/download/ 
 
+## Necessary Software:
+1. https://www.apachefriends.org/download.html (7.3.1 / PHP 7.3.1)
+2. https://code.visualstudio.com/
+3. https://git-scm.com/downloads
+4. https://getcomposer.org/download/ 
+
+## After Installation : Necessary Command
+1. create a folder in your xamp->htdocs-> foldername
+2. on visula code terminal -> paste the folder path-> 
+cd G:\xamp2\htdocs\pgdit
+3. git colne https://github.com/bdmrk/student_management.git
+4. composer install
+5. open xamp and browse -> http://localhost/phpmyadmin
+6. create a database -> 
+7. go to visual code and edit .env file and there edit this portion -> 
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=student_crud1
+DB_USERNAME=root
+DB_PASSWORD=
+
+## After Database Connection : Necessary Command
+
+1. php artisan migrate
+2. php artisan db:seed
+3. php artisan db:seed --class=ProgramsTableSeeder.php
+4. php artisan serve
+
+
+## Project Browse:
+1. Click the link avobe
+2. http://127.0.0.1:8000/login
+3. Credentials: 
+user: admin@gmail.com
+pass: 123456
+
+
+## Working on Project
+1. https://github.com/latif7
+2. https://github.com/bdmrk/
+
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
