@@ -109,10 +109,9 @@
     </div>
 
 @endsection
-@section('script')
+@section('scripts')
 <script>
-
-
+    
     $(".program").change(function(){
         
         var id = $(this).val();

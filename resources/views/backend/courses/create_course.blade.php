@@ -43,7 +43,7 @@
                                 <span class="text-danger">{{$errors->has('course_credit') ? $errors->first('course_credit') : ''}}</span>
                             </div>
                         </div>
-                        
+
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
@@ -77,12 +77,12 @@
                         <label class="control-label col-md-3">Prerequisite</label>
                         <div class="col-md-6">
                             <select name="prerequisite_course_id" multiple class="form-control select2 prerequisite">
-                              
+
                             </select>
                         </div>
                     </div>
                     
-                    
+
                     <div class="form-group">
                         <label class="control-label col-md-3">Status</label>
                         <div class="col-md-6">
@@ -93,7 +93,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <input type="submit" value="Create Syllabus" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Create Course" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
                     {{Form::close()}}
@@ -102,17 +102,16 @@
         </div>
 
     </div>
-
+    
 @endsection
-@section('script')
-
+@section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script>
-
-
+<script type="text/javascript">
+          
     $(".program").change(function(){
         
         var id = $(this).val();
+        
       
         var hitUrl = "{{ url('/admin/ajax/get-syllabus') }}/" + id;
         

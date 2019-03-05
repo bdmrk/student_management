@@ -49,6 +49,15 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
 Auth::routes();
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/student-login', 'Auth\StudentLoginController@showLoginForm')->name('student-login');
+Route::post('/student-login', 'Auth\StudentLoginController@postLogin')->name('student-login');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('student')->middleware('auth:student')->group (
+    function() {
+        Route::get('/dashboard', 'Student\StudentController@dashboard')->name('student-dash');
+        Route::get('/enroll', 'Student\StudentController@enroll')->name('student-enroll');
+    });

@@ -147,7 +147,7 @@ class CourseController extends Controller
     public function getCourseBySyllabusId($syllabusId)
     {
         $syllabus = Course::active()->where('syllabus_id', $syllabusId)->get();
-        $options = "<option value=''>Select Syllabus</option>";
+        $options = "";
         $options .= Helpers::makeOptions($syllabus, "id", "course_name");
         return response()->json($options);
     }

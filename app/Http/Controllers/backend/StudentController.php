@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\DataTables\StudentDataTable;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -14,11 +16,11 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    
+
+    public function index(StudentDataTable $dataTable)
     {
-        $data['students'] = Student::all();
-        return view('backend.students.student_manage', $data);
+//        $data['students'] = Student::all();
+        return $dataTable->render('backend.students.student_manage');
            
     }
 
@@ -40,28 +42,63 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
+
+            $request->validate([
+                'applicant_name' => 'required|max:100',
+                'father_name' => 'required|max:100',
+                'mother_name' => 'required|max:100',
+                'dob' => 'required|date',
+                'contact_number' => 'required',
+                'email' => 'required|email',
+                'gender' => 'required',
+                'religion' => 'required',
+                'blood_group' => 'required',
+                'nid' => 'required',
+                'present_address' => 'required',
+                'permanent_address' => 'required',
+                'student_photo' => 'required|mimes:jpeg,jpg,png|max:100',
+            ]);
+
+
         try {
-            $studentImage = $request->file('student_photo');
-            $imageName = $studentImage->getClientOriginalname();
-            $directory = 'images/students/';
-            $imageUrl = $directory.$imageName;
-            $studentImage->move($directory, $imageName);
-    
+            if ($request->hasFile('student_photo')) {
+
+                $studentImage = $request->file('student_photo');
+                $ext = $studentImage->getClientOriginalExtension();
+                $imageName = 'st_'.rand(100,999)."_".date('ymdhis').".".$ext;
+//                dd($imageName);
+                $directory = '/images/students/';
+                $imageUrl = $directory.$imageName;
+                $destination = public_path() . $directory;
+                $studentImage->move($destination, $imageName);
+
+            }
             $students = new Student();
-            $students->first_name = $request->input('first_name');
-            $students->second_name = $request->input('second_name');
-            $students->dob = $request->input('dob');
-            $students->contact_number = $request->input('contact_number');
-            $students->email = $request->input('email');
+            $students->full_name = $request->input('applicant_name');
             $students->father_name = $request->input('father_name');
             $students->mother_name = $request->input('mother_name');
-            $students->address = $request->input('address');
-            $students->student_photo = $imageUrl;
+            $students->dob = Carbon::parse($request->input('dob'))->format("Y-m-d");
             $students->gender = $request->input('gender');
-            $students->status = $request->input('status');
+            $students->contact_number = $request->input('contact_number');
+            $students->email = $request->input('email');
+            $students->present_address = $request->input('present_address');
+            $students->permanent_address = $request->input('permanent_address');
+            $students->religion = $request->input('religion');
+            $students->blood_group = $request->input('blood_group');
+            $students->nationality = $request->input('nationality');
+            $students->nid = $request->input('nid');
+            $students->student_photo = $imageUrl;
+            $students->username = 'abcd';
+            $students->password = '1233';
+            $students->status = 1;
+            $students->program_id = 1;
+            $students->is_active = 0;
+            $students->is_selected = 0;
             $students->created_by = Auth::user()->id;
             $students->save();
         } catch(\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
       
