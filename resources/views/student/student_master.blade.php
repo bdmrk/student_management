@@ -126,7 +126,7 @@
 	<!--left-fixed -navigation-->
 
 	<!-- header-starts -->
-@include('backend.includes.header')
+@include('backend.includes.student_header')
 <!-- //header-ends -->
 
 	<!-- main content start-->

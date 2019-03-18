@@ -16,4 +16,9 @@ class Semester extends Model
         return $this->where('status', true);
     }
 
+    public function enroll()
+    {
+        return $this->hasMany(Enroll::class, 'semester_id');
+    }
+
 }

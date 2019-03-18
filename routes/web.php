@@ -13,6 +13,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/students', 'backend\StudentController');
         Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
+        Route::get('/student/select/{id}', 'backend\StudentController@selectStudent')->name('student.select');
 
 
         Route::resource('/semester', 'backend\SemesterController');
@@ -32,9 +33,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
        
         Route::resource('/offer', 'backend\OfferController');
         Route::get('/offer/change-status/{id}', 'backend\OfferController@changeStatus')->name('syllabus.change-status');
-      
-      
-      
+        
       
         //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -60,4 +59,8 @@ Route::prefix('student')->middleware('auth:student')->group (
     function() {
         Route::get('/dashboard', 'Student\StudentController@dashboard')->name('student-dash');
         Route::get('/enroll', 'Student\StudentController@enroll')->name('student-enroll');
+        Route::post('/enroll', 'Student\StudentController@store')->name('enroll.store');
+        Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
+
+        Route::get('logout', 'Auth\StudentLoginController@logut')->name('student-logout');
     });

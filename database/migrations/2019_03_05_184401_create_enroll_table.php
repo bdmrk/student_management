@@ -16,12 +16,10 @@ class CreateEnrollTable extends Migration
         Schema::create('enroll', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
-            $table->integer('offer_id');
-            $table->integer('incourse_mark')->default(0);
-            $table->integer('final_mark')->default(0);
-            $table->integer('cgpa')->nullable();
-            $table->integer('grade')->nullable();
-            $table->integer('status');
+            $table->integer('semester_id');
+            $table->double('cgpa', 3, 2)->nullable();
+            $table->string('grade', 20)->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

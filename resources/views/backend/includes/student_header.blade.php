@@ -160,7 +160,7 @@
 
 
         <!--search-box-->
-        <div class="search-box hide">
+        <div class="search-box hide ">
             <form class="input">
                 <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
                 <label class="input__label" for="input-31">
@@ -176,10 +176,10 @@
                 <li class="dropdown profile_details_drop">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <div class="profile_img">
-                            <span class="prfil-img"></span>
+                            <span class="prfil-img"><i class="fa fa-user"></i></span>
                             <div class="user-name">
-                                <p>{{ Auth::user()->name }}</p>
-                                <span>Administrator</span>
+                                <p>{{ Auth::guard('student')->user()->full_name }}</p>
+                                <span>Student</span>
                             </div>
                             <i class="fa fa-angle-down lnr"></i>
                             <i class="fa fa-angle-up lnr"></i>
@@ -189,10 +189,7 @@
                     <ul class="dropdown-menu drp-mnu">
                         <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
                         <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                             <button type='submit'><i class="fa fa-sign-out"></i> Logout</button> 
-                        </form>
+                            <a href="{{ route('student-logout') }}"><i class="fa fa-sign-out"></i>  Logout</a>
                         </li>
                     </ul>
                 </li>

@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Helpers\Enum\StudentStatus;
 use App\Models\Student;
 use App\User;
 use Yajra\DataTables\EloquentDataTable;
@@ -31,6 +32,13 @@ class StudentDataTable extends DataTable
         $dataTable = new EloquentDataTable($this->query());
         $dataTable->addColumn('program', function ($student) {
             return $student->program->program_name;
+        })->editColumn('action', function ($student) {
+            $action = '';
+
+            if ($student->status == StudentStatus::Applied) {
+                $action = "<a class='btn btn-info' href='".route('student.select', $student->id)."'>Select</a>";
+            }
+            return $action;
         });
 
         return $dataTable->make(true);
@@ -59,7 +67,7 @@ class StudentDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-//                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -76,6 +84,7 @@ class StudentDataTable extends DataTable
             'contact_number',
             'email',
             'program',
+            'status',
             'created_at',
             'updated_at'
         ];

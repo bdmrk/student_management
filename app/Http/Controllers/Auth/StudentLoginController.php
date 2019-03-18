@@ -44,7 +44,7 @@ class StudentLoginController extends Controller
 
 
             // if successful, then redirect to their intended location
-            if(Auth::guard('student')->user()->status!=1){
+            if(Auth::guard('student')->user()->is_active!=1){
                 Session::flash('error','Your account is inactive');
                 Auth::guard('student')->logout();
                 return redirect()->back()->withInput($request->only('email', 'remember'));
@@ -58,6 +58,13 @@ class StudentLoginController extends Controller
 
         // if unsuccessful, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function logout() {
+//        Auth::guard('student')->logout();
+        auth('student')->logout();
+//        $this->guard()->logout();
+        return redirect()->route('student-login');
     }
 
 }

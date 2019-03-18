@@ -17,42 +17,30 @@
                             @include('backend.includes.message')
                         </div>
                     </div>
-                    {{Form::open(['route'=>'semester.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
+                    {{Form::open(['route'=>'enroll.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
-                        <label class="control-label col-md-3" >Semester's Name</label>
+                        <label class="control-label col-md-3">Semester : </label>
                         <div class="col-md-6">
-                            <input type="text" name="semester_name" class="form-control" placeholder="Spring"/>
-                            <span class="text-danger">{{$errors->has('semester_name') ? $errors->first('semester_name') : ''}}</span>
+                            <select name="semester" class="form-control semester">
+                                <option value="{{ $semester->id }}">{{ $semester->semester_name }}</option>
+                            </select>
+                            <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label class="control-label col-md-3">Starting Date</label>
+                        <label class="control-label col-md-3">Course : </label>
                         <div class="col-md-6">
-                            <input type="date" name="starting_date" class="form-control" placeholder="01/01/2019"/>
-                            <span class="text-danger">{{$errors->has('starting_date') ? $errors->first('starting_date') : ''}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Ending Date</label>
-                        <div class="col-md-6">
-                            <input type="date" name="ending_date" class="form-control" placeholder="01/01/2019"/>
-                            <span class="text-danger">{{$errors->has('ending_date') ? $errors->first('ending_date') : ''}}</span>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Status</label>
-                        <div class="col-md-6">
-                            <label><input type="radio"  checked name="status" value="1"/>Active</label>
-                            <label><input type="radio"  name="status" value="0"/>Inactive</label>
+                            @foreach($offers as $offer)
+                                {{ $offer->course->course_name }} <input type="checkbox" value="{{ $offer->id }}" name="course[]" />
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-3">
-                            <input type="submit" value="Create" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Enroll" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
 
