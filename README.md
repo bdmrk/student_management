@@ -21,7 +21,7 @@ cd G:\xamp2\htdocs\pgdit
 3. git clone https://github.com/bdmrk/student_management.git
 4. git checkout origin kausar
 5. git pull origin kausar
-6. composer install
+6. composer update
 7. open xamp and browse -> http://localhost/phpmyadmin
 8. create a database -> 
 9. go to visual code and edit .env file and there edit this portion -> 
@@ -39,13 +39,14 @@ DB_PASSWORD=
 3. php artisan db:seed --class=ProgramsTableSeeder.php
 4. php artisan serve
 
-
 ## Project Browse:
 1. Click the link avobe
 2. http://127.0.0.1:8000/login
 3. Credentials: 
 user: admin@gmail.com
 pass: 123456
+
+
 
 
 ## Working on Project
