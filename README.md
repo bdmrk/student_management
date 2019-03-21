@@ -36,7 +36,7 @@ DB_PASSWORD=
 
 1. php artisan migrate
 2. php artisan db:seed
-3. php artisan db:seed --class=ProgramsTableSeeder.php
+3. php artisan db:seed --class=ProgramsTableSeeder
 4. php artisan serve
 
 ## Project Browse:
