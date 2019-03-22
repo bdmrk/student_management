@@ -1,7 +1,7 @@
-@extends('student.student_master')
+@extends('teacher.teacher_master')
 
 @section('title')
-    Enrolled Course
+    Marks Entry
 @endsection
 
 @section('body')
@@ -9,9 +9,10 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class=""> Enrolled Semester </h3>
+                    <h3 class=""> Marks Entry </h3>
                 </div>
                 <div class="panel-body">
+                    <a href="{{route('student-enroll')}}" class="btn btn-success pull-right">Enroll a New Course</a>
                     <div class="row">
                         <div class="col-md-9 pull-right">
                             @include('backend.includes.message')
@@ -22,27 +23,19 @@
                         <div lass="col-md-12">
                             <table class="table">
                                 <tr>
-                                    <th>Semester Name</th>
+                                    <th>Course Name</th>
+                                    <th>Semester</th>
                                     <th>Status</th>
                                     <th>CGPA</th>
                                     <th>Grade</th>
-                                    <th class="text-center">Action</th>
                                 </tr>
-                                @foreach($enrolledSemester as $enroll)
-                                    <tr>
-                                        <td>{{ $enroll->semester->semester_name }}</td>
-                                        <td>{{ $enroll->status }}</td>
-                                        <td>{{ $enroll->cgpa }}</td>
-                                        <td>{{ $enroll->grade }}</td>
-                                        <td class="text-center"><a href="" class="btn btn-info">Print Payment Slip</a> </td>
-                                    </tr>
-                                @endforeach
+                               
 
                             </table>
                         </div>
                     </div>
 
-
+                    
                 </div>
 
             </div>

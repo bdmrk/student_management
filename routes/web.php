@@ -50,6 +50,8 @@ Auth::routes();
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('/student-login', 'Auth\StudentLoginController@showLoginForm')->name('student-login');
 Route::post('/student-login', 'Auth\StudentLoginController@postLogin')->name('student-login');
+Route::get('/teacher-login', 'Auth\TeacherLoginController@showLoginForm')->name('teacher-login');
+Route::post('/teacher-login', 'Auth\TeacherLoginController@postLogin')->name('teacher-login');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -63,4 +65,13 @@ Route::prefix('student')->middleware('auth:student')->group (
         Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
 
         Route::get('logout', 'Auth\StudentLoginController@logut')->name('student-logout');
+    });
+
+Route::prefix('teacher')->middleware('auth:teacher')->group (
+    function() {
+        Route::get('/dashboard', 'Teacher\TeacherController@dashboard')->name('teacher-dash');
+        Route::get('/marks-entry', 'Teacher\TeacherController@marksEntry')->name('marks-entry');
+        Route::post('/ajax/save-mark', 'Teacher\TeacherController@saveMark')->name('save-mark');
+
+        Route::get('logout', 'Auth\TeacherLoginController@logut')->name('teacher-logout');
     });
