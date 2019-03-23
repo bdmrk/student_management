@@ -34,7 +34,7 @@
                                         <td>{{ $enroll->status }}</td>
                                         <td>{{ $enroll->cgpa }}</td>
                                         <td>{{ $enroll->grade }}</td>
-                                        <td class="text-center"><a href="" class="btn btn-info">Print Payment Slip</a> </td>
+                                        <td class="text-center"><a href="{{route('student.print.payment-slip', $enroll->id)}}" class="btn btn-info">Print Payment Slip</a> </td>
                                     </tr>
                                 @endforeach
 

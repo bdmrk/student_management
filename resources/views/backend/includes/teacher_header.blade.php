@@ -179,7 +179,7 @@
                             <span class="prfil-img"><i class="fa fa-user"></i></span>
                             <div class="user-name">
                                 <p>{{ Auth::guard('teacher')->user()->first_name }}</p>
-                                <span>Student</span>
+                                <span>Teacher</span>
                             </div>
                             <i class="fa fa-angle-down lnr"></i>
                             <i class="fa fa-angle-up lnr"></i>
@@ -189,7 +189,7 @@
                     <ul class="dropdown-menu drp-mnu">
                         <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
                         <li>
-                            <a href="{{ route('student-logout') }}"><i class="fa fa-sign-out"></i>  Logout</a>
+                            <a href="{{ route('teacher-logout') }}"><i class="fa fa-sign-out"></i>  Logout</a>
                         </li>
                     </ul>
                 </li>
