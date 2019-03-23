@@ -13,14 +13,14 @@ class CreateEnrolledCourseTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrolled_course', function (Blueprint $table) {
+        Schema::create('enrolled_courses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
             $table->integer('enroll_id');
             $table->integer('offer_id');
             $table->integer('incourse_mark')->default(0);
             $table->integer('final_mark')->default(0);
-            $table->double('cgpa', 3,2)->nullable();
+            $table->double('cgpa', 3,2)->default(0);
             $table->string('grade', 10)->nullable();
             $table->double('course_fee', 16,2);
             $table->string('status', 20);

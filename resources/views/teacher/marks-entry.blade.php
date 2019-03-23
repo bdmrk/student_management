@@ -24,6 +24,7 @@
                                 <tr>
                                     <th>Student Name</th>
                                     <th>Course Name</th>
+                                    <th>Status</th>
                                     <th>Semester</th>
                                     <th>Incourse Mark</th>
                                     <th>Final Mark</th>
@@ -39,11 +40,12 @@
                                         <tr>
                                             <td>{{ $course->student->full_name }}</td>
                                             <td>{{ $course->offer->course->course_name }}</td>
+                                            <td>{{ $course->status }}</td>
                                             <td>{{ $course->enroll->semester->semester_name }}</td>
                                             <td><input type="text" name="incourse_mark"></td>
                                             <td><input type="text" name="final_mark"></td>
-                                            <td>CGPA</td>
-                                            <td>Grade</td>
+                                            <td>{{ $course->cgpa }}</td>
+                                            <td>{{ $course->grade }}</td>
                                             <td><input type="submit" class=" btn-sm btn btn-info" value="Save"> </td>
                                         </tr>
                                     </form>
@@ -71,7 +73,7 @@
             var formData = $( this ).serializeArray();
             var hitUrl = "{{ route('save-mark') }}"
             $.post(hitUrl, formData, function (data) {
-                                console.log(data);
+                alert(data.message);
             });
         });
 
