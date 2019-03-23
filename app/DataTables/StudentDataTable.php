@@ -18,15 +18,6 @@ class StudentDataTable extends DataTable
      */
     public function ajax()
     {
-//        return $this->datatables
-//            ->eloquent()
-//            ->make(true);
-//        ->editColumn('receiver_number', function ($smsLog) {
-//        return stringReplaceWithSymbol($smsLog->receiver_number,'*');
-//    })
-//        ->editColumn('message_body', function ($smsLog) {
-//            return replaceNumberFromString($smsLog->message_body,'*');
-//        })
 
 
         $dataTable = new EloquentDataTable($this->query());
@@ -85,8 +76,7 @@ class StudentDataTable extends DataTable
             'email',
             'program',
             'status',
-            'created_at',
-            'updated_at'
+
         ];
     }
 

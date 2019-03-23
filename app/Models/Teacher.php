@@ -15,7 +15,7 @@ class Teacher extends Authenticatable
     protected $dates = ['deleted_at'];
     protected $table = "teachers";
 
-    protected $fillable = ['first_name', 'second_name','designation', 'contact_number', 'email', 'father_name', 'mother_name', 'address', 'teacher_photo', 'gender', 'status'];
+    protected $fillable = ['full_name', 'dob','designation', 'contact_number', 'email', 'father_name', 'mother_name', 'address', 'teacher_photo', 'gender', 'status'];
 
     public function scopeActive($query)
     {
@@ -23,8 +23,5 @@ class Teacher extends Authenticatable
 
     }
 
-    public function getFullNameAttribute()
-    {
-        return "{$this-> first_name} {$this->last_name}";
-    }
+
 }

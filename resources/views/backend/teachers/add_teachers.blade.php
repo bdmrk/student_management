@@ -20,27 +20,21 @@
                     {{Form::open(['route'=>'teachers.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
-                        <label class="control-label col-md-3" >First Name</label>
+                        <label class="control-label col-md-3" >Full Name</label>
                         <div class="col-md-6">
-                            <input type="text" name="first_name" class="form-control" placeholder="Mahabubur Rahman"/>
-                            <span class="text-danger">{{$errors->has('first_name') ? $errors->first('first_name') : ''}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Second Name</label>
-                        <div class="col-md-6">
-                            <input type="text" name="second_name" class="form-control" placeholder="Kausar"/>
-                            <span class="text-danger">{{$errors->has('second_name') ? $errors->first('second_name') : ''}}</span>
+                            <input type="text" name="full_name" class="form-control" placeholder="Mahabubur Rahman Kausar"/>
+                            <span class="text-danger">{{$errors->has('full_name') ? $errors->first('full_name') : ''}}</span>
                         </div>
                     </div>
 
-                    {{--<div class="form-group">--}}
-                        {{--<label class="control-label col-md-3">Date of Birth</label>--}}
-                        {{--<div class="col-md-6">--}}
-                            {{--<input type="text" name="dob" class="form-control" placeholder="18/03/1992"/>--}}
-                            {{--<span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}} </span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Date of Birth</label>
+                        <div class="col-md-6">
+                            <input type="date" name="date_of_birth" class="form-control" placeholder="18/03/1992"/>
+                            <span class="text-danger">{{$errors->has('date_of_birth') ? $errors->first('date_of_birth') : ''}} </span>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Designation</label>
@@ -61,6 +55,22 @@
                         <div class="col-md-6">
                             <input type="email" name="email" class="form-control" placeholder="hostkausar@gmail.com"/>
                             <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Password</label>
+                        <div class="col-md-6">
+                            <input type="password" name="password" class="form-control" placeholder="Password"/>
+                            <span class="text-danger">{{$errors->has('password') ? $errors->first('password') : ''}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Confirm Password</label>
+                        <div class="col-md-6">
+                            <input type="password" name="password_confirmation" class="form-control" placeholder=" Retype Password"/>
+                            <span class="text-danger">{{$errors->has('password_confirmation') ? $errors->first('password_confirmation') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -96,8 +106,8 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Gender</label>
                         <div class="col-md-6">
-                            <label><input type="radio"  checked name="gender" value="1"/>Male</label>
-                            <label><input type="radio"  name="gender" value="0"/>Female</label>
+                            <label><input type="radio"  checked name="gender" value="Male"/>Male</label>
+                            <label><input type="radio"  name="gender" value="Female"/>Female</label>
                         </div>
                     </div>
 
