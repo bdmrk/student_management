@@ -139,7 +139,7 @@ class StudentController extends Controller
         }
       
        
-        return redirect()->route('students.create')->with('message', "Student is Created Successfully");
+        return redirect()->route('students.create')->with('successMessage', "Student is Created Successfully");
     }
 
     /**
@@ -222,7 +222,7 @@ class StudentController extends Controller
     {
         try {
             $student =  Student::find($request->id);
-            $student->status = !$semester->status;
+            $student->status = !$student->status;
             $student->save();
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");

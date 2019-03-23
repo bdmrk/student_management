@@ -10,9 +10,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="text-center">   Manage Teachers </h4>
+
                 </div>
+
+
                 <div class="panel-body table-responsive">
-                    <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+                    <div class="row">
+                        <div class="col-md-9 pull-left">
+                            @include('backend.includes.message')
+                        </div>
+                    </div>
                     <table class="table table-bordered ">
                         <tr class="bg-primary">
                             <th>SL NO</th>
@@ -29,7 +36,7 @@
                         @foreach($teachers as $teacher)
                             <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{$teacher->first_name}}</td>
+                                <td>{{$teacher->full_name}}</td>
                                 <td>{{$teacher->designation}}</td>
                                 <td>{{$teacher->contact_number}}</td>
                                 <td>{{$teacher->email}}</td>

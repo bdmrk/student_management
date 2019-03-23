@@ -15,18 +15,17 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('second_name');
-           // $table->timestamp('dob')->nullable();
+            $table->string('full_name');
+           $table->date('dob')->nullable();
             $table->string('designation');
             $table->string('contact_number');
             $table->string('email');
-            $table->string('password',256);
+            $table->string('password' ,255);
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('address');
             $table->string('teacher_photo');
-            $table->tinyInteger('gender');
+            $table->string('gender');
             $table->tinyInteger('status');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();

@@ -28,12 +28,17 @@ class TeachersController extends Controller
 
     protected  function teacherValidate($request) {
         $this->validate($request, [
-            'first_name' => 'required',
+            'full_name' => 'required',
+            'date_of_birth' => 'required',
+            'contact_number' => 'required',
+           'teacher_photo' => 'required',
+            'password'=>'required|confirmed|min:6',
+            'password_confirmation'=>'sometimes|required_with:password',
 
         ]);
     }
 
-    protected  function imageUploade($request) {
+    protected  function imageUpload($request) {
         $teacherImage = $request->file('teacher_photo');
         $fileType = $teacherImage->getClientOriginalExtension();
         $imageName = $request->first_name.'.'.$fileType;
@@ -41,17 +46,19 @@ class TeachersController extends Controller
         $imageUrl = $directory.$imageName;
          Image::make($teacherImage)->resize(300,300)->save($imageUrl);
 
-        //$teacherImage->move($directory, $imageName);
-        return $imageUrl;
+         return $imageUrl;
     }
 
     protected  function teacherBasicInfoSave($request, $imageUrl ) {
         $teachers = new Teacher();
-        $teachers->first_name = $request->input('first_name');
-        $teachers->second_name = $request->input('second_name');
+        $teachers->full_name = $request->input('full_name');
+        $teachers->dob = $request->input('date_of_birth');
         $teachers->designation = $request->input('designation');
         $teachers->contact_number = $request->input('contact_number');
         $teachers->email = $request->input('email');
+
+        $teachers->password = bcrypt($request->input('password'));
+
         $teachers->father_name = $request->input('father_name');
         $teachers->mother_name = $request->input('mother_name');
         $teachers->address = $request->input('address');
@@ -65,15 +72,20 @@ class TeachersController extends Controller
     public function store(Request $request )
     {
         $this->teacherValidate($request);
+        try {
+            if ($request->hasFile('teacher_photo')) {
+                $imageUrl = $this->imageUpload($request);
+            }  else {
+                $imageUrl = '';
+            }
 
-        if ($request->hasFile('teacher_photo')) {
-            $imageUrl = $this->imageUploade($request);
-        }  else {
-             $imageUrl = '';
+            $this->teacherBasicInfoSave($request, $imageUrl);
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
-        $this->teacherBasicInfoSave($request, $imageUrl);
-        return redirect()->route('teachers.create')->with('message', "Teacher is Created Successfully");
+        return redirect()->route('teachers.create')->with('successMessage', "Teacher is Created Successfully");
     }
 
 
@@ -92,30 +104,41 @@ class TeachersController extends Controller
 
     public function update(Request $request, $id)
     {
-        $teacher = Teacher::find($id);
+        $this->validate($request, [
+            'full_name' => 'required',
+            'date_of_birth' => 'required',
+            'contact_number' => 'required',
+        ]);
 
-        if($request->hasFile('teacher_photo')) {
-            $teacherImage = $request->file('teacher_photo');
-            unlink($teacher->teacher_photo);
-            $imageName = $teacherImage->getClientOriginalName();
-            $directory = 'images/teachers/';
-            $imageUrl = $directory . $imageName;
-            Image::make($teacherImage)->save($imageUrl);
-            $teacher->teacher_photo = $imageUrl;
-        }
-        $teacher->first_name = $request->input('first_name');
-        $teacher->second_name = $request->input('second_name');
-        $teacher->designation = $request->input('designation');
-        $teacher->contact_number = $request->input('contact_number');
-        $teacher->email = $request->input('email');
-        $teacher->father_name = $request->input('father_name');
-        $teacher->mother_name = $request->input('mother_name');
-        $teacher->address = $request->input('address');
-        $teacher->gender = $request->input('gender');
-        $teacher->status = $request->input('status');
-        //dd($teacher);
-        $teacher->save();
-           return redirect()->route('teachers.index')->with('message', "Teacher Updated successfully");
+       try {
+           $teacher = Teacher::find($id);
+
+           if($request->hasFile('teacher_photo')) {
+               $teacherImage = $request->file('teacher_photo');
+               unlink($teacher->teacher_photo);
+               $imageName = $teacherImage->getClientOriginalName();
+               $directory = 'images/teachers/';
+               $imageUrl = $directory . $imageName;
+               Image::make($teacherImage)->save($imageUrl);
+               $teacher->teacher_photo = $imageUrl;
+           }
+           $teacher->full_name = $request->input('full_name');
+           $teacher->dob = $request->input('date_of_birth');
+           $teacher->designation = $request->input('designation');
+           $teacher->contact_number = $request->input('contact_number');
+           $teacher->email = $request->input('email');
+           $teacher->father_name = $request->input('father_name');
+           $teacher->mother_name = $request->input('mother_name');
+           $teacher->address = $request->input('address');
+           $teacher->gender = $request->input('gender');
+           $teacher->status = $request->input('status');
+           //dd($teacher);
+           $teacher->save();
+       } catch (\Exception $exception) {
+           return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+                }
+
+           return redirect()->route('teachers.index')->with('successMessage', "Teacher Updated successfully");
     }
 
 
@@ -123,7 +146,7 @@ class TeachersController extends Controller
     {
         $teacher = Teacher::find($id);
         $teacher->delete();
-        return redirect()->route('teachers.create')->with('message',"Teachers is deleted successfully");
+        return redirect()->route('teachers.create')->with('successMessage',"Teachers is deleted successfully");
     }
 
     public function changeStatus(Request $request)
