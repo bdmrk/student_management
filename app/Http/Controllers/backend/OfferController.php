@@ -79,7 +79,7 @@ class OfferController extends Controller
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
 
-        return redirect()->route("offer.index")->with('message', "Offer created Successfully");
+        return redirect()->route("offer.index")->with('message', "Offer is created Successfully");
     }
 
     /**
@@ -124,6 +124,17 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $offer = Offer::find($id);
+        $offer->delete();
+        return redirect()->route('offer.index')->with('successMessage', "Offer is Deleted Successfully");
+    }
+
+    public  function  changeStatus(Request $request){
+
+        $offer =  Offer::find($request->id);
+        $offer->status = !$offer->status;
+        $offer->save();
+        return redirect()->route('offer.index');
+
     }
 }

@@ -135,7 +135,7 @@ class SyllabusController extends Controller
         $syllabus =  Syllabus::find($request->id);
         $syllabus->status = !$syllabus->status;
         $syllabus->save();
-        return redirect()->route('semester.index');
+        return redirect()->route('syllabus.index');
 
     }
 

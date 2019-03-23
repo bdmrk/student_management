@@ -12,7 +12,9 @@
                     <h4 class="text-center"> Manage Offers </h4>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+                    <div class="col-md-9 pull-right">
+                        @include('backend.includes.message')
+                    </div>
                     <table class="table table-bordered">
                         <tr class="bg-primary">
                             <th>SL NO</th>
@@ -35,19 +37,19 @@
                                 <td>
 
                                     @if($offer->status ==1)
-                                        <a href="{{ route('course.change-status', $offer->id) }}" class="btn btn-info btn-xs pull-left">
+                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-info btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-up"></span>
                                         </a>
                                     @else
-                                        <a href="{{ route('course.change-status', $offer->id) }}" class="btn btn-warning btn-xs pull-left">
+                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-warning btn-xs pull-left">
                                             <span class="glyphicon glyphicon-arrow-down"></span>
                                         </a>
                                     @endif
 
-                                    <a href="{{route('course.edit',['id'=>$offer->id])}}" class="btn btn-success btn-xs pull-left">
+                                    <a href="{{route('offer.edit',['id'=>$offer->id])}}" class="btn btn-success btn-xs pull-left">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    <form method="post" action="{{ route('course.destroy', ($offer->id)) }}">
+                                    <form method="post" action="{{ route('offer.destroy', ($offer->id)) }}">
                                         {{ csrf_field() }}
                                         {{ method_field("delete") }}
                                         <button class="btn btn-danger btn-xs pull-left"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
