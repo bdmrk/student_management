@@ -11,9 +11,10 @@ Route::prefix('admin')->middleware('auth')->group (
         //admin main path
 Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
-        Route::resource('/students', 'backend\StudentController');
+
         Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
         Route::get('/student/select/{id}', 'backend\StudentController@selectStudent')->name('student.select');
+        Route::resource('/students', 'backend\StudentController');
 
 
         Route::resource('/semester', 'backend\SemesterController');

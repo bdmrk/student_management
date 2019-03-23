@@ -150,8 +150,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $data['student'] = Student::all();
-        return view('backend.students.student_index', $data);
+        $data['student'] = Student::with('academicInfo')->find($id);
+
+        return view('backend.students.student_details', $data);
     }
 
     /**
