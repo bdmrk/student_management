@@ -22,6 +22,7 @@
                             <th>Syllabus</th>
                             <th>Semester</th>
                             <th>Course</th>
+                            <th>Teacher</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,6 +34,7 @@
                                 <td>{{$offer->syllabus->syllabus_name}}</td>
                                 <td>{{$offer->semester->semester_name}}</td>
                                 <td>{{$offer->course->course_name}}</td>
+                                <td>{{$offer->teacher->full_name}}</td>
                                 <td>{{$offer->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 <td>
 
