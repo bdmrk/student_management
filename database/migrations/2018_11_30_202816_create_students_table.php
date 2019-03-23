@@ -15,17 +15,26 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('second_name');
+            $table->string('full_name', 100);
+            $table->string('father_name', 100);
+            $table->string('mother_name', 100);
             $table->date('dob');
-            $table->string('contact_number');
-            $table->string('email');
-            $table->string('father_name');
-            $table->string('mother_name');
-            $table->string('address');
-            $table->string('student_photo');
-            $table->tinyInteger('gender');
+            $table->string('contact_number',20);
+            $table->string('email', 100);
+            $table->string('gender', 10);
+            $table->string('blood_group',10)->nullable();
+            $table->string('religion', 50);
+            $table->string('nationality', 50);
+            $table->string('nid', 20)->nullable();
+            $table->text('present_address');
+            $table->text('permanent_address');
+            $table->string('student_photo', 100);
+            $table->unsignedInteger('program_id');
             $table->tinyInteger('status');
+            $table->string('password', 256);
+            $table->string('remember_token', 256);
+            $table->boolean('is_active');
+            $table->boolean('is_selected');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
             $table->softDeletes();

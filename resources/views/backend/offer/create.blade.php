@@ -60,7 +60,7 @@
                                     <option value="{{ $s->id }}" @if(old('semester') == $s->id) select @endif>{{ $s->semester_name }}</option>
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{$errors->has('course') ? $errors->first('course') : ''}}</span>
+                            <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
                     </div>
 
@@ -109,10 +109,9 @@
     </div>
 
 @endsection
-@section('script')
+@section('scripts')
 <script>
-
-
+    
     $(".program").change(function(){
         
         var id = $(this).val();

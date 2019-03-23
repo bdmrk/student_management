@@ -4,7 +4,7 @@
         <button id="showLeftPush"><i class="fa fa-bars"></i></button>
         <!--toggle button end-->
         <div class="profile_details_left"><!--notifications of menu start -->
-            <ul class="nofitications-dropdown">
+            <ul class="nofitications-dropdown hide">
                 <li class="dropdown head-dpdn">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
                     <ul class="dropdown-menu">
@@ -160,7 +160,7 @@
 
 
         <!--search-box-->
-        <div class="search-box">
+        <div class="search-box hide">
             <form class="input">
                 <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
                 <label class="input__label" for="input-31">
@@ -176,9 +176,9 @@
                 <li class="dropdown profile_details_drop">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <div class="profile_img">
-                            <span class="prfil-img"><img src="{{asset('/')}}back_end/images/k.png" alt=""> </span>
+                            <span class="prfil-img"></span>
                             <div class="user-name">
-                                <p>MRK</p>
+                                <p>{{ Auth::user()->name }}</p>
                                 <span>Administrator</span>
                             </div>
                             <i class="fa fa-angle-down lnr"></i>
@@ -187,8 +187,6 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu drp-mnu">
-                        <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                        <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
                         <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
                         <li>
                         <form action="{{ route('logout') }}" method="POST">

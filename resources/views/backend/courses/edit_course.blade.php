@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <input type="submit" value="Update Syllabus" name="btn" class="btn btn-success btn block" />
+                            <input type="submit" value="Update Course" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
                     {{Form::close()}}

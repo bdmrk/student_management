@@ -13,6 +13,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::resource('/students', 'backend\StudentController');
         Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
+        Route::get('/student/select/{id}', 'backend\StudentController@selectStudent')->name('student.select');
 
 
         Route::resource('/semester', 'backend\SemesterController');
@@ -32,9 +33,7 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
        
         Route::resource('/offer', 'backend\OfferController');
         Route::get('/offer/change-status/{id}', 'backend\OfferController@changeStatus')->name('syllabus.change-status');
-      
-      
-      
+        
       
         //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -49,6 +48,30 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
 Auth::routes();
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/student-login', 'Auth\StudentLoginController@showLoginForm')->name('student-login');
+Route::post('/student-login', 'Auth\StudentLoginController@postLogin')->name('student-login');
+Route::get('/teacher-login', 'Auth\TeacherLoginController@showLoginForm')->name('teacher-login');
+Route::post('/teacher-login', 'Auth\TeacherLoginController@postLogin')->name('teacher-login');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('student')->middleware('auth:student')->group (
+    function() {
+        Route::get('/dashboard', 'Student\StudentController@dashboard')->name('student-dash');
+        Route::get('/enroll', 'Student\StudentController@enroll')->name('student-enroll');
+        Route::post('/enroll', 'Student\StudentController@store')->name('enroll.store');
+        Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
+
+        Route::get('logout', 'Auth\StudentLoginController@logut')->name('student-logout');
+    });
+
+Route::prefix('teacher')->middleware('auth:teacher')->group (
+    function() {
+        Route::get('/dashboard', 'Teacher\TeacherController@dashboard')->name('teacher-dash');
+        Route::get('/marks-entry', 'Teacher\TeacherController@marksEntry')->name('marks-entry');
+        Route::post('/ajax/save-mark', 'Teacher\TeacherController@saveMark')->name('save-mark');
+
+        Route::get('logout', 'Auth\TeacherLoginController@logut')->name('teacher-logout');
+    });

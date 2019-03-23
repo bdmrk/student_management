@@ -21,6 +21,7 @@ class CreateTeachersTable extends Migration
             $table->string('designation');
             $table->string('contact_number');
             $table->string('email');
+            $table->string('password',256);
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('address');

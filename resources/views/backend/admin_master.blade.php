@@ -110,6 +110,8 @@
     <script src="{{asset('/')}}back_end/ckeditor/samples/js/sample.js"></script>
     <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/css/samples.css">
     <link rel="stylesheet" href="{{asset('/')}}back_end/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     <!--CK Editor Ends-->
 
     @yield('style')
@@ -119,7 +121,7 @@
 <div class="main-content">
     <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
         <!--left-fixed -navigation-->
-        @include('backend.includes.sidebar')
+            @include('backend.includes.sidebar')
     </div>
     <!--left-fixed -navigation-->
 
@@ -197,6 +199,7 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="{{asset('/')}}back_end/js/bootstrap.js"> </script>
 <!-- //Bootstrap Core JavaScript -->
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 <!--CK Editor-->
 <script>
@@ -205,6 +208,6 @@
 <!--CK Editor-->
 
 <!-- ajax -->
-@yield('script')
+@yield('scripts')
 </body>
 </html>
