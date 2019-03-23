@@ -30,9 +30,9 @@ class CreateStudentsTable extends Migration
             $table->text('permanent_address');
             $table->string('student_photo', 100);
             $table->unsignedInteger('program_id');
-            $table->tinyInteger('status');
+            $table->string('status', 50);
             $table->string('password', 256);
-            $table->string('remember_token', 256);
+            $table->string('remember_token', 256)->nullable();
             $table->boolean('is_active');
             $table->boolean('is_selected');
             $table->integer('created_by');

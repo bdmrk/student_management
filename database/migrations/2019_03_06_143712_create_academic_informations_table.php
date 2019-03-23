@@ -13,7 +13,7 @@ class CreateAcademicInformationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('academic_information', function (Blueprint $table) {
+        Schema::create('academic_informations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
             $table->string('examination', 100)->nullable();

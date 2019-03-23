@@ -22,27 +22,22 @@
                     {{ method_field("put") }}
 
                     <div class="form-group">
-                        <label class="control-label col-md-4" >First Name</label>
+                        <label class="control-label col-md-4" >Full Name</label>
                         <div class="col-md-6">
-                            <input type="text" name="first_name"   class="form-control" value="{{ $teacher->first_name }}" />
-                            <span class="text-danger">{{$errors->has('first_name') ? $errors->first('first_name') : ''}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Second Name</label>
-                        <div class="col-md-6">
-                            <input type="text" name="second_name" class="form-control" value="{{ $teacher->second_name }}"/>
-                            <span class="text-danger">{{$errors->has('second_name') ? $errors->first('second_name') : ''}}</span>
+                            <input type="text" name="full_name"   class="form-control" value="{{ $teacher->full_name }}" />
+                            <span class="text-danger">{{$errors->has('full_name') ? $errors->first('full_name') : ''}}</span>
                         </div>
                     </div>
 
-                    {{--<div class="form-group">--}}
-                    {{--<label class="control-label col-md-4">Date of Birth</label>--}}
-                    {{--<div class="col-md-6">--}}
-                    {{--<input type="text" name="dob" class="form-control" placeholder="18/03/1992"/>--}}
-                    {{--<span class="text-danger">{{$errors->has('dob') ? $errors->first('dob') : ''}} </span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Date of Birth</label>
+                        <div class="col-md-6">
+                            <input type="text" name="date_of_birth" class="form-control" value="{{ $teacher->dob }}"/>
+                            <span class="text-danger">{{$errors->has('date_of_birth') ? $errors->first('date_of_birth') : ''}} </span>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="control-label col-md-4">Designation</label>
                         <div class="col-md-6">
