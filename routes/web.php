@@ -63,6 +63,7 @@ Route::prefix('student')->middleware('auth:student')->group (
         Route::get('/enroll', 'Student\StudentController@enroll')->name('student-enroll');
         Route::post('/enroll', 'Student\StudentController@store')->name('enroll.store');
         Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
+        Route::get('/print-payment-slip/{enroll_id}', 'Student\StudentController@printPaymentSlip')->name('student.print.payment-slip');
 
         Route::get('logout', 'Auth\StudentLoginController@logut')->name('student-logout');
     });
@@ -71,6 +72,7 @@ Route::prefix('teacher')->middleware('auth:teacher')->group (
     function() {
         Route::get('/dashboard', 'Teacher\TeacherController@dashboard')->name('teacher-dash');
         Route::get('/marks-entry', 'Teacher\TeacherController@marksEntry')->name('marks-entry');
+        Route::get('/show-courses', 'Teacher\TeacherController@showCourses')->name('show-courses');
         Route::post('/ajax/save-mark', 'Teacher\TeacherController@saveMark')->name('save-mark');
 
         Route::get('logout', 'Auth\TeacherLoginController@logut')->name('teacher-logout');

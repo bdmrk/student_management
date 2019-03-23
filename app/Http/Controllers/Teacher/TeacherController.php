@@ -23,6 +23,14 @@ class TeacherController extends Controller
         return view('teacher.dashboard' );
     }
 
+    public function showCourses()
+    {
+        $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer' => function($query) {
+            $query->with('course')->where('teacher_id', auth()->guard('teacher')->user()->id);
+        }])->get();
+        return view('teacher.show-courses', $data);
+    }
+
     public function marksEntry()
     {
         $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer' => function($query) {
@@ -102,6 +110,8 @@ class TeacherController extends Controller
             $grade = $this->calculateGrade($cgpa);
 
             $course = EnrolledCourse::findOrFail($request->input('enrolled_course_id'));
+            $course->incourse_mark = $request->input('incourse_mark');
+            $course->final_mark = $request->input('final_mark');
             $course->cgpa = $cgpa;
             $course->grade = $grade;
 

@@ -7,6 +7,7 @@ use App\Models\Enroll;
 use App\Models\EnrolledCourse;
 use App\Models\Offer;
 use App\Models\Semester;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -101,5 +102,12 @@ class StudentController extends Controller
     {
         $data['enrolledSemester'] = Enroll::all();
         return view('student.student_semester', $data);
+    }
+
+    public function printPaymentSlip($enrollId)
+    {
+        $data['courses'] = EnrolledCourse::with(['offer.course'])->where('enroll_id', $enrollId)->get();
+        $pdf = PDF::loadView('pdf.student.payment_slip', $data);
+        return $pdf->stream('invoice.pdf');
     }
 }
