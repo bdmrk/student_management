@@ -151,4 +151,13 @@ class CourseController extends Controller
         $options .= Helpers::makeOptions($syllabus, "id", "course_name");
         return response()->json($options);
     }
+
+    public  function  changeStatus(Request $request){
+
+        $course =  Course::find($request->id);
+        $course->status = !$course->status;
+        $course->save();
+        return redirect()->route('course.index');
+
+    }
 }

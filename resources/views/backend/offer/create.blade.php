@@ -70,7 +70,7 @@
                                 <select name="teacher" class="form-control">
                                     <option value="">Select Teacher</option>
                                     @foreach($teachers as $t)
-                                        <option value="{{ $t->id }}">{{ $t->fullName }}</option>
+                                        <option value="{{ $t->id }}">{{ $t->full_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="text-danger">{{$errors->has('teacher') ? $errors->first('teacher') : ''}}</span>
