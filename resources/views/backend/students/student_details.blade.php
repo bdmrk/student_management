@@ -15,10 +15,16 @@
                 <div class="panel-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="fb-profile">
+                            <div class="col-md-2">
 
-                                <img align="left" class="fb-image-profile thumbnail" src="{{asset($student->student_photo)}}"/>
+                                <div class="fb-profile">
 
+                                    <img align="left" height="100" class="fb-image-profile thumbnail" src="{{asset($student->student_photo)}}"/>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-9">
                                 <div class="fb-profile-text">
                                     <h1>{{$student->full_name}}</h1>
 
@@ -132,13 +138,14 @@
                                                             </thead>
                                                             <tbody>
                                                             @php($i=1)
-                                                            @foreach($student as $s)
+                                                            @foreach($student->academicInfo as $acInfo)
                                                             <tr>
                                                                 <th scope="row">{{$i++}}</th>
-                                                                <td>SSC</td>
-                                                                <td>Dhaka</td>
-                                                                <td>2005</td>
-                                                                <td>5.00</td>
+                                                                <td>{{$acInfo->examination}}</td>
+                                                                <td>@if($acInfo->board){{$acInfo->board}}@else {{$acInfo->institute}} @endif</td>
+                                                                <td>{{$acInfo->passing_year}}</td>
+                                                                <td>{{$acInfo->result}}</td>
+
                                                             </tr>
                                                             @endforeach
 
@@ -152,41 +159,35 @@
                                         <div class="tab-pane" id="tab_default_4">
 
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="email">Highest Education:</label>
-                                                        <p> MBA/PGDM</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Place of Birth:</label>
-                                                        <p> pune, maharashtra</p>
-                                                    </div>
+                                                <div class="col-sm-12">
+                                                    <br>
+                                                    <table class="table table-bordered"> <thead>
+                                                        <tr>
+                                                            <th>#</th>
+
+                                                            <th>Course Name</th>
+                                                            <th>Incourse Mark</th>
+                                                            <th>Final Mark</th>
+                                                            <th>CGPA</th>
+                                                            <th>Grade</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @php($i=1)
+                                                        @foreach($student->enrolledCourse as $course)
+                                                            <tr>
+                                                                <th scope="row">{{$i++}}</th>
+                                                                <td>{{$course->offer->course->course_name}}</td>
+                                                                <td>{{$course->incourse_mark}}</td>
+                                                                <td>{{$course->final_mark}}</td>
+                                                                <td>{{$course->cgpa}}</td>
+                                                                <td>{{$course->grade}}</td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </div>
