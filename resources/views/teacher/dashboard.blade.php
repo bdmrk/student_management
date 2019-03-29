@@ -9,10 +9,9 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class=""> Marks Entry </h3>
+                    <h3 class=""> Courses </h3>
                 </div>
                 <div class="panel-body">
-                    <a href="{{route('student-enroll')}}" class="btn btn-success pull-right">Enroll a New Course</a>
                     <div class="row">
                         <div class="col-md-9 pull-right">
                             @include('backend.includes.message')
@@ -23,14 +22,20 @@
                         <div lass="col-md-12">
                             <table class="table">
                                 <tr>
+                                    <th>Course Code</th>
                                     <th>Course Name</th>
                                     <th>Semester</th>
-                                    <th>Status</th>
-                                    <th>CGPA</th>
-                                    <th>Grade</th>
+                                    <th>Syllabus</th>
                                 </tr>
-                               
+                                @foreach($offers as $offer)
+                                    <tr>
+                                        <td>{{ $offer->course->course_code }}</td>
+                                        <td>{{ $offer->course->course_name }}</td>
+                                        <td>{{ $offer->semester->semester_name }}</td>
+                                        <td>{{ $offer->syllabus->syllabus_name }}</td>
+                                    </tr>
 
+                                @endforeach
                             </table>
                         </div>
                     </div>

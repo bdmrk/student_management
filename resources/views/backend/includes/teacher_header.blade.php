@@ -179,7 +179,7 @@
                             <span class="prfil-img"><i class="fa fa-user"></i></span>
                             <div class="user-name">
                                 <p>{{ Auth::guard('teacher')->user()->first_name }}</p>
-                                <span>Student</span>
+                                <span>Teacher</span>
                             </div>
                             <i class="fa fa-angle-down lnr"></i>
                             <i class="fa fa-angle-up lnr"></i>
