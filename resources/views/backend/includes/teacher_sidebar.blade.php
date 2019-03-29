@@ -13,7 +13,7 @@
             <ul class="sidebar-menu">
 
                 <li class="treeview">
-                    <a href="{{route('student-dash')}}">
+                    <a href="{{route('teacher-dash')}}">
                         <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
                     </a>
                 </li>

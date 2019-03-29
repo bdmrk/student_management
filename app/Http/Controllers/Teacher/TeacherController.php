@@ -20,7 +20,10 @@ class TeacherController extends Controller
     public function dashboard()
     {
 //        dd($data);
-        return view('teacher.dashboard' );
+        $data['offers'] = Offer::with(['course', 'semester', 'syllabus' => function($query) {
+            return $query->where('status', true);
+        }])->where('teacher_id', auth()->user()->id)->get();
+        return view('teacher.dashboard', $data);
     }
 
     public function showCourses()
