@@ -49,7 +49,7 @@
                                         </li>
                                         <li>
                                             <a href="#tab_default_4" data-toggle="tab">
-                                                Course Information</a>
+                                               Enrolled Course </a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
