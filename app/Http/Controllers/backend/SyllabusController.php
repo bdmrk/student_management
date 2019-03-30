@@ -60,7 +60,7 @@ class SyllabusController extends Controller
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
       
-        return redirect()->route('syllabus.create')->with('successMessage', "Syllabus Created Successfully");
+        return redirect()->route('syllabus.index')->with('successMessage', "Syllabus Created Successfully");
     }
 
     /**

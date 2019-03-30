@@ -210,7 +210,7 @@ class StudentController extends Controller
         }
 
 
-        return redirect()->route('students.create')->with('successMessage', "Student is Created Successfully");
+        return redirect()->route('students.index')->with('successMessage', "Student is Created Successfully");
     }
 
     /**

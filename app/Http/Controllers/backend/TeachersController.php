@@ -85,7 +85,7 @@ class TeachersController extends Controller
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
-        return redirect()->route('teachers.create')->with('successMessage', "Teacher is added Successfully");
+        return redirect()->route('teachers.index')->with('successMessage', "Teacher is added Successfully");
     }
 
 
