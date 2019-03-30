@@ -9,7 +9,7 @@ Route::get('/', 'frontend\HomeController@index')->name('home');
 Route::prefix('admin')->middleware('auth')->group (
     function() {
         //admin main path
-Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
+Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
 
 
         Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
@@ -35,7 +35,8 @@ Route::get('/dashboard', 'backend\AdminConroller@index')->name('dash');
 
         Route::get('/offer/change-status/{id}', 'backend\OfferController@changeStatus')->name('offer.change-status');
         Route::resource('/offer', 'backend\OfferController');
-      
+        //reprots
+        Route::get('/reprot/show-due-bill', 'backend\ReportController@showDueBill')->name('report.show-due-bill');
         //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 

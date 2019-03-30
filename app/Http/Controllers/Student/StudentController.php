@@ -69,17 +69,21 @@ class StudentController extends Controller
             $enroll->student_id = Auth::guard('student')->user()->id;
             $enroll->semester_id = $request->input('semester');
             $enroll->status = "Running";
+            $enroll->payment_status = false;
             $enroll->save();
             $count = count($request->input('course'));
             $offers = Offer::with('course')->whereIn('id', $request->input('course'))->get();
             $courses = [];
             $now = Carbon::now();
+            $totalCourseFee = 0;
 
             foreach ($offers as $offer) {
                 $course = [];
                 $course['enroll_id'] = $enroll->id;
                 $course['student_id'] = $enroll->student_id;
                 $course['offer_id'] = $offer->id;
+                $course['course_fee'] = $offer->course_fee;
+                $totalCourseFee += $offer->course_fee;
                 $course['status'] = "Running";
                 $course['created_at'] = $now;
                 $course['updated_at'] = $now;
@@ -87,6 +91,9 @@ class StudentController extends Controller
             }
             
             EnrolledCourse::insert($courses);
+            $enroll->bill_amount = $totalCourseFee;
+            $enroll->save();
+            
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();

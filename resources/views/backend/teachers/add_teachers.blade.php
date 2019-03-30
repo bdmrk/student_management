@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="text-center "> Teacher Registration </h3>
+                    <h3 class="text-center ">Add Teacher </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -20,70 +20,70 @@
                     {{Form::open(['route'=>'teachers.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
-                        <label class="control-label col-md-3" >Full Name</label>
+                        <label class="control-label col-md-3" >Full Name<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="full_name" class="form-control" placeholder="Mahabubur Rahman Kausar"/>
+                            <input type="text" required name="full_name" value="{{ old('full_name') }}" class="form-control" required placeholder="Enter teacher name"/>
                             <span class="text-danger">{{$errors->has('full_name') ? $errors->first('full_name') : ''}}</span>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label class="control-label col-md-3">Date of Birth</label>
+                        <label class="control-label col-md-3">Date of Birth<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="date" name="date_of_birth" class="form-control" placeholder="18/03/1992"/>
+                            <input type="date" required name="date_of_birth" value="{{ old('date_of_birth') }}" class="form-control" placeholder="Enter date of birth"/>
                             <span class="text-danger">{{$errors->has('date_of_birth') ? $errors->first('date_of_birth') : ''}} </span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3">Designation</label>
+                        <label class="control-label col-md-3">Designation<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="designation" class="form-control" placeholder="Professor">
+                            <input type="text" required name="designation" value="{{ old('designation') }}" class="form-control" placeholder="Enter designation">
                             <span class="text-danger">{{$errors->has('designation') ? $errors->first('designation') : ''}} </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Contact Number</label>
+                        <label class="control-label col-md-3">Contact Number<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="contact_number" class="form-control" placeholder="01839590972"/>
+                            <input type="text" required name="contact_number" value="{{ old('contact_number') }}" class="form-control" placeholder="Enter contact"/>
                             <span class="text-danger">{{$errors->has('contact_number') ? $errors->first('contact_number') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Email</label>
+                        <label class="control-label col-md-3">Email<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="email" name="email" class="form-control" placeholder="hostkausar@gmail.com"/>
+                            <input type="email" required name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter email"/>
                             <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3">Password</label>
+                        <label class="control-label col-md-3">Password<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="password" name="password" class="form-control" placeholder="Password"/>
+                            <input type="password" required name="password" class="form-control" placeholder="Password"/>
                             <span class="text-danger">{{$errors->has('password') ? $errors->first('password') : ''}}</span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3">Confirm Password</label>
+                        <label class="control-label col-md-3">Confirm Password<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="password" name="password_confirmation" class="form-control" placeholder=" Retype Password"/>
+                            <input type="password" required name="password_confirmation" class="form-control" placeholder=" Retype Password"/>
                             <span class="text-danger">{{$errors->has('password_confirmation') ? $errors->first('password_confirmation') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Father's Name</label>
+                        <label class="control-label col-md-3">Father's Name<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="father_name" class="form-control"/>
+                            <input type="text" required name="father_name" placeholder="Enter father's name" value="{{ old('father_name') }}" class="form-control"/>
                             <span class="text-danger">{{$errors->has('first_name') ? $errors->first('father_name') : ''}}</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Mother's Name</label>
+                        <label class="control-label col-md-3">Mother's Name<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="mother_name" class="form-control"/>
+                            <input type="text" required name="mother_name"  placeholder="Enter mother's name" value="{{ old('mother_name') }}" class="form-control"/>
                             <span class="text-danger">{{$errors->has('mother_name') ? $errors->first('mother_name') : ''}}</span>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Address</label>
                         <div class="col-md-6">
-                            <textarea type="text" name="address" class="form-control"> </textarea>
+                            <textarea type="text" name="address" class="form-control">{{ old('address') }}</textarea>
                             <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                         </div>
                     </div>
@@ -100,6 +100,7 @@
                         <label class="control-label col-md-3">Teacher Photo</label>
                         <div class="col-md-6">
                             <input type="file" name="teacher_photo" accept="image/*"/>
+                            <span class="text-danger">{{$errors->has('teacher_photo') ? $errors->first('teacher_photo') : ''}}</span>
                         </div>
                     </div>
 

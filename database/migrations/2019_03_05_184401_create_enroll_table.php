@@ -19,6 +19,7 @@ class CreateEnrollTable extends Migration
             $table->integer('semester_id');
             $table->double('cgpa', 3, 2)->nullable();
             $table->string('grade', 20)->nullable();
+            $table->double('bill_amount', 15,2)->default(0);
             $table->string('status');
             $table->boolean('payment_status')->default(false);
             $table->timestamps();

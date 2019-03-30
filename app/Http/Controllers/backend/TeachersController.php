@@ -31,7 +31,7 @@ class TeachersController extends Controller
             'full_name' => 'required',
             'date_of_birth' => 'required',
             'contact_number' => 'required',
-           'teacher_photo' => 'required',
+           'teacher_photo' => 'nullable|mimes:jpeg,jpg,png',
             'password'=>'required|confirmed|min:6',
             'password_confirmation'=>'sometimes|required_with:password',
 
@@ -85,7 +85,7 @@ class TeachersController extends Controller
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
-        return redirect()->route('teachers.create')->with('successMessage', "Teacher is Created Successfully");
+        return redirect()->route('teachers.create')->with('successMessage', "Teacher is added Successfully");
     }
 
 
