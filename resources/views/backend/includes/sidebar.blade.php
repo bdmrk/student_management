@@ -121,7 +121,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('report.show-due-bill') }}"><i class="fa fa-angle-right"></i>Show Due Bill</a></li>
+                        <li><a href="{{ route('report.show-bill') }}"><i class="fa fa-angle-right"></i>Show Bill</a></li>
                     </ul>
                 </li>
 

@@ -36,7 +36,8 @@ Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
         Route::get('/offer/change-status/{id}', 'backend\OfferController@changeStatus')->name('offer.change-status');
         Route::resource('/offer', 'backend\OfferController');
         //reprots
-        Route::get('/reprot/show-due-bill', 'backend\ReportController@showDueBill')->name('report.show-due-bill');
+        Route::get('/reprot/show-bill', 'backend\ReportController@showDueBill')->name('report.show-bill');
+        Route::get('/bill/{bill_id}/paid', 'backend\ReportController@paidBill')->name('bill.paid');
         //logout route
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 

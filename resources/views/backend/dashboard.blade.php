@@ -2,11 +2,11 @@
 
 @section('title')
     Dashboard
-    @endsection
+@endsection
 
 @section('body')
 
-    <div class="col_3">
+    <div class="col_3 row">
         <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-user icon-rounded"></i>
@@ -38,12 +38,32 @@
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                 <div class="stats">
-                    <h5><strong>450</strong></h5>
-                    <span>Fee Collection</span>
+                    <h5><strong>{{ $totalBill }}</strong></h5>
+                    <span>Total Bill</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 widget widget1">
+            <div class="r3_counter_box">
+                <i class="pull-left fa fa-money dollar1 icon-rounded"></i>
+                <div class="stats">
+                    <h5><strong>{{ $paidAmount }}</strong></h5>
+                    <span>Collection</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 widget widget1">
+            <div class="r3_counter_box">
+                <i class="pull-left fa fa-money dollar1 icon-rounded"></i>
+                <div class="stats">
+                    <h5><strong>{{ $totalBill-$paidAmount }}</strong></h5>
+                    <span>Bill Due</span>
                 </div>
             </div>
         </div>
 
         <div class="clearfix"> </div>
     </div>
-    @endsection
+@endsection

@@ -13,6 +13,10 @@ class Enroll extends Model
     {
         return $this->belongsTo(Semester::class, 'semester_id');
     }
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
     public function enrolledCourse()
     {
         return $this->belongsTo(EnrolledCourse::class, 'enroll_id');

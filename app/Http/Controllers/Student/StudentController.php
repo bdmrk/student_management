@@ -97,12 +97,11 @@ class StudentController extends Controller
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();
-            dd($exception->getMessage());
             return redirect()->back()->with('errorMessage', "Failed. Something went wrong.");
 
         }
 
-        return redirect()->route('student-enroll');
+        return redirect()->route('student-dash');
     }
 
     public function enrolledSemester()
