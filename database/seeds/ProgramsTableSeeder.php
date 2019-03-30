@@ -11,21 +11,26 @@ class ProgramsTableSeeder extends Seeder
      */
     public function run()
     {
-        Program::insert(
-            [
+        $program = Program::count();
+
+        if (!$program) {
+            Program::insert(
                 [
-                    "code" => "PGDIT",
-                    "program_name" => "PGDIT",
-                    "status" => true,
-                    "created_by" => 1
-                ],
-                [
-                    "code" => "PMIT",
-                    "program_name" => "PMIT",
-                    "status" => true,
-                    "created_by" => 1
+                    [
+                        "code" => "PGDIT",
+                        "program_name" => "PGDIT",
+                        "status" => true,
+                        "created_by" => 1
+                    ],
+                    [
+                        "code" => "PMIT",
+                        "program_name" => "PMIT",
+                        "status" => true,
+                        "created_by" => 1
+                    ]
                 ]
-            ]
-        );
+            );
+        }
+
     }
 }
