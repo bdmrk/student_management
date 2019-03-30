@@ -11,7 +11,7 @@ class TeacherLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:teacher');
+        $this->middleware('guest:teacher')->except('logout');
     }
     /**
      * Feature: Show the Client Login Form.

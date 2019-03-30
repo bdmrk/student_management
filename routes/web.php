@@ -69,7 +69,7 @@ Route::prefix('student')->middleware('auth:student')->group (
         Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
         Route::get('/print-payment-slip/{enroll_id}', 'Student\StudentController@printPaymentSlip')->name('student.print.payment-slip');
 
-        Route::get('logout', 'Auth\StudentLoginController@logut')->name('student-logout');
+        Route::get('logout', 'Auth\StudentLoginController@logout')->name('student-logout');
     });
 
 Route::prefix('teacher')->middleware('auth:teacher')->group (
@@ -79,5 +79,5 @@ Route::prefix('teacher')->middleware('auth:teacher')->group (
         Route::get('/show-courses', 'Teacher\TeacherController@showCourses')->name('show-courses');
         Route::post('/ajax/save-mark', 'Teacher\TeacherController@saveMark')->name('save-mark');
 
-        Route::get('logout', 'Auth\TeacherLoginController@logut')->name('teacher-logout');
+        Route::get('logout', 'Auth\TeacherLoginController@logout')->name('teacher-logout');
     });
