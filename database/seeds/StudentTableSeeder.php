@@ -29,7 +29,7 @@ class StudentTableSeeder extends Seeder
                 "nid" => "29393844848844",
                 "present_address" => "Dhaka",
                 "permanent_address" => "Dhaka",
-                "student_photo" => "avatar.png",
+                "student_photo" => "images\avatar.png",
                 "program_id" => 1,
                 "is_active" => 1,
                 "is_selected" =>0,
