@@ -12,12 +12,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
-        $user->name = 'Admin';
-        $user->email = 'admin@gmail.com';
-        $user->password = bcrypt('123456');
-        $user->created_by = 1;
-        $user->save();
+        $hasUser = User::count();
+        if (!$hasUser) {
+
+            $user = new User();
+            $user->name = 'Admin';
+            $user->email = 'admin@gmail.com';
+            $user->password = bcrypt('123456');
+            $user->created_by = 1;
+            $user->save();
+        }
 
     }
 }
