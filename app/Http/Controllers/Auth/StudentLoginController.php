@@ -11,7 +11,7 @@ class StudentLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:student');
+        $this->middleware('guest:student')->except('logout');
     }
     /**
      * Feature: Show the Client Login Form.
@@ -61,7 +61,7 @@ class StudentLoginController extends Controller
     }
 
     public function logout() {
-//        Auth::guard('student')->logout();
+        Auth::guard('student')->logout();
         auth('student')->logout();
 //        $this->guard()->logout();
         return redirect()->route('student-login');

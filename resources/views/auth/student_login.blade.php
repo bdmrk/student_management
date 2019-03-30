@@ -9,7 +9,7 @@
                 <form method="POST" action="{{ route('student-login') }}">
                     @csrf
 
-                    <input type="text" class="user" name="email" placeholder="Enter Your Email" required="">
+                    <input type="email" class="user" name="email" placeholder="Enter Your Email" required="">
                     @if ($errors->has('email'))
                                     <p class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
