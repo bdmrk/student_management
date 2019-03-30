@@ -10,7 +10,7 @@ class ReportController extends Controller
 {
     public function showDueBill()
     {
-        $data['dueBills'] = Enroll::with(['student', 'semester'])->where('payment_status', true)->get();
+        $data['dueBills'] = Enroll::with(['student', 'semester'])->where('payment_status', false)->get();
         return view('backend.report.due_bill', $data);
     }
 }
