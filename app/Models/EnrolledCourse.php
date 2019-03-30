@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EnrolledCourse extends Model
 {
-    protected $table = 'enrolled_courses';
+    protected $table = 'enrolled_course';
     public $timestamps = true;
 
     public function offer()
