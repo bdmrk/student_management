@@ -108,6 +108,7 @@ class TeachersController extends Controller
             'full_name' => 'required',
             'date_of_birth' => 'required',
             'contact_number' => 'required',
+            'email' => 'required',
         ]);
 
        try {
