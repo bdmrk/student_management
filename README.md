@@ -19,16 +19,18 @@
 2. on visual code terminal -> paste the folder path-> 
 cd G:\xamp2\htdocs\pgdit
 3. git clone https://github.com/bdmrk/student_management.git
-4. git checkout origin kausar
-5. git pull origin kausar
-6. composer update
-7. open xamp and browse -> http://localhost/phpmyadmin
-8. create a database -> 
-9. go to visual code and edit .env file and there edit this portion -> 
+4. on visual code terminal -> paste the folder path-> 
+cd G:\xamp2\htdocs\pgdit\student_management
+5. git checkout origin kausar
+6. git pull origin kausar
+7. composer update
+8. open xamp and browse -> http://localhost/phpmyadmin
+9. create a database -> 
+10. go to visual code and edit .env file and there edit this portion -> 
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_DATABASE=student_crud1
+DB_DATABASE=pgdit_project
 DB_USERNAME=root
 DB_PASSWORD=
 
