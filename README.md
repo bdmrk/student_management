@@ -36,8 +36,7 @@ DB_PASSWORD=
 
 1. php artisan migrate
 2. php artisan db:seed
-3. php artisan db:seed --class=ProgramsTableSeeder
-4. php artisan serve
+3. php artisan serve
 
 ## Project Browse:
 1. Click the link avobe
@@ -45,8 +44,6 @@ DB_PASSWORD=
 3. Credentials: 
 user: admin@gmail.com
 pass: 123456
-
-
 
 
 ## Working on Project
