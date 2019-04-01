@@ -16,7 +16,7 @@
 
 ## After Installation : Necessary Command
 1. create a folder in your xamp->htdocs-> foldername
-2. on visula code terminal -> paste the folder path-> 
+2. on visual code terminal -> paste the folder path-> 
 cd G:\xamp2\htdocs\pgdit
 3. git clone https://github.com/bdmrk/student_management.git
 4. git checkout origin kausar
