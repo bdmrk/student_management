@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Prerequisite</label>
                         <div class="col-md-6">
-                            <select name="prerequisite_course_id" multiple class="form-control select2 prerequisite">
+                            <select name="prerequisite_course_id[]" multiple class="form-control select2 prerequisite">
 
                             </select>
                         </div>
