@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Helpers;
+use App\Models\CoursePrerequisite;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
@@ -65,6 +67,22 @@ class CourseController extends Controller
             $course->status = $request->input('status');
             $course->created_by = Auth::user()->id;
             $course->save();
+
+            $prerequisitCourse = [];
+
+            foreach($request->inpout('prerequisite_course_id') as $coId) {
+                $data = [];
+                $data['course_id'] = $course->id;
+                $data['prerequisite_course_id'] = $coId;
+                $data['created_at'] = Carbon::now();
+                $data['updated_at'] = Carbon::now();
+                array_push($prerequisitCourse, $data);
+            }
+
+            if(count($prerequisitCourse)) {
+                CoursePrerequisite::insert($prerequisitCourse);
+            }
+            
         } catch(\Exception $exception) {
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
