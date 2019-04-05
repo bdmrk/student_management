@@ -71,18 +71,17 @@ class CourseController extends Controller
 
             $prerequisitCourse = [];
             $pcourses = $request->input('prerequisite_course_id');
-            if(count($pcourses)) {
+            if(is_array($pcourses) && count($pcourses)) {
 //            dd($pcourses);
-            foreach($pcourses as $coId) {
-                $data = [];
-                $data['course_id'] = $course->id;
-                $data['prerequisite_course_id'] = $coId;
-                $data['created_at'] = Carbon::now();
-                $data['updated_at'] = Carbon::now();
-                array_push($prerequisitCourse, $data);
-            }
-
-
+                foreach($pcourses as $coId) {
+                    $data = [];
+                    $data['course_id'] = $course->id;
+                    $data['prerequisite_course_id'] = $coId;
+                    $data['created_at'] = Carbon::now();
+                    $data['updated_at'] = Carbon::now();
+                    array_push($prerequisitCourse, $data);
+                }
+                
                 CoursePrerequisite::insert($prerequisitCourse);
             }
             DB::commit();
