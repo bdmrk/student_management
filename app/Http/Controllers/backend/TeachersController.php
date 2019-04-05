@@ -13,7 +13,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::paginate(10);
+        $teachers = Teacher::orderBy('created_at', 'desc')->paginate(10);
         return view('backend.teachers.manage_teachers', ['teachers'=>$teachers]);
 
     }

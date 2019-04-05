@@ -15,6 +15,7 @@ class AdminConroller extends Controller
     {
         $data['totalStudent'] = Student::count();
         $data['totalTeacher'] = Teacher::count();
+        $data['enrolled'] = Enroll::count();
         $data['offeredCourse'] = Offer::with(['syllabus' => function($query){
             $query->where('status', true);
         }])->count();
