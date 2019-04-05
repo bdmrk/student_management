@@ -87,7 +87,7 @@ class CourseController extends Controller
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
       
-        return redirect()->route('course.create')->with('successMessage', "Course is Created Successfully");
+        return redirect()->route('course.index')->with('successMessage', "Course is Created Successfully");
     }
 
     /**

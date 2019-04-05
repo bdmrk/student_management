@@ -16,6 +16,17 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-3 widget widget1">
+            <div class="r3_counter_box">
+                <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
+                <div class="stats">
+                    <h5><strong>{{ $enrolled }}</strong></h5>
+                    <span>Enrollerd Student</span>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-user user1 icon-rounded"></i>
@@ -54,6 +65,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-money dollar1 icon-rounded"></i>
@@ -63,6 +75,13 @@
                 </div>
             </div>
         </div>
+
+
+        
+
+
+
+
 
         <div class="clearfix"> </div>
     </div>

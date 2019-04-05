@@ -13,7 +13,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::paginate(10);
+        $teachers = Teacher::orderBy('created_at', 'desc')->paginate(10);
         return view('backend.teachers.manage_teachers', ['teachers'=>$teachers]);
 
     }
@@ -85,7 +85,7 @@ class TeachersController extends Controller
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
-        return redirect()->route('teachers.create')->with('successMessage', "Teacher is added Successfully");
+        return redirect()->route('teachers.index')->with('successMessage', "Teacher is added Successfully");
     }
 
 
@@ -108,6 +108,7 @@ class TeachersController extends Controller
             'full_name' => 'required',
             'date_of_birth' => 'required',
             'contact_number' => 'required',
+            'email' => 'required',
         ]);
 
        try {
@@ -146,7 +147,7 @@ class TeachersController extends Controller
     {
         $teacher = Teacher::find($id);
         $teacher->delete();
-        return redirect()->route('teachers.create')->with('successMessage',"Teachers is deleted successfully");
+        return redirect()->route('teachers.index')->with('successMessage',"Teachers is deleted successfully");
     }
 
     public function changeStatus(Request $request)
