@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Syllabus;
 use App\Models\Program;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -54,7 +55,7 @@ class CourseController extends Controller
             'syllabus' => 'required|integer',
             'status' => 'required'
         ]);
-
+        DB::beginTransaction();
         try {
             $course = new Course();
         
@@ -69,8 +70,9 @@ class CourseController extends Controller
             $course->save();
 
             $prerequisitCourse = [];
-
-            foreach($request->inpout('prerequisite_course_id') as $coId) {
+            $pcourses = $request->input('prerequisite_course_id');
+//            dd($pcourses);
+            foreach($pcourses as $coId) {
                 $data = [];
                 $data['course_id'] = $course->id;
                 $data['prerequisite_course_id'] = $coId;
@@ -82,8 +84,12 @@ class CourseController extends Controller
             if(count($prerequisitCourse)) {
                 CoursePrerequisite::insert($prerequisitCourse);
             }
+            DB::commit();
             
         } catch(\Exception $exception) {
+            DB::rollback();
+            dd($exception->getMessage());
+            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
       

@@ -86,6 +86,7 @@ class StudentController extends Controller
                 $course['course_fee'] = $offer->course_fee;
                 $totalCourseFee += $offer->course_fee;
                 $course['status'] = "Running";
+                $course['teacher_id'] = $offer->teacher_id;
                 $course['created_at'] = $now;
                 $course['updated_at'] = $now;
                 array_push($courses, $course);

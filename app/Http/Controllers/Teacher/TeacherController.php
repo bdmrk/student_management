@@ -28,9 +28,9 @@ class TeacherController extends Controller
 
     public function showCourses()
     {
-        $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer' => function($query) {
-            $query->with('course')->where('teacher_id', auth()->guard('teacher')->user()->id);
-        }])->get();
+        $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer.course'])
+            ->where('teacher_id', auth()->guard('teacher')->user()->id)
+            ->get();
         return view('teacher.show-courses', $data);
     }
 
