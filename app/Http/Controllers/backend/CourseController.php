@@ -71,6 +71,7 @@ class CourseController extends Controller
 
             $prerequisitCourse = [];
             $pcourses = $request->input('prerequisite_course_id');
+            if(count($pcourses)) {
 //            dd($pcourses);
             foreach($pcourses as $coId) {
                 $data = [];
@@ -81,7 +82,7 @@ class CourseController extends Controller
                 array_push($prerequisitCourse, $data);
             }
 
-            if(count($prerequisitCourse)) {
+
                 CoursePrerequisite::insert($prerequisitCourse);
             }
             DB::commit();
