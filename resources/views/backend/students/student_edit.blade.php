@@ -23,7 +23,7 @@
                     @csrf
                     {{ method_field('PUT') }}
 
-                    @include('backend.students.includes.general_information')
+                    @include('backend.students.includes.edit.general')
 
 
                     <div class="form-grids row widget-shadow " data-example-id="basic-forms">
@@ -32,9 +32,12 @@
                         </div>
 
 
-                        @include('backend.students.includes.ssc_hsc')
+                        @include('backend.students.includes.edit.ssc_hsc')
 
-                        @include('backend.students.includes.honours_master')
+
+
+
+                        @include('backend.students.includes.edit.honours_masters')
 
 
                     </div>

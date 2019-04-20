@@ -28,6 +28,6 @@ class CreateCoursePrerequisitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_prerequisit');
+        Schema::dropIfExists('course_prerequisite');
     }
 }

@@ -53,7 +53,7 @@ class StudentTableSeeder extends Seeder
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination_id' => 1,
+                    'examination_id' => 5,
                     'board' =>rand(1,9),
                     'institute' => "",
                     'roll_no' => $faker->numberBetween(100000, 999999),
@@ -66,28 +66,28 @@ class StudentTableSeeder extends Seeder
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination_id' => 1,
-                    'board_id' => rand(1,9),
+                    'examination_id' => 13,
+                    'board_id' => null,
                     'institute' => "National University",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 4),
                     'group' => "",
-                    'subject' => "Computer Science",
-                    'passing_year' => "2007",
-                    'course_duration' => "4 Years"
+                    'subject' => "English",
+                    'passing_year' => "2011",
+                    'course_duration' => "4"
 
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination_id' => 1,
-                    'board_id' => rand(1,9),
+                    'examination_id' => 18,
+                    'board_id' => null,
                     'institute' => "National University",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 4),
                     'group' => "",
-                    'subject' => "Computer Science",
-                    'passing_year' => "2007",
-                    'course_duration' => "1 Year"
+                    'subject' => "English",
+                    'passing_year' => "2012",
+                    'course_duration' => "1"
 
                 ]
             ]);

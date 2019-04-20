@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\backend;
 
 use App\DataTables\StudentDataTable;
+use App\Helpers\Enum\BloodEnum;
 use App\Helpers\Enum\GroupEnum;
+use App\Helpers\Enum\ReligionEnum;
 use App\Helpers\Enum\StudentStatus;
 use App\Models\AcademicInfo;
 use App\Models\Board;
@@ -40,6 +42,8 @@ class StudentController extends Controller
         $data['boards'] = Board::all();
         $data['exams'] = Examinations::all();
         $data['groups'] = GroupEnum::getValues();
+        $data['religions'] = ReligionEnum::getValues();
+        $data['bloods'] = BloodEnum::getValues();
         return view('backend.students.student_add', $data);
     }
 
@@ -59,22 +63,12 @@ class StudentController extends Controller
             'mother_name' => 'required|max:100',
             'dob' => 'required|date',
             'contact_number' => 'required',
-//            'email' => 'required|email|unique:students,email',
-//            'password' => 'required|max:10|min:6',
+
             'gender' => 'required',
             'religion' => 'required',
             'blood_group' => 'required',
             'nid' => 'required',
-//            'present_address' => 'required',
-//            'permanent_address' => 'required',
-//            'ssc.examination' => 'required',
-//            'ssc.board' => 'required',
-//            'ssc.group' => 'required',
-//            'ssc.result' => 'required',
-//            'ssc.passing_year' => 'required',
-//            'honours.subject' => 'required',
-//            'masters.subject' => 'required',
-//            'student_photo' => 'required|mimes:jpeg,jpg,png|max:100',aaaa
+
         ]);
 
 
@@ -127,9 +121,9 @@ class StudentController extends Controller
             $ssc = $request->input('ssc');
 
             $sscInfo['student_id'] = $student->id;
-            $sscInfo['board'] = isset($ssc['board']) ? $ssc['board']: '';
+            $sscInfo['board_id'] = isset($ssc['board']) ? $ssc['board']: '';
             $sscInfo['group'] = isset($ssc['group']) ? $ssc['group']: '';
-            $sscInfo['examination'] = isset($ssc['examination']) ? $ssc['examination']: '';
+            $sscInfo['examination_id'] = isset($ssc['examination']) ? $ssc['examination']: '';
             $sscInfo['roll_no'] = isset($ssc['roll']) ? $ssc['roll']: '';
             $sscInfo['result'] = isset($ssc['result']) ? $ssc['result']: '';
             $sscInfo['passing_year'] = isset($ssc['passing_year']) ? $ssc['passing_year']: '';
@@ -142,9 +136,9 @@ class StudentController extends Controller
             $hscInfo = [];
             $hsc = $request->input('hsc');
             $hscInfo['student_id'] = $student->id;
-            $hscInfo['board'] = isset($hsc['board']) ? $hsc['board']: '';
+            $hscInfo['board_id'] = isset($hsc['board']) ? $hsc['board']: '';
             $hscInfo['group'] = isset($hsc['group']) ? $hsc['group']: '';
-            $hscInfo['examination'] = isset($hsc['examination']) ? $hsc['examination']: '';
+            $hscInfo['examination_id'] = isset($hsc['examination']) ? $hsc['examination']: '';
             $hscInfo['roll_no'] = isset($hsc['roll']) ? $hsc['roll']: '';
             $hscInfo['result'] = isset($hsc['result']) ? $hsc['result']: '';
             $hscInfo['passing_year'] = isset($hsc['passing_year']) ? $hsc['passing_year']: '';
@@ -158,7 +152,7 @@ class StudentController extends Controller
             $honoursInfo['student_id'] = $student->id;
             $honoursInfo['institute'] = isset($honours['institute']) ? $honours['institute']: '';
             $honoursInfo['subject'] = isset($honours['subject']) ? $honours['subject']: '';
-            $honoursInfo['examination'] = isset($honours['examination']) ? $honours['examination']: '';
+            $honoursInfo['examination_id'] = isset($honours['examination']) ? $honours['examination']: '';
             $honoursInfo['roll_no'] = isset($honours['roll']) ? $honours['roll']: '';
             $honoursInfo['result'] = isset($honours['result']) ? $honours['result']: '';
             $honoursInfo['passing_year'] = isset($honours['passing_year']) ? $honours['passing_year']: '';
@@ -175,7 +169,7 @@ class StudentController extends Controller
                 $mastersInfo['student_id'] = $student->id;
                 $mastersInfo['institute'] = isset($masters['institute']) ? $masters['institute']: '';
                 $mastersInfo['subject'] = isset($masters['subject']) ? $masters['subject']: '';
-                $mastersInfo['examination'] = isset($masters['examination']) ? $masters['examination']: '';
+                $mastersInfo['examination_id'] = isset($masters['examination']) ? $masters['examination']: '';
                 $mastersInfo['roll_no'] = isset($masters['roll']) ? $masters['roll']: '';
                 $mastersInfo['result'] = isset($masters['result']) ? $masters['result']: '';
                 $mastersInfo['passing_year'] = isset($masters['passing_year']) ? $masters['passing_year']: '';
@@ -187,26 +181,6 @@ class StudentController extends Controller
             }
 
 
-
-
-//            for ($i = 0; $i < $count; $i++) {
-//
-//                if ($request->input('examination')[$i]) {
-//                    $academicInfo = [];
-//                    $academicInfo['student_id'] = $student->id;
-//                    $academicInfo['board'] = isset($request->input('board')[$i]) ? $request->input('board')[$i]: '';
-//                    $academicInfo['group'] = isset($request->input('group')[$i]) ? $request->input('group')[$i]: '';
-//                    $academicInfo['examination'] = isset($request->input('examination')[$i]) ? $request->input('examination')[$i]: '';
-//                    $academicInfo['roll_no'] = isset($request->input('roll')[$i]) ? $request->input('roll')[$i]: '';
-//                    $academicInfo['result'] = isset($request->input('result')[$i]) ? $request->input('result')[$i]: '';
-//                    $academicInfo['passing_year'] = isset($request->input('passing_year')[$i]) ? $request->input('passing_year')[$i]: '';
-//                    $academicInfo['course_duration'] = isset($request->input('course_duration')[$i]) ? $request->input('course_duration')[$i]: '';
-//                    $academicInfo['created_at'] = $now;
-//                    $academicInfo['updated_at'] = $now;
-//
-//                    array_push($academicData, $academicInfo);
-//                }
-//            }
 
             AcademicInfo::insert($academicData);
 
@@ -227,7 +201,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $data['student'] = Student::with(['academicInfo', 'enrolledCourse.offer.course'])->find($id);
+        $data['student'] = Student::with(['academicInfo' => function($query){
+            $query->with(['board', 'exam']);
+        }, 'enrolledCourse.offer.course'])->find($id);
 
         return view('backend.students.student_details', $data);
     }
@@ -240,7 +216,20 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $data['students'] = Student::find($id);
+        $data['students'] = $student = Student::with(['academicInfo.exam'])->where('id', $id)->first();
+        //dd($student);
+        $data['boards'] = Board::all();
+        $data['exams'] = Examinations::all();
+        $data['groups'] = GroupEnum::getValues();
+        $data['religions'] = ReligionEnum::getValues();
+        $data['bloods'] = BloodEnum::getValues();
+        //$data['academicExamIds'] = $student->academicInfo->pluck('examination_id')->toArray();
+        $academicInfo = [];
+        foreach ($student->academicInfo as $acInfo) {
+            $academicInfo[$acInfo->exam->level] =  $acInfo;
+        }
+//        dd($academicInfo);
+        $data['academicInfo'] = $academicInfo;
         return view('backend.students.student_edit', $data);
     }
 
