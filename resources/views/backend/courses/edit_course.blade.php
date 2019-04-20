@@ -98,7 +98,7 @@
 @endsection
 @section('script')
 <script>
-    
+
 
     $(".program").change(function(){
         

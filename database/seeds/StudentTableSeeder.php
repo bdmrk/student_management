@@ -41,8 +41,8 @@ class StudentTableSeeder extends Seeder
             \App\Models\AcademicInfo::insert([
                 [
                     'student_id' => $student->id,
-                    'examination' => "S.S.C",
-                    'board' => "Dhaka",
+                    'examination_id' => 1,
+                    'board_id' => rand(1,9),
                     'institute' => "",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 5),
@@ -53,8 +53,8 @@ class StudentTableSeeder extends Seeder
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination' => "H.S.C",
-                    'board' => "Dhaka",
+                    'examination_id' => 1,
+                    'board' =>rand(1,9),
                     'institute' => "",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 5),
@@ -66,8 +66,8 @@ class StudentTableSeeder extends Seeder
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination' => "Honors",
-                    'board' => "",
+                    'examination_id' => 1,
+                    'board_id' => rand(1,9),
                     'institute' => "National University",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 4),
@@ -79,8 +79,8 @@ class StudentTableSeeder extends Seeder
                 ],
                 [
                     'student_id' => $student->id,
-                    'examination' => "Masters",
-                    'board' => "",
+                    'examination_id' => 1,
+                    'board_id' => rand(1,9),
                     'institute' => "National University",
                     'roll_no' => $faker->numberBetween(100000, 999999),
                     'result' => $faker->numberBetween(3, 4),

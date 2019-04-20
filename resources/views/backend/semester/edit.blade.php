@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     {{Form::open(['route'=>['semester.update', $semester->id], 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
-                                                 {{ method_field("put") }}
+                    {{ method_field("put") }}
                     <div class="form-group">
                         <label class="control-label col-md-3" >Semester's Name</label>
                         <div class="col-md-6">

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\backend;
 
 use App\DataTables\StudentDataTable;
+use App\Helpers\Enum\GroupEnum;
 use App\Helpers\Enum\StudentStatus;
 use App\Models\AcademicInfo;
+use App\Models\Board;
+use App\Models\Examinations;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,7 +37,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('backend.students.student_add');
+        $data['boards'] = Board::all();
+        $data['exams'] = Examinations::all();
+        $data['groups'] = GroupEnum::getValues();
+        return view('backend.students.student_add', $data);
     }
 
     /**
@@ -68,7 +74,7 @@ class StudentController extends Controller
 //            'ssc.passing_year' => 'required',
 //            'honours.subject' => 'required',
 //            'masters.subject' => 'required',
-//            'student_photo' => 'required|mimes:jpeg,jpg,png|max:100',
+//            'student_photo' => 'required|mimes:jpeg,jpg,png|max:100',aaaa
         ]);
 
 
@@ -234,7 +240,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $data['students'] = Student::all();
+        $data['students'] = Student::find($id);
         return view('backend.students.student_edit', $data);
     }
 
