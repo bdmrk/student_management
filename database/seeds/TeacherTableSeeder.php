@@ -19,7 +19,7 @@ class TeacherTableSeeder extends Seeder
             $teachers = new Teacher();
             $teachers->full_name = $faker->name;
             $teachers->dob = "1975-01-01";
-            $teachers->designation = "Professor";
+            $teachers->designation = "Asst. Professor";
             $teachers->contact_number = "0171".$faker->numberBetween(1000000, 9999999);
             $teachers->email = $faker->unique()->email;
 

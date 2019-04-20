@@ -146,7 +146,7 @@ class TeachersController extends Controller
     {
         $teacher = Teacher::find($id);
         $teacher->delete();
-        return redirect()->route('teachers.create')->with('successMessage',"Teachers is deleted successfully");
+        return redirect()->route('teachers.index')->with('successMessage',"Teachers is deleted successfully");
     }
 
     public function changeStatus(Request $request)
