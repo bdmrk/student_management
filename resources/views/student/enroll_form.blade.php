@@ -33,7 +33,7 @@
                         <label class="control-label col-md-3">Course : </label>
                         <div class="col-md-6">
                             @foreach($offers as $offer)
-                                {{ $offer->course->course_name }} <input type="checkbox" value="{{ $offer->id }}" name="course[]" />
+                                <input type="checkbox" value="{{ $offer->id }}" name="course[]" />  {{ $offer->course->course_name }}
                             @endforeach
                         </div>
                     </div>

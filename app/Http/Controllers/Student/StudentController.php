@@ -7,6 +7,7 @@ use App\Models\Enroll;
 use App\Models\EnrolledCourse;
 use App\Models\Offer;
 use App\Models\Semester;
+use Dompdf\Exception;
 use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -85,6 +86,7 @@ class StudentController extends Controller
                 $course['course_fee'] = $offer->course_fee;
                 $totalCourseFee += $offer->course_fee;
                 $course['status'] = "Running";
+                $course['teacher_id'] = $offer->teacher_id;
                 $course['created_at'] = $now;
                 $course['updated_at'] = $now;
                 array_push($courses, $course);
@@ -112,8 +114,14 @@ class StudentController extends Controller
 
     public function printPaymentSlip($enrollId)
     {
-        $data['courses'] = EnrolledCourse::with(['offer.course'])->where('enroll_id', $enrollId)->get();
-        $pdf = PDF::loadView('pdf.student.payment_slip', $data);
-        return $pdf->stream('invoice.pdf');
+        try {
+            $data['courses'] = EnrolledCourse::with(['offer.course', 'enroll.semester'])->where("student_id", auth()->guard("student")->user()->id)->where('enroll_id', $enrollId)->get();
+            $data['enroll'] = Enroll::with(['student'])->where('id', $enrollId)->first();
+            $pdf = PDF::loadView('pdf.student.payment_slip', $data)->setPaper('a4', 'landscape');
+            return $pdf->stream('invoice.pdf');
+        } catch (Exception $exception) {
+            abort(404);
+        }
+
     }
 }

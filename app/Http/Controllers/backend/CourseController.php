@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Helpers;
+use App\Models\CoursePrerequisite;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Syllabus;
 use App\Models\Program;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -52,7 +55,7 @@ class CourseController extends Controller
             'syllabus' => 'required|integer',
             'status' => 'required'
         ]);
-
+        DB::beginTransaction();
         try {
             $course = new Course();
         
@@ -65,11 +68,32 @@ class CourseController extends Controller
             $course->status = $request->input('status');
             $course->created_by = Auth::user()->id;
             $course->save();
+
+            $prerequisitCourse = [];
+            $pcourses = $request->input('prerequisite_course_id');
+            if(is_array($pcourses) && count($pcourses)) {
+//            dd($pcourses);
+                foreach($pcourses as $coId) {
+                    $data = [];
+                    $data['course_id'] = $course->id;
+                    $data['prerequisite_course_id'] = $coId;
+                    $data['created_at'] = Carbon::now();
+                    $data['updated_at'] = Carbon::now();
+                    array_push($prerequisitCourse, $data);
+                }
+                
+                CoursePrerequisite::insert($prerequisitCourse);
+            }
+            DB::commit();
+            
         } catch(\Exception $exception) {
+            DB::rollback();
+            dd($exception->getMessage());
+            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
       
-        return redirect()->route('course.create')->with('successMessage', "Course is Created Successfully");
+        return redirect()->route('course.index')->with('successMessage', "Course is Created Successfully");
     }
 
     /**
@@ -141,7 +165,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        $course->delete();
+        return redirect()->route('course.index')->with('successMessage',"Courese is deleted successfully");
     }
 
     public function getCourseBySyllabusId($syllabusId)

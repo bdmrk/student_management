@@ -23,6 +23,7 @@ class CreateEnrolledCourseTable extends Migration
             $table->double('cgpa', 3,2)->default(0);
             $table->string('grade', 10)->nullable();
             $table->double('course_fee', 16,2);
+            $table->unsignedInteger('teacher_id');
             $table->string('status', 20);
             $table->timestamps();
         });

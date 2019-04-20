@@ -50,7 +50,7 @@ class SemesterController extends Controller
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
-       return redirect('admin/semester/create')->with('successMessage','Semester Saved Succesfully');
+       return redirect('admin/semester')->with('successMessage','Semester Saved Succesfully');
 
     }
 
