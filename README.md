@@ -7,19 +7,51 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## Necessary Software:
+1. https://www.apachefriends.org/download.html (7.3.1 / PHP 7.3.1)
+2. https://code.visualstudio.com/
+3. https://git-scm.com/downloads
+4. https://getcomposer.org/download/ 
+5. Create Github Account
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## After Installation : Necessary Command
+1. create a folder in your xamp->htdocs-> foldername
+2. on visual code terminal -> paste the folder path-> 
+cd G:\xamp2\htdocs\pgdit
+3. git clone https://github.com/bdmrk/student_management.git
+4. on visual code terminal -> paste the folder path-> 
+cd G:\xamp2\htdocs\pgdit\student_management
+5. git checkout origin kausar
+6. git pull origin kausar
+7. composer update
+8. open xamp and browse -> http://localhost/phpmyadmin
+9. create a database -> 
+10. go to visual code and edit .env file and there edit this portion -> 
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=pgdit_project
+DB_USERNAME=root
+DB_PASSWORD=
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## After Database Connection : Necessary Command
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+1. php artisan migrate
+2. php artisan db:seed
+3. php artisan serve
+
+## Project Browse:
+1. Click the link avobe
+2. http://127.0.0.1:8000/login
+3. Credentials: 
+user: admin@gmail.com
+pass: 123456
+
+
+## Working on Project
+1. https://github.com/latif7
+2. https://github.com/bdmrk/
+
 
 ## Learning Laravel
 
