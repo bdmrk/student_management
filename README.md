@@ -21,7 +21,7 @@ cd G:\xamp2\htdocs\pgdit
 3. git clone https://github.com/bdmrk/student_management.git
 4. on visual code terminal -> paste the folder path-> 
 cd G:\xamp2\htdocs\pgdit\student_management
-5. git checkout origin kausar
+5. git checkout kausar
 6. git pull origin kausar
 7. composer update
 8. open xamp and browse -> http://localhost/phpmyadmin
