@@ -141,8 +141,8 @@
                                                             @foreach($student->academicInfo as $acInfo)
                                                             <tr>
                                                                 <th scope="row">{{$i++}}</th>
-                                                                <td>{{$acInfo->examination}}</td>
-                                                                <td>@if($acInfo->board){{$acInfo->board}}@else {{$acInfo->institute}} @endif</td>
+                                                                <td>{{$acInfo->exam->name}}</td>
+                                                                <td>@if($acInfo->board_id){{$acInfo->board->name}}@else {{$acInfo->institute}} @endif</td>
                                                                 <td>{{$acInfo->passing_year}}</td>
                                                                 <td>{{$acInfo->result}}</td>
 

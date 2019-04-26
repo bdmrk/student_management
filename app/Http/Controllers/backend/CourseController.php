@@ -200,7 +200,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        $course->delete();
+        return redirect()->route('course.index')->with('successMessage',"Courese is deleted successfully");
     }
 
     public function getCourseBySyllabusId($syllabusId)
