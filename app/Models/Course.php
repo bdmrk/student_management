@@ -18,4 +18,9 @@ class Course extends Model
     {
         return $query->where('status', true);
     }
+
+    public function coursePrerequisite()
+    {
+        return $this->hasMany(CoursePrerequisite::class, 'course_id');
+    }
 }

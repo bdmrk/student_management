@@ -4,6 +4,10 @@
     Edit Course
 @endsection
 
+@section('style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('body')
     <div class="row">
         <div class="col-md-12">
@@ -50,29 +54,18 @@
                         </div>
                     </div>
 
+
+
                     <div class="form-group">
-                        <label class="control-label col-md-3">Program</label>
+                        <label class="control-label col-md-3">Prerequisite</label>
                         <div class="col-md-6">
-                            <select name="program" class="form-control program">
-                                <option value="">Select Your Program</option>
-                                @foreach($programs as $p)
-                                    <option @if($course->syllabus->program_id == $p->id) selected @endif value="{{ $p->id }}">{{ $p->program_name }}</option>
+                            <select name="prerequisite_course_id[]" multiple class="form-control select2 prerequisite">
+                                @foreach($courses as $aCourse)
+                                    <option value="{{ $aCourse->id }}" @if(in_array($aCourse->id, $prerequisiteCourseIds)) selected @endif>{{ $aCourse->course_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Syllabus</label>
-                        <div class="col-md-6">
-                            <select name="syllabus" class="form-control syllabus">
-                                @foreach($syllabuses as $sy)
-                                    <option @if($course->syllabus_id == $sy->id) selected @endif value="{{ $sy->id }}">{{ $sy->syllabus_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
                     
                     
                     <div class="form-group">
@@ -96,7 +89,8 @@
     </div>
 
 @endsection
-@section('script')
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
     
 
@@ -114,7 +108,13 @@
             $(".syllabus").html('');
         }
     });
+
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
 </script>
+
+
 
 @endsection
 

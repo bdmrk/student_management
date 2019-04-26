@@ -53,31 +53,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                            <label class="control-label col-md-3">Program</label>
-                            <div class="col-md-6">
-                                <select name="program" class="form-control program">
-                                    <option value="">Select Your Program</option>
-                                    @foreach($programs as $p)
-                                        <option value="{{ $p->id }}">{{ $p->program_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                    <div class="form-group">
-                            <label class="control-label col-md-3">Syllabus</label>
-                            <div class="col-md-6">
-                                <select name="syllabus" class="form-control syllabus">
-                                    <option value="">Select Syllabus</option>
-                                </select>
-                            </div>
-                        </div>
+                   
                     <div class="form-group">
                         <label class="control-label col-md-3">Prerequisite</label>
                         <div class="col-md-6">
                             <select name="prerequisite_course_id[]" multiple class="form-control select2 prerequisite">
-
+                                @foreach($courses as $aCourse)
+                                    <option value="{{ $aCourse->id }}">{{ $aCourse->course_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
