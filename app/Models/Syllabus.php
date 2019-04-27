@@ -17,4 +17,8 @@ class Syllabus extends Model
     {
         return $this->belongsTo(Program::class, 'program_id');
     }
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
 }

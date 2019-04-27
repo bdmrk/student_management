@@ -16,8 +16,8 @@ class CreateAcademicInformationsTable extends Migration
         Schema::create('academic_informations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
-            $table->string('examination', 100)->nullable();
-            $table->string('board', 100)->nullable();
+            $table->unsignedInteger('examination_id')->nullable();
+            $table->unsignedInteger('board_id')->nullable();
             $table->string('institute', 100)->nullable();
             $table->string('roll_no', 100)->nullable();
             $table->string('result', 100)->nullable();

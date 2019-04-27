@@ -12,7 +12,11 @@ ManageSyllabus
                 <h4 class="text-center"> Manage Syllabus </h4>
             </div>
             <div class="panel-body">
-                <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+                <div class="row">
+                    <div class="col-md-9 pull-right">
+                        @include('backend.includes.message')
+                    </div>
+                </div>
                 <table class="table table-bordered">
                     <tr class="bg-primary">
                         <th>SL NO</th>
@@ -33,11 +37,11 @@ ManageSyllabus
                         <td>
 
                             @if($syllabus->status ==1)
-                            <a href="{{ route('syllabus.change-status', $syllabus->id) }}" class="btn btn-info btn-xs pull-left">
+                            <a href="{{ route('syllabus.change-status', $syllabus->id) }}" class="btn btn-info btn-xs pull-left" title="Change Status">
                                 <span class="glyphicon glyphicon-arrow-up"></span>
                             </a>
                             @else
-                            <a href="{{ route('syllabus.change-status', $syllabus->id) }}" class="btn btn-warning btn-xs pull-left">
+                            <a href="{{ route('syllabus.change-status', $syllabus->id) }}" class="btn btn-warning btn-xs pull-left" title="Change Status">
                                 <span class="glyphicon glyphicon-arrow-down"></span>
                             </a>
                             @endif

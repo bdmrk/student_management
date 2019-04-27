@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoursePrerequisitTable extends Migration
+class CreateExaminationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCoursePrerequisitTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_prerequisite', function (Blueprint $table) {
+        Schema::create('examinations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('course_id');
-            $table->unsignedInteger('prerequisite_course_id');
+            $table->string('name', 100);
+            $table->string('level', 100);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCoursePrerequisitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_prerequisite');
+        Schema::dropIfExists('examinations');
     }
 }

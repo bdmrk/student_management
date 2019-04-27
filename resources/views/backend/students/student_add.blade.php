@@ -1,7 +1,7 @@
 @extends('backend.admin_master')
 
 @section('title')
-    Add Student
+    Create Student
 @endsection
 
 @section('body')
@@ -28,11 +28,12 @@
                             <h4>Academic Qualifications : </h4>
                         </div>
                         @include('backend.students.includes.ssc_hsc')
+                        @include('backend.students.includes.honours_master')
 
 
                     </div>
                     <div class="form-group">
-                        <div class="col-md-8 col-md-offset-3">
+                        <div class="col-md-12 col-md-offset-5">
                             <input type="submit" value="Save Student" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>

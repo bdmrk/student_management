@@ -34,9 +34,13 @@ class CourseController extends Controller
      */
     public function create()
     {
-        
-        $data['programs'] = Program::all();
-        
+
+        $data['courses'] = Course::select('courses.*')
+            ->leftJoin('syllabus', 'syllabus.id', 'courses.syllabus_id')
+            ->where('syllabus.status', true)
+            ->where('courses.status', true)
+            ->get();
+
         return view('backend.courses.create_course', $data);
     }
 
@@ -52,19 +56,23 @@ class CourseController extends Controller
             'course_name' => 'required|max:255',
             'course_code' => 'required|max:10',
             'course_credit' => 'required|integer',
-            'syllabus' => 'required|integer',
             'status' => 'required'
         ]);
+
+        $syllabus = Syllabus::active()->first();
+        if (!($syllabus instanceof Syllabus)) {
+            return redirect()->back()->withInput()->with('errorMessage', 'There is no syllabus is active');
+        }
+
         DB::beginTransaction();
         try {
+
             $course = new Course();
-        
             $course->course_name = $request->input('course_name');
             $course->course_code = $request->input('course_code');
             $course->course_credit = $request->input('course_credit');
             $course->description = $request->input('description');
-            $course->syllabus_id = $request->input('syllabus');
-//            $course->syllabus_id = $request->input('prerequisite_course_id');
+            $course->syllabus_id = $syllabus->id;
             $course->status = $request->input('status');
             $course->created_by = Auth::user()->id;
             $course->save();
@@ -72,7 +80,6 @@ class CourseController extends Controller
             $prerequisitCourse = [];
             $pcourses = $request->input('prerequisite_course_id');
             if(is_array($pcourses) && count($pcourses)) {
-//            dd($pcourses);
                 foreach($pcourses as $coId) {
                     $data = [];
                     $data['course_id'] = $course->id;
@@ -81,19 +88,18 @@ class CourseController extends Controller
                     $data['updated_at'] = Carbon::now();
                     array_push($prerequisitCourse, $data);
                 }
-                
+
                 CoursePrerequisite::insert($prerequisitCourse);
             }
+
             DB::commit();
-            
+
         } catch(\Exception $exception) {
             DB::rollback();
-            dd($exception->getMessage());
-            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
-      
-        return redirect()->route('course.index')->with('successMessage', "Course is Created Successfully");
+
+        return redirect()->route('course.index')->with('successMessage', "Course Created Successfully");
     }
 
     /**
@@ -115,9 +121,16 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $data['programs'] = Program::all();
-        $data['course'] = Course::with('syllabus')->find($id);
-        $data['syllabuses'] = Syllabus::where('program_id', $data['course']->syllabus->program_id)->get();
+        $data['course'] = $course = Course::with(['syllabus'])->find($id);
+
+        if ($course->syllabus->status == false) {
+             return redirect()->back()->with("errorMessage", "Sorry. You cannot edit inactive syllabus course.");
+        }
+
+        $prerequisiteCourseIds = CoursePrerequisite::where('course_id', $course->id)->pluck('prerequisite_course_id');
+        $data['prerequisiteCourseIds'] =   $prerequisiteCourseIds->toArray();
+        $data['courses'] =  Course::where('id', "<>", $course->id)->where('syllabus_id', $course->syllabus_id)->get();
+
         return view('backend.courses.edit_course', $data);
     }
 
@@ -130,30 +143,52 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'course_name' => 'required|max:255',
             'course_code' => 'required|max:10',
             'course_credit' => 'required|integer',
-            'syllabus' => 'required|integer',
             'status' => 'required'
         ]);
 
+        DB::beginTransaction();
         try {
-            $course = Course::findOrfail($id);
-        
+            $course = Course::with(['syllabus','coursePrerequisite'])->findOrfail($id);
+
             $course->course_name = $request->input('course_name');
             $course->course_code = $request->input('course_code');
             $course->course_credit = $request->input('course_credit');
             $course->description = $request->input('description');
-            $course->syllabus_id = $request->input('syllabus');
             $course->status = $request->input('status');
             $course->created_by = Auth::user()->id;
             $course->save();
+
+            $prerequisitCourse = [];
+            $pcourses = $request->input('prerequisite_course_id');
+
+            $oldCoursePrerequisite =  $course->coursePrerequisite->pluck('prerequisite_course_id')->toArray();
+            $isdiff = array_diff($pcourses, $oldCoursePrerequisite);
+
+            if (count($isdiff)) {
+                CoursePrerequisite::whereIn('prerequisite_course_id', $oldCoursePrerequisite)->where('course_id', $course->id)->delete();
+                $prerequisiteCourses = [];
+                foreach ($pcourses as $courseId) {
+                    $data = [];
+                    $data['course_id'] = $course->id;
+                    $data['prerequisite_course_id'] = $courseId;
+                    $data['created_at'] = Carbon::now();
+                    $data['updated_at'] = Carbon::now();
+                    array_push($prerequisiteCourses, $data);
+                }
+
+                CoursePrerequisite::insert($prerequisiteCourses);
+            }
+            DB::commit();
         } catch(\Exception $exception) {
+            DB::rollBack();
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
-      
+
         return redirect()->route('course.index')->with('successMessage', "Course is Updated Successfully");
     }
 
@@ -184,6 +219,5 @@ class CourseController extends Controller
         $course->status = !$course->status;
         $course->save();
         return redirect()->route('course.index');
-
     }
 }
