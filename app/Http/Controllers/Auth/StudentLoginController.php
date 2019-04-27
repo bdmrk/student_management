@@ -42,7 +42,6 @@ class StudentLoginController extends Controller
         // Attempt to log the user in
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
 
-
             // if successful, then redirect to their intended location
             if(Auth::guard('student')->user()->is_active!=1){
                 Session::flash('error','Your account is inactive');

@@ -49,6 +49,10 @@ class SyllabusController extends Controller
         ]);
 
         try {
+            $isActiveSyllabus = Syllabus::where('status', true)->first();
+            if ($isActiveSyllabus instanceof Syllabus) {
+                return redirect()->back()->withInput()->with('errorMessage', 'Failed. Please inactive old syllabus before creating new syllabus');
+            }
             $syllabus = new Syllabus();
             $syllabus->syllabus_name = $request->input('syllabus_name');
             $syllabus->description = $request->input('description');
@@ -104,7 +108,12 @@ class SyllabusController extends Controller
         ]);
 
         try {
-            $syllabus = Syllabus::find($id);
+
+            $syllabus = Syllabus::findOrFail($id);
+            $isActiveSyllabus = Syllabus::where('id', '<>', $syllabus->id)->where('status', true)->first();
+            if ($isActiveSyllabus instanceof Syllabus && $request->input('status')) {
+               return redirect()->back()->withInput()->with('errorMessage', 'Failed. Another syllabus already active');
+            }
             $syllabus->syllabus_name = $request->input('syllabus_name');
             $syllabus->description = $request->input('description');
             $syllabus->program_id = $request->input('program');
@@ -133,9 +142,13 @@ class SyllabusController extends Controller
     public  function  changeStatus(Request $request){
 
         $syllabus =  Syllabus::find($request->id);
+        $isActiveSyllabus = Syllabus::where('id', '<>', $syllabus->id)->where('status', true)->first();
+        if ($isActiveSyllabus instanceof Syllabus && !$syllabus->status) {
+            return redirect()->back()->with('errorMessage', 'Failed. Another syllabus already active');
+        }
         $syllabus->status = !$syllabus->status;
         $syllabus->save();
-        return redirect()->route('syllabus.index');
+        return redirect()->back()->with('successMessage', 'Syllabus status change successfully');;
 
     }
 
