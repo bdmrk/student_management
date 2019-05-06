@@ -42,8 +42,8 @@
 
                     </div>
                     <div class="form-group">
-                        <div class="col-md-8 col-md-offset-3">
-                            <input type="submit" value="Save Student" name="btn" class="btn btn-success btn block" />
+                        <div class="col-md-8 col-md-offset-5">
+                            <input type="submit" value="Update Student" name="btn" class="btn btn-success btn block" />
                         </div>
                     </div>
 
