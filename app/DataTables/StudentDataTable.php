@@ -27,7 +27,12 @@ class StudentDataTable extends DataTable
             $action = '';
 
             if ($student->status == StudentStatus::Applied) {
-                $action = "<a class='btn btn-info' href='".route('student.select', $student->id)."'>Select</a>";
+                $action = "<a class='btn btn-info btn-sm' href='".route('student.select', $student->id)."'>Select</a>";
+
+            }
+
+            if ($student->status == StudentStatus::Selected) {
+                $action = "<a class='btn btn-success btn-sm' href='".route('student.admitted', $student->id)."'>Admitted</a>";
 
             }
 

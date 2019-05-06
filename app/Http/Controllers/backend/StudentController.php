@@ -252,6 +252,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function selectStudent($id)
     {
         try {
@@ -267,6 +270,24 @@ class StudentController extends Controller
         }
 
     }
+
+    public function admittedStudent($id)
+    {
+        try {
+            $student = Student::where('status', StudentStatus::Selected)->where('id', $id)->first();
+            if ($student instanceof Student) {
+                $student->status = StudentStatus::Admitted;
+                $student->save();
+                return redirect()->back()->with('successMessage', "Student Admitted successfully");
+            }
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('errorMessage', "Action failed. Something went wrong");
+        }
+
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
