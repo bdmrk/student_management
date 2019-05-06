@@ -129,7 +129,7 @@
 @include('backend.includes.teacher_header')
 <!-- //header-ends -->
 
-	<!-- main content start-->
+	<!-- main content start-->z
 	<div id="page-wrapper">
 		<div class="main-page">
 

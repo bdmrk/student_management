@@ -41,7 +41,7 @@ class TeachersController extends Controller
     protected  function imageUpload($request) {
         $teacherImage = $request->file('teacher_photo');
         $fileType = $teacherImage->getClientOriginalExtension();
-        $imageName = $request->first_name.'.'.$fileType;
+        $imageName = $request->full_name.'.'.$fileType;
         $directory = 'images/teachers/';
         $imageUrl = $directory.$imageName;
          Image::make($teacherImage)->resize(300,300)->save($imageUrl);
