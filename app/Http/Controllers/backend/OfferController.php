@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\Enum\MonthEnum;
 use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,10 @@ class OfferController extends Controller
     public function create()
     {
         $data['programs'] = Program::all();
-        $data['semesters'] = Semester::active()->get();
+        $data['syllabus'] = $syllabus = Syllabus::active()->first();
+
+        
+        $data['semester'] = Semester::active()->first();
         $data['teachers'] = Teacher::active()->get();
         
         return view('backend.offer.create', $data);

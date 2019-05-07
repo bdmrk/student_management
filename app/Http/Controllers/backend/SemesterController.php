@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\Enum\MonthEnum;
 use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,8 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('backend.semester.create_semester');
+        $data['month'] = array_combine(MonthEnum::getValues(), MonthEnum::getKeys());
+        return view('backend.semester.create_semester', $data);
     }
 
     /**
@@ -41,12 +43,13 @@ class SemesterController extends Controller
         try {
             $semester = new Semester();
             $semester->semester_name = $request->input('semester_name');
-            $semester->start_date = $request->input('starting_date');
-            $semester->end_date = $request->input('ending_date');
+            $semester->start_month = $request->input('starting_month');
+            $semester->end_month = $request->input('ending_month');
             $semester->status = $request->input('status');
             $semester->created_by = Auth::user()->id;
             $semester->save();
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 

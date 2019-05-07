@@ -17,6 +17,29 @@
                                     @include('backend.includes.message')
                                 </div>
                             </div>
+
+                    @if(!$syllabus)
+
+
+                        <div class="row">
+                            <div class="col-md-9 pull-right">
+                                <div class="alert alert-danger" role="alert">
+                                    <p>There is no active syllabus. Please create a syllabus at first.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    @elseif(!$semester)
+
+                        <div class="row">
+                            <div class="col-md-9 pull-right">
+                                <div class="alert alert-danger" role="alert">
+                                    <p>There is no active semester. Please create a semester at first.</p>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+
                     {{Form::open(['route'=>'offer.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                    <div class="form-group">
@@ -35,8 +58,8 @@
                     <div class="form-group">
                             <label class="control-label col-md-3">Syllabus</label>
                             <div class="col-md-6">
-                                <select name="syllabus" class="form-control syllabus">
-                                    <option value="">Select Syllabus</option>
+                                <select name="syllabus" readonly="" class="form-control syllabus">
+                                    <option value="{{ $syllabus->id }}">{{ $syllabus->syllabus_name  }}</option>
                                 </select>
                                 <span class="text-danger">{{$errors->has('syllabus') ? $errors->first('syllabus') : ''}}</span>
                             </div>
@@ -55,10 +78,8 @@
                         <label class="control-label col-md-3">Semester</label>
                         <div class="col-md-6">
                             <select name="semester" class="form-control semester">
-                                <option value="">Select Semester</option>
-                                @foreach($semesters as $s)
-                                    <option value="{{ $s->id }}" @if(old('semester') == $s->id) select @endif>{{ $s->semester_name }}</option>
-                                @endforeach
+                                <option value="{{ $semester->id }}">{{ $semester->semester_name }}</option>
+
                             </select>
                             <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
@@ -102,6 +123,7 @@
                         </div>
                     </div>
                     {{Form::close()}}
+                        @endif
                 </div>
             </div>
         </div>
@@ -111,44 +133,7 @@
 @endsection
 @section('scripts')
 <script>
-    
-    $(".program").change(function(){
-        
-        var id = $(this).val();
-      
-        var hitUrl = "{{ url('/admin/ajax/get-syllabus') }}/" + id;
-        
-        if (id != '') {
-            $.get(hitUrl, function(response){
-               // alert(response);
-                if(response) {
-                    $(".syllabus").html(response);
-                } 
-            });
-        } else {
-            $(".syllabus").html('');
-        }
-    });
 
-    $(".syllabus").change(function(){
-
-        var id = $(this).val();
-
-        var hitUrl = "{{ url('/admin/ajax/get-prerequisite-course-by-syllabus-id') }}/" + id;
-
-        if (id != '') {
-            $.get(hitUrl, function(response){
-                // alert(response);
-                if(response) {
-                    $(".course").html(response);
-                } else{
-                    $(".course").html('');
-                }
-            });
-        } else {
-            $(".course").html('');
-        }
-    });
 </script>
 
 @endsection

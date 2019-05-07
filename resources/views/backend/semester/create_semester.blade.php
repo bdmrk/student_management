@@ -27,17 +27,26 @@ Add Semester
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Starting Date</label>
+                    <label class="control-label col-md-3">Starting Month</label>
                     <div class="col-md-6">
-                        <input type="date" name="starting_date" class="form-control" placeholder="01/01/2019"/>
-                        <span class="text-danger">{{$errors->has('starting_date') ? $errors->first('starting_date') : ''}}</span>
+                        <select class="form-control" name="starting_month">
+                            @foreach($month as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
+                        </select>
+
+                        <span class="text-danger">{{$errors->has('starting_month') ? $errors->first('starting_month') : ''}}</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Ending Date</label>
+                    <label class="control-label col-md-3">Ending Month</label>
                     <div class="col-md-6">
-                        <input type="date" name="ending_date" class="form-control" placeholder="01/01/2019"/>
-                        <span class="text-danger">{{$errors->has('ending_date') ? $errors->first('ending_date') : ''}}</span>
+                        <select class="form-control" name="ending_month">
+                            @foreach($month as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger">{{$errors->has('ending_month') ? $errors->first('ending_month') : ''}}</span>
                     </div>
                 </div>
 
