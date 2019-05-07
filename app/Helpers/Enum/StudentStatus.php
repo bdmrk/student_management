@@ -12,6 +12,7 @@ namespace App\Helpers\Enum;
 class StudentStatus extends BasicEnum
 {
     const Applied = "Applied";
+    const Admitted = "Admitted";
     const Rejected = "Rejected";
     const Selected = "Selected";
     const Enrolled = "Enrolled";

@@ -10,9 +10,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="text-center">Due Bill </h4>
-
                 </div>
-
 
                 <div class="panel-body table-responsive">
                     <div class="row">
@@ -20,6 +18,7 @@
                             @include('backend.includes.message')
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-9 pull-left">
                             <form action="" method="get">
@@ -28,7 +27,6 @@
                                     <option value="" @if($payment_status == null) selected @endif>All</option>
                                     <option value="1" @if($payment_status == 1) selected @endif>Paid</option>
                                     <option value="0" @if($payment_status == 0 && $payment_status != null) selected @endif>Not Paid</option>
-
                                 </select>
                                 <label class="">Payment Status</label>
                                 <select name="semester">
@@ -69,7 +67,7 @@
                         </tr>
                         @endforeach
 
-                        
+
                     </table>
                 </div>
             </div>

@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Email<span class="text-danger">*</span></label>
                         <div class="col-md-6">
-                            <input type="email" required name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter email"/>
+                            <input type="email" required name="email" class="form-control" placeholder="Enter email"/>
                             <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                         </div>
                     </div>

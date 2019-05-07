@@ -56,7 +56,6 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-//        dd($request->all());
         $request->validate([
             'applicant_name' => 'required|max:100',
             'father_name' => 'required|max:100',
@@ -80,7 +79,6 @@ class StudentController extends Controller
                 $studentImage = $request->file('student_photo');
                 $ext = $studentImage->getClientOriginalExtension();
                 $imageName = 'st_'.rand(100,999)."_".date('ymdhis').".".$ext;
-//                dd($imageName);
                 $directory = '/images/students/';
                 $imageUrl = $directory.$imageName;
                 $destination = public_path() . $directory;
@@ -110,7 +108,6 @@ class StudentController extends Controller
             $student->created_by = Auth::user()->id;
             $student->save();
 
-//            $count = count($request->input('examination'));
 
             $academicData = [];
             $now = Carbon::now();
@@ -252,6 +249,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function selectStudent($id)
     {
         try {
@@ -267,6 +267,24 @@ class StudentController extends Controller
         }
 
     }
+
+    public function admittedStudent($id)
+    {
+        try {
+            $student = Student::where('status', StudentStatus::Selected)->where('id', $id)->first();
+            if ($student instanceof Student) {
+                $student->status = StudentStatus::Admitted;
+                $student->save();
+                return redirect()->back()->with('successMessage', "Student Admitted successfully");
+            }
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('errorMessage', "Action failed. Something went wrong");
+        }
+
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
