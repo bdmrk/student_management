@@ -56,7 +56,6 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-//        dd($request->all());
         $request->validate([
             'applicant_name' => 'required|max:100',
             'father_name' => 'required|max:100',
@@ -80,7 +79,6 @@ class StudentController extends Controller
                 $studentImage = $request->file('student_photo');
                 $ext = $studentImage->getClientOriginalExtension();
                 $imageName = 'st_'.rand(100,999)."_".date('ymdhis').".".$ext;
-//                dd($imageName);
                 $directory = '/images/students/';
                 $imageUrl = $directory.$imageName;
                 $destination = public_path() . $directory;
@@ -110,7 +108,6 @@ class StudentController extends Controller
             $student->created_by = Auth::user()->id;
             $student->save();
 
-//            $count = count($request->input('examination'));
 
             $academicData = [];
             $now = Carbon::now();

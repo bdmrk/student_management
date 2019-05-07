@@ -1,6 +1,12 @@
 @extends('layouts.auth_master')
 
+@section('f-title')
+
+    Login::PGDIT
+    @stop
+
 @section('content')
+
 <div id="page-wrapper">
     <div class="main-page login-page ">
         <h2 class="title1">Login</h2>
