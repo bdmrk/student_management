@@ -12,7 +12,7 @@
                     <option selected="selected" value="">Select One</option>
                     @foreach($exams as $exam)
                         @if($exam->level == 'SSC')
-                            <option value="{{ $exam }}" @if($academicInfo['SSC']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
+                            <option value="{{ $exam->id }}" @if($academicInfo['SSC']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -27,7 +27,7 @@
                     <option selected="selected" value="">Select One</option>
                     @foreach($boards as $board)
 
-                        <option value="{{ $board }}" @if($academicInfo['SSC']->board_id == $board->id ) selected @endif> {{$board->name}}</option>
+                        <option value="{{ $board->id }}" @if($academicInfo['SSC']->board_id == $board->id ) selected @endif> {{$board->name}}</option>
 
                     @endforeach
                 </select>
@@ -94,7 +94,7 @@
                         <option selected="selected" value="">Select One</option>
                         @foreach($exams as $exam)
                             @if($exam->level == 'HSC')
-                                <option value="{{ $exam }}" @if($academicInfo['HSC']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
+                                <option value="{{ $exam->id }}" @if($academicInfo['HSC']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -110,7 +110,7 @@
                         <option selected="selected" value="">Select One</option>
                         @foreach($boards as $board)
 
-                            <option value="{{ $board }}" @if($academicInfo['HSC']->board_id == $board->id ) selected @endif> {{$board->name}}</option>
+                            <option value="{{ $board->id }}" @if($academicInfo['HSC']->board_id == $board->id ) selected @endif> {{$board->name}}</option>
 
                         @endforeach
                     </select>

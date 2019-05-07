@@ -48,7 +48,7 @@
     <div class="form-group">
         <label class="control-label col-md-4">Password : </label>
         <div class="col-md-6">
-            <input type="password" name="password" value="{{ old('password')}}" class="form-control" required placeholder="123456"/>
+            <input type="password" name="password" value="{{ old('password')}}" class="form-control" placeholder="123456"/>
             <span class="text-info">Min 6 characters and max 10 characters</span>
             <span class="text-danger">{{$errors->has('password') ? $errors->first('password') : ''}}</span>
         </div>
@@ -119,7 +119,7 @@
     <div class="form-group">
         <label class="control-label col-md-4">Student Photo : </label>
         <div class="col-md-6">
-            <input type="file" required name="student_photo" accept="image/*"/>
+            <input type="file" name="student_photo" accept="image/*"/>
             <img  src="{{ asset($students->student_photo) }}" height="70px" width="70px"/>
             <span class="text-danger">{{$errors->has('student_photo') ? $errors->first('student_photo') : ''}}</span>
         </div>

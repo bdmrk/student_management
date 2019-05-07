@@ -74,9 +74,9 @@
             <div class="col-sm-6">
                 <select name="honours[course_duration]" required id="selector1" class="form-control1">
                     <option selected="selected" value="">Select One</option>
-                    <option value="1">3 Years</option>
-                    <option value="2">4 Years</option>
-                    <option value="3">5 Years</option>
+                    <option value="3">3 Years</option>
+                    <option value="4">4 Years</option>
+                    <option value="5">5 Years</option>
                 </select>
                 <span class="text-danger">{{$errors->has('honours.course_duration') ? $errors->first('honours.course_duration') : ''}}</span>
 

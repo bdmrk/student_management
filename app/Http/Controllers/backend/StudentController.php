@@ -182,7 +182,6 @@ class StudentController extends Controller
             AcademicInfo::insert($academicData);
 
         } catch(\Exception $exception) {
-            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
 
@@ -239,7 +238,158 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'applicant_name' => 'required|max:100',
+            'father_name' => 'required|max:100',
+            'mother_name' => 'required|max:100',
+            'dob' => 'required|date',
+            'contact_number' => 'required',
+
+            'gender' => 'required',
+            'religion' => 'required',
+            'blood_group' => 'required',
+            'nid' => 'required',
+
+        ]);
+
+
+
+
+        try {
+
+            $student = Student::findOrFail($id);
+            $student->full_name = $request->input('applicant_name');
+            $student->father_name = $request->input('father_name');
+            $student->mother_name = $request->input('mother_name');
+            $student->dob = Carbon::parse($request->input('dob'))->format("Y-m-d");
+            $student->gender = $request->input('gender');
+            $student->contact_number = $request->input('contact_number');
+            $student->email = $request->input('email');
+            $student->present_address = $request->input('present_address');
+            $student->permanent_address = $request->input('permanent_address');
+            $student->religion = $request->input('religion');
+            $student->blood_group = $request->input('blood_group');
+            $student->nationality = $request->input('nationality');
+            $student->nid = $request->input('nid');
+
+            if ($request->hasFile('student_photo')) {
+
+                $studentImage = $request->file('student_photo');
+                $ext = $studentImage->getClientOriginalExtension();
+                $imageName = 'st_'.rand(100,999)."_".date('ymdhis').".".$ext;
+                $directory = '/images/students/';
+                $imageUrl = $directory.$imageName;
+                $destination = public_path() . $directory;
+                $studentImage->move($destination, $imageName);
+
+                $student->student_photo = $imageUrl;
+            }
+            if ($request->has('password')) {
+                $student->password = bcrypt($request->input('password'));
+            }
+            $student->program_id = 1;
+            $student->updated_by = Auth::user()->id;
+            $student->save();
+
+
+            $academicData = [];
+            $now = Carbon::now();
+
+
+
+            $sscInfo = [];
+            $ssc = $request->input('ssc');
+
+            $sscInfo['student_id'] = $student->id;
+            $sscInfo['board_id'] = isset($ssc['board']) ? $ssc['board']: '';
+            $sscInfo['group'] = isset($ssc['group']) ? $ssc['group']: '';
+            $sscInfo['examination_id'] = isset($ssc['examination']) ? $ssc['examination']: '';
+            $sscInfo['roll_no'] = isset($ssc['roll']) ? $ssc['roll']: '';
+            $sscInfo['result'] = isset($ssc['result']) ? $ssc['result']: '';
+            $sscInfo['passing_year'] = isset($ssc['passing_year']) ? $ssc['passing_year']: '';
+            $sscInfo['updated_at'] = $now;
+
+            $sscAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $ssc['examination'])->first();
+
+            if ($sscAcInfo instanceof AcademicInfo) {
+                AcademicInfo::where('student_id', $student->id)->where('examination_id', $ssc['examination'])->update($sscInfo);
+            } else {
+                AcademicInfo::insert($sscInfo);
+            }
+
+
+
+            $hscInfo = [];
+            $hsc = $request->input('hsc');
+            $hscInfo['student_id'] = $student->id;
+            $hscInfo['board_id'] = isset($hsc['board']) ? $hsc['board']: '';
+            $hscInfo['group'] = isset($hsc['group']) ? $hsc['group']: '';
+            $hscInfo['examination_id'] = isset($hsc['examination']) ? $hsc['examination']: '';
+            $hscInfo['roll_no'] = isset($hsc['roll']) ? $hsc['roll']: '';
+            $hscInfo['result'] = isset($hsc['result']) ? $hsc['result']: '';
+            $hscInfo['passing_year'] = isset($hsc['passing_year']) ? $hsc['passing_year']: '';
+            $hscInfo['updated_at'] = $now;
+
+            $hscAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $hsc['examination'])->first();
+            if ($hscAcInfo instanceof AcademicInfo) {
+                AcademicInfo::where('student_id', $student->id)->where('examination_id', $hsc['examination'])->update($hscInfo);
+            } else {
+                AcademicInfo::insert($hscInfo);
+            }
+
+            $honoursInfo = [];
+            $honours = $request->input('honours');
+            $honoursInfo['student_id'] = $student->id;
+            $honoursInfo['institute'] = isset($honours['institute']) ? $honours['institute']: '';
+            $honoursInfo['subject'] = isset($honours['subject']) ? $honours['subject']: '';
+            $honoursInfo['examination_id'] = isset($honours['examination']) ? $honours['examination']: '';
+            $honoursInfo['roll_no'] = isset($honours['roll']) ? $honours['roll']: '';
+            $honoursInfo['result'] = isset($honours['result']) ? $honours['result']: '';
+            $honoursInfo['passing_year'] = isset($honours['passing_year']) ? $honours['passing_year']: '';
+            $honoursInfo['course_duration'] = isset($honours['course_duration']) ? $honours['course_duration']: '';
+            $honoursInfo['updated_at'] = $now;
+
+            $honoursAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $honours['examination'])->first();
+            if ($honoursAcInfo instanceof AcademicInfo) {
+                AcademicInfo::where('student_id', $student->id)->where('examination_id', $honours['examination'])->update($honoursInfo);
+            } else {
+                AcademicInfo::insert($honoursInfo);
+            }
+
+            $masters = $request->input('masters');
+            if($masters['examination'] != ''){
+                $mastersInfo = [];
+                $mastersInfo['student_id'] = $student->id;
+                $mastersInfo['institute'] = isset($masters['institute']) ? $masters['institute']: '';
+                $mastersInfo['subject'] = isset($masters['subject']) ? $masters['subject']: '';
+                $mastersInfo['examination_id'] = isset($masters['examination']) ? $masters['examination']: '';
+                $mastersInfo['roll_no'] = isset($masters['roll']) ? $masters['roll']: '';
+                $mastersInfo['result'] = isset($masters['result']) ? $masters['result']: '';
+                $mastersInfo['passing_year'] = isset($masters['passing_year']) ? $masters['passing_year']: '';
+                $mastersInfo['course_duration'] = isset($masters['course_duration']) ? $masters['course_duration']: '';
+                $mastersInfo['updated_at'] = $now;
+
+                $masterAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $masters['examination'])->first();
+                if ($masterAcInfo instanceof AcademicInfo) {
+                    AcademicInfo::where('student_id', $student->id)->where('examination_id', $masters['examination'])->update($mastersInfo);
+                } else {
+                    AcademicInfo::insert($mastersInfo);
+                }
+
+            }
+
+
+
+            AcademicInfo::insert($academicData);
+
+        } catch(\Exception $exception) {
+            dd($exception->getMessage());
+            return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
+        }
+
+
+        return redirect()->route('students.index')->with('successMessage', "Student is updated successfully");
     }
 
     /**

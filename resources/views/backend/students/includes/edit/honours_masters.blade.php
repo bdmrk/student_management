@@ -11,7 +11,7 @@
                     <option selected="selected" value="">Select One</option>
                     @foreach($exams as $exam)
                         @if($exam->level == 'Graduation')
-                            <option value="{{ $exam }}" @if($academicInfo['Graduation']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
+                            <option value="{{ $exam->id }}" @if($academicInfo['Graduation']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -73,10 +73,10 @@
 
             <div class="col-sm-6">
                 <select name="honours[course_duration]" required id="selector1" class="form-control1">
-                    <option selected="selected" value="">Select One</option>
-                    <option value="1" @if(1 == $academicInfo['Graduation']->course_duration) selected @endif>3 Years</option>
-                    <option value="2" @if(2 == $academicInfo['Graduation']->course_duration) selected @endif>4 Years</option>
-                    <option value="3" @if(3 == $academicInfo['Graduation']->course_duration) selected @endif>5 Years</option>
+                    <option value="">Select One</option>
+                    <option value="3" @if($academicInfo['Graduation']->course_duration == 3) selected @endif>3 Years</option>
+                    <option value="4" @if($academicInfo['Graduation']->course_duration == 4) selected @endif>4 Years</option>
+                    <option value="5" @if($academicInfo['Graduation']->course_duration == 5) selected @endif>5 Years</option>
                 </select>
                 <span class="text-danger">{{$errors->has('honours.course_duration') ? $errors->first('honours.course_duration') : ''}}</span>
 
@@ -95,7 +95,7 @@
                         <option value="" selected="selected">Select One</option>
                         @foreach($exams as $exam)
                             @if($exam->level == 'Masters')
-                                <option value="{{ $exam }}" @if($academicInfo['Masters']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
+                                <option value="{{ $exam->id }}" @if($academicInfo['Masters']->examination_id == $exam->id) ) selected @endif>{{ $exam ->name }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -158,8 +158,8 @@
                 <div class="col-sm-6">
                     <select name="masters[course_duration]" id="selector1" class="form-control1">
                         <option selected="selected" value="">Select One</option>
-                        <option value="1" @if(1 == $academicInfo['Masters']->course_duration) selected @endif>1 Year</option>
-                        <option value="2" @if(2 == $academicInfo['Masters']->course_duration) selected @endif>2 Years</option>
+                        <option value="1" @if($academicInfo['Masters']->course_duration == 1) selected @endif>1 Year</option>
+                        <option value="2" @if($academicInfo['Masters']->course_duration == 2) selected @endif>2 Years</option>
                     </select>
                     <span class="text-danger">{{$errors->has('masters.course_duration') ? $errors->first('masters.course_duration') : ''}}</span>
 
