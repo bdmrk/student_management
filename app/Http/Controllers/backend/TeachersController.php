@@ -91,7 +91,9 @@ class TeachersController extends Controller
 
     public function show($id)
     {
-        //
+        $data['teacher'] = Teacher:: find($id);
+
+        return view('backend.teachers.details_teacher', $data);
     }
 
 
@@ -150,13 +152,6 @@ class TeachersController extends Controller
         return redirect()->route('teachers.index')->with('successMessage',"Teachers is deleted successfully");
     }
 
-//    public function changeStatus(Request $request)
-//    {
-//        $teacher =  Teacher::find($request->id);
-//        $teacher->status = !$teacher->status;
-//        $teacher->save();
-//        return redirect()->route('teachers.index');
-//    }
 
 
     public function inactiveStatus($id){
