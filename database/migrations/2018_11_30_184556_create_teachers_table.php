@@ -27,6 +27,7 @@ class CreateTeachersTable extends Migration
             $table->string('teacher_photo');
             $table->string('gender');
             $table->tinyInteger('status');
+            $table->rememberToken();
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
             $table->softDeletes();
