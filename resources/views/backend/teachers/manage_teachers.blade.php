@@ -41,25 +41,39 @@
                                 <td>{{$teacher->contact_number}}</td>
                                 <td>{{$teacher->email}}</td>
                                 <td>
-                                    <img src="{{asset($teacher->teacher_photo)}}" alt="photo" height="100" width="100">
+                                    <img src="{{asset($teacher->teacher_photo)}}" alt="photo" height="70" width="70">
                                 </td>
                                 <td>{{$teacher->gender}}</td>
                                 <td>{{$teacher->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 
                                 <td>
-                                    <a href="#" class="btn btn-success btn-xs pull-left">
+
+                                    @if($teacher->status ==1)
+                                        <a href="{{route('teacher.inactive',['id'=>$teacher->id])}}" class="btn btn-info btn-xs">
+                                            <span class="glyphicon glyphicon-arrow-up"></span>
+                                        </a>
+                                    @else
+                                        <a href="{{route('teacher.active',['id'=>$teacher->id])}}" class="btn btn-warning btn-xs">
+                                            <span class="glyphicon glyphicon-arrow-down"></span>
+                                        </a>
+                                    @endif
+
+                                    <a href="{{route('teachers.show',['id'=>$teacher->id])}}" class="btn btn-success btn-xs d-inline">
                                         <span class="glyphicon glyphicon-zoom-in"></span>
                                     </a>
 
-                                    <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-success btn-xs pull-left">
+                                    <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-success btn-xs d-inline">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     <form method="post" action="{{ route('teachers.destroy', ($teacher->id)) }}">
                                         {{ csrf_field() }}
                                         {{ method_field("delete") }}
-                                        <button class="btn btn-danger btn-xs pull-left"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
+                                        <button class="btn btn-danger btn-xs d-inline"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
                                     </form>
                                 </td>
+
+
+
                             </tr>
                         @endforeach
                     </table>

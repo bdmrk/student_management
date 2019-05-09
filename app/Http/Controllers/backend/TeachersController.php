@@ -150,11 +150,26 @@ class TeachersController extends Controller
         return redirect()->route('teachers.index')->with('successMessage',"Teachers is deleted successfully");
     }
 
-    public function changeStatus(Request $request)
-    {
-        $teacher =  Teacher::find($request->id);
-        $teacher->status = !$teacher->status;
+//    public function changeStatus(Request $request)
+//    {
+//        $teacher =  Teacher::find($request->id);
+//        $teacher->status = !$teacher->status;
+//        $teacher->save();
+//        return redirect()->route('teachers.index');
+//    }
+
+
+    public function inactiveStatus($id){
+        $teacher = Teacher::find($id);
+        $teacher -> status = 0;
         $teacher->save();
-        return redirect()->route('teachers.create');
+        return redirect()->route('teachers.index')->with('successMessage',"Teachers is terminated successfully ");
+    }
+
+    public function activeStatus($id){
+        $teacher = Teacher::find($id);
+        $teacher -> status = 1;
+        $teacher->save();
+        return redirect()->route('teachers.index')->with('successMessage',"Teachers is activated successfully ");
     }
 }
