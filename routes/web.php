@@ -85,3 +85,6 @@ Route::prefix('teacher')->middleware('auth:teacher')->group (
 
         Route::get('logout', 'Auth\TeacherLoginController@logout')->name('teacher-logout');
     });
+
+
+

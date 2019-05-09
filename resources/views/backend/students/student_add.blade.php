@@ -32,6 +32,26 @@
 
 
                     </div>
+
+
+
+                    <div class="form-grids row widget-shadow " data-example-id="basic-forms">
+                        <div class="form-title">
+                            <h4>Upload Your Certificates  Here : </h4>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="file"  name="certificates[]" accept="image/*" placeholder="Please Upload Certificate" multiple/>
+                            <span class="text-danger">{{$errors->has('student_photo') ? $errors->first('student_photo') : ''}}</span>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
                     <div class="form-group">
                         <div class="col-md-12 col-md-offset-5">
                             <input type="submit" value="Save Student" name="btn" class="btn btn-success btn block" />
@@ -47,3 +67,5 @@
     </div>
 
 @endsection
+
+

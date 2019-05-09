@@ -56,6 +56,13 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
+
+
+
+
+
+
+
         $request->validate([
             'applicant_name' => 'required|max:100',
             'father_name' => 'required|max:100',
@@ -67,6 +74,9 @@ class StudentController extends Controller
             'religion' => 'required',
             'blood_group' => 'required',
             'nid' => 'required',
+
+            'certificates' => 'required',
+            'certificates.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048'
 
         ]);
 
@@ -85,6 +95,11 @@ class StudentController extends Controller
                 $studentImage->move($destination, $imageName);
 
             }
+
+
+
+
+
             $student = new Student();
             $student->full_name = $request->input('applicant_name');
             $student->father_name = $request->input('father_name');
@@ -180,6 +195,27 @@ class StudentController extends Controller
 
 
             AcademicInfo::insert($academicData);
+
+
+
+            //Multiple Image upload
+
+            if ($image = $request->file('certificates')) {
+                foreach ($image as $files) {
+                    $destinationPath = 'public/images/certificates/'; // upload path
+                    $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                    $files->move($destinationPath, $profileImage);
+                    $insert[]['certificates'] = "$profileImage";
+                }
+            }
+
+            $upload = Student::insert($insert);
+
+
+
+
+
+
 
         } catch(\Exception $exception) {
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
