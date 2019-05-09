@@ -38,6 +38,20 @@
                                 </div>
                             </div>
                         </div>
+
+
+                    @elseif(!$course)
+
+                        <div class="row">
+                            <div class="col-md-9 pull-right">
+                                <div class="alert alert-danger" role="alert">
+                                    <p>There is no active course. Please create a course at first.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     @else
 
                     {{Form::open(['route'=>'offer.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
@@ -135,7 +149,43 @@
 <script>
 
 
+    $(".program").change(function(){
 
+        var id = $(this).val();
+
+        var hitUrl = "{{ url('/admin/ajax/get-syllabus') }}/" + id;
+
+        if (id != '') {
+            $.get(hitUrl, function(response){
+                // alert(response);
+                if(response) {
+                    $(".syllabus").html(response);
+                }
+            });
+        } else {
+            $(".syllabus").html('');
+        }
+    });
+
+    $(".syllabus").change(function(){
+
+        var id = $(this).val();
+
+        var hitUrl = "{{ url('/admin/ajax/get-prerequisite-course-by-syllabus-id') }}/" + id;
+
+        if (id != '') {
+            $.get(hitUrl, function(response){
+                // alert(response);
+                if(response) {
+                    $(".course").html(response);
+                } else{
+                    $(".course").html('');
+                }
+            });
+        } else {
+            $(".course").html('');
+        }
+    });
 </script>
 
 @endsection

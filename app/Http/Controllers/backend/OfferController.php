@@ -34,6 +34,7 @@ class OfferController extends Controller
     {
         $data['programs'] = Program::all();
         $data['syllabus'] = $syllabus = Syllabus::active()->first();
+        $data['course'] = $course = Course::active()->first();
 
         
         $data['semester'] = Semester::active()->first();
