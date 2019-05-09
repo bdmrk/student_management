@@ -28,8 +28,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        $data['month'] = array_combine(MonthEnum::getValues(), MonthEnum::getKeys());
-        return view('backend.semester.create_semester', $data);
+        return view('backend.semester.create_semester');
     }
 
     /**
@@ -43,8 +42,8 @@ class SemesterController extends Controller
         try {
             $semester = new Semester();
             $semester->semester_name = $request->input('semester_name');
-            $semester->start_month = $request->input('starting_month');
-            $semester->end_month = $request->input('ending_month');
+            $semester->start_date = $request->input('start_date');
+            $semester->end_date = $request->input('end_date');
             $semester->status = $request->input('status');
             $semester->created_by = Auth::user()->id;
             $semester->save();
