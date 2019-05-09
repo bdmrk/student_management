@@ -14,7 +14,7 @@ class StudentTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 0; $i <= 20; $i++) {
+        for($i = 0; $i <= 5; $i++) {
             $student = \App\Models\Student::create([
                 "full_name" => $faker->name,
                 "email" => $faker->unique()->email,

@@ -15,7 +15,7 @@ class TeacherTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 0; $i <= 9; $i++) {
+        for($i = 0; $i <= 5; $i++) {
             $teachers = new Teacher();
             $teachers->full_name = $faker->name;
             $teachers->dob = "1975-01-01";
