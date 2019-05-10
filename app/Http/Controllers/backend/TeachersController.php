@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\EnrolledCourse;
 use App\Models\Teacher;
+use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Image;
@@ -31,7 +33,7 @@ class TeachersController extends Controller
             'full_name' => 'required',
             'date_of_birth' => 'required',
             'contact_number' => 'required',
-           'teacher_photo' => 'nullable|mimes:jpeg,jpg,png',
+            'teacher_photo' => 'nullable|mimes:jpeg,jpg,png',
             'password'=>'required|confirmed|min:6',
             'password_confirmation'=>'sometimes|required_with:password',
 
@@ -44,9 +46,9 @@ class TeachersController extends Controller
         $imageName = $request->full_name.'.'.$fileType;
         $directory = 'images/teachers/';
         $imageUrl = $directory.$imageName;
-         Image::make($teacherImage)->resize(300,300)->save($imageUrl);
+        Image::make($teacherImage)->resize(300,300)->save($imageUrl);
 
-         return $imageUrl;
+        return $imageUrl;
     }
 
     protected  function teacherBasicInfoSave($request, $imageUrl ) {
@@ -93,6 +95,40 @@ class TeachersController extends Controller
     {
         $data['teacher'] = Teacher:: find($id);
 
+
+        $data['previousCourses'] = EnrolledCourse::select(
+            'enrolled_course.*',
+            'semester.semester_name',
+            'courses.course_name',
+            'syllabus.syllabus_name'
+
+        )
+            ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
+            ->leftJoin('semester', 'semester.id', '=', 'offers.semester_id')
+            ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
+            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus')
+            ->where('enrolled_course.teacher_id', $id)
+            ->where('syllabus.status', false)
+            ->where('semester.status', false)
+            ->get();
+
+
+        $data['currentCourses'] = EnrolledCourse::select(
+            'enrolled_course.*',
+            'semester.semester_name',
+            'courses.course_name',
+            'syllabus.syllabus_name'
+
+        )
+            ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
+            ->leftJoin('semester', 'semester.id', '=', 'offers.semester_id')
+            ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
+            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus')
+            ->where('enrolled_course.teacher_id', $id)
+            ->where('syllabus.status', true)
+            ->where('semester.status', true)
+            ->get();
+
         return view('backend.teachers.details_teacher', $data);
     }
 
@@ -113,35 +149,35 @@ class TeachersController extends Controller
             'email' => 'required',
         ]);
 
-       try {
-           $teacher = Teacher::find($id);
+        try {
+            $teacher = Teacher::find($id);
 
-           if($request->hasFile('teacher_photo')) {
-               $teacherImage = $request->file('teacher_photo');
-               unlink($teacher->teacher_photo);
-               $imageName = $teacherImage->getClientOriginalName();
-               $directory = 'images/teachers/';
-               $imageUrl = $directory . $imageName;
-               Image::make($teacherImage)->save($imageUrl);
-               $teacher->teacher_photo = $imageUrl;
-           }
-           $teacher->full_name = $request->input('full_name');
-           $teacher->dob = $request->input('date_of_birth');
-           $teacher->designation = $request->input('designation');
-           $teacher->contact_number = $request->input('contact_number');
-           $teacher->email = $request->input('email');
-           $teacher->father_name = $request->input('father_name');
-           $teacher->mother_name = $request->input('mother_name');
-           $teacher->address = $request->input('address');
-           $teacher->gender = $request->input('gender');
-           $teacher->status = $request->input('status');
-           //dd($teacher);
-           $teacher->save();
-       } catch (\Exception $exception) {
-           return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
-                }
+            if($request->hasFile('teacher_photo')) {
+                $teacherImage = $request->file('teacher_photo');
+                unlink($teacher->teacher_photo);
+                $imageName = $teacherImage->getClientOriginalName();
+                $directory = 'images/teachers/';
+                $imageUrl = $directory . $imageName;
+                Image::make($teacherImage)->save($imageUrl);
+                $teacher->teacher_photo = $imageUrl;
+            }
+            $teacher->full_name = $request->input('full_name');
+            $teacher->dob = $request->input('date_of_birth');
+            $teacher->designation = $request->input('designation');
+            $teacher->contact_number = $request->input('contact_number');
+            $teacher->email = $request->input('email');
+            $teacher->father_name = $request->input('father_name');
+            $teacher->mother_name = $request->input('mother_name');
+            $teacher->address = $request->input('address');
+            $teacher->gender = $request->input('gender');
+            $teacher->status = $request->input('status');
+            //dd($teacher);
+            $teacher->save();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
 
-           return redirect()->route('teachers.index')->with('successMessage', "Teacher Updated successfully");
+        return redirect()->route('teachers.index')->with('successMessage', "Teacher Updated successfully");
     }
 
 

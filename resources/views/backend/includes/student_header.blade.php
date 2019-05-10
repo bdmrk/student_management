@@ -176,10 +176,8 @@
                 <li class="dropdown profile_details_drop">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <div class="profile_img">
-                            <span class="prfil-img"><i class="fa fa-user"></i></span>
                             <div class="user-name">
                                 <p>{{ Auth::guard('student')->user()->full_name }}</p>
-                                <span>Student</span>
                             </div>
                             <i class="fa fa-angle-down lnr"></i>
                             <i class="fa fa-angle-up lnr"></i>
@@ -187,9 +185,8 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu drp-mnu">
-                        <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
                         <li>
-                            <a href="{{ route('student-logout') }}"><i class="fa fa-sign-out"></i>  Logout</a>
+                            <a href="{{ route('student-logout') }}" class="btn-xs btn-warning">  Logout</a>
                         </li>
                     </ul>
                 </li>
