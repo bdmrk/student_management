@@ -27,18 +27,18 @@ class StudentDataTable extends DataTable
             $action = '';
 
             if ($student->status == StudentStatus::Applied) {
-                $action = "<a class='btn btn-info btn-sm' href='".route('student.select', $student->id)."'>Select</a>";
+                $action = "<a title='Click to select student' class='btn btn-info btn-xs d-inline' href='".route('student.select', $student->id)."'>Select</a>";
 
             }
 
             if ($student->status == StudentStatus::Selected) {
-                $action = "<a class='btn btn-success btn-sm' href='".route('student.admitted', $student->id)."'>Admitted</a>";
+                $action = "<a title='Click to admit student' class='btn btn-success btn-xs d-inline' href='".route('student.admitted', $student->id)."'>Admit</a>";
 
             }
 
-            $action .= "<a class='btn btn-primary btn-sm' href='".route('students.edit', $student->id)."'> <span class=\"glyphicon glyphicon-edit\"></span></a>";
+            $action .= "<a title='Click to edit student' class='btn btn-warning btn-xs d-inline ' href='".route('students.edit', $student->id)."'> <span class=\"glyphicon glyphicon-edit icon\"></span></a>";
 
-            $action .= "<a class='btn btn-info btn-sm' href='".route('students.show', $student->id)."'><span class=\"glyphicon glyphicon-zoom-in\"></span></a>";
+            $action .= "<a title='Click to see details' class='btn btn-success btn-xs d-inline ' href='".route('students.show', $student->id)."'><span class=\"glyphicon glyphicon-zoom-in icon\"></span></a>";
             return $action;
         });
 
@@ -68,7 +68,7 @@ class StudentDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '100px'])
                     ->parameters($this->getBuilderParameters());
     }
 

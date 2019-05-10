@@ -47,6 +47,13 @@
             width: 100%;
             height: 295px;
         }
+
+
+         .icon {
+             color: #fff;
+         }
+
+
     </style>
     <!--pie-chart --><!-- index page sales reviews visitors pie chart -->
     <script src="{{asset('/')}}back_end/js/pie-chart.js" type="text/javascript"></script>
