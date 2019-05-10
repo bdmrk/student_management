@@ -80,7 +80,11 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="gender">Gender:</label>
-                                                        <p>{{$teacher->gender}}</p>
+                                                        @if ($teacher->gender == 1)
+                                                             <p>Male</p>
+                                                             @else
+                                                            <p>Female</p>
+                                                             @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="phone">Phone:</label>
@@ -100,7 +104,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="permanent">Status</label>
-                                                        @if($teacher == true)
+                                                        @if($teacher->status == 1)
                                                             <p>Active</p>
                                                             @else
                                                         <p>Terminated</p>
@@ -109,9 +113,6 @@
 
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                         <div class="tab-pane" id="tab_default_3">
 
@@ -138,8 +139,6 @@
                                                                     <td>{{$course->course_name}}</td>
                                                                     <td>{{$course->semester_name}}</td>
                                                                     <td>{{$course->syllabus_name}}</td>
-
-
                                                                 </tr>
                                                             @endforeach
 
