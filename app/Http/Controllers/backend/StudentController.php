@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Matrix\Exception;
+use File;
 
 class StudentController extends Controller
 {
@@ -56,13 +57,6 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-
-
-
-
-
-
-
         $request->validate([
             'applicant_name' => 'required|max:100',
             'father_name' => 'required|max:100',
@@ -73,15 +67,8 @@ class StudentController extends Controller
             'gender' => 'required',
             'religion' => 'required',
             'blood_group' => 'required',
-            'nid' => 'required',
-
-            'certificates' => 'required',
-            'certificates.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048'
-
+            'nid' => 'required'
         ]);
-
-
-
 
         try {
             if ($request->hasFile('student_photo')) {
@@ -95,10 +82,6 @@ class StudentController extends Controller
                 $studentImage->move($destination, $imageName);
 
             }
-
-
-
-
 
             $student = new Student();
             $student->full_name = $request->input('applicant_name');
@@ -123,11 +106,7 @@ class StudentController extends Controller
             $student->created_by = Auth::user()->id;
             $student->save();
 
-
-            $academicData = [];
             $now = Carbon::now();
-
-
 
             $sscInfo = [];
             $ssc = $request->input('ssc');
@@ -142,6 +121,17 @@ class StudentController extends Controller
             $sscInfo['created_at'] = $now;
             $sscInfo['updated_at'] = $now;
 
+            $certficateDirectory = '/images/students/certificate';
+            $certificatDestination = public_path() . $certficateDirectory;
+
+            if ($request->hasFile('ssc.certificate')) {
+                $sscCertificate = $request->file('ssc.certificate');
+                $sscext = $sscCertificate->getClientOriginalExtension();
+                $sscImageName = 'ssc_certificate_'.rand(100,999)."_".date('ymdhis').".".$sscext;
+
+                $sscCertificate->move($certificatDestination, $sscImageName);
+                $sscInfo['certificate'] = $sscImageName;;
+            }
 
             AcademicInfo::insert($sscInfo);
 
@@ -156,6 +146,16 @@ class StudentController extends Controller
             $hscInfo['passing_year'] = isset($hsc['passing_year']) ? $hsc['passing_year']: '';
             $hscInfo['created_at'] = $now;
             $hscInfo['updated_at'] = $now;
+
+            if ($request->hasFile('hsc.certificate')) {
+                $hscCertificate = $request->file('hsc.certificate');
+                $hscext = $hscCertificate->getClientOriginalExtension();
+                $hscImageName = 'hsc_certificate_'.rand(100,999)."_".date('ymdhis').".".$hscext;
+
+                $hscCertificate->move($certificatDestination, $hscImageName);
+                $hscInfo['certificate'] = $hscImageName;;
+            }
+
             AcademicInfo::insert($hscInfo);
 
 
@@ -171,6 +171,16 @@ class StudentController extends Controller
             $honoursInfo['course_duration'] = isset($honours['course_duration']) ? $honours['course_duration']: '';
             $honoursInfo['created_at'] = $now;
             $honoursInfo['updated_at'] = $now;
+
+            if ($request->hasFile('honours.certificate')) {
+                $honoursCertificate = $request->file('honours.certificate');
+                $honoursext = $honoursCertificate->getClientOriginalExtension();
+                $honoursImageName = 'honours_certificate_'.rand(100,999)."_".date('ymdhis').".".$honoursext;
+
+                $honoursCertificate->move($certificatDestination, $honoursImageName);
+                $honoursInfo['certificate'] = $honoursImageName;;
+            }
+
 
 
             AcademicInfo::insert($honoursInfo);
@@ -188,40 +198,25 @@ class StudentController extends Controller
                 $mastersInfo['course_duration'] = isset($masters['course_duration']) ? $masters['course_duration']: '';
                 $mastersInfo['created_at'] = $now;
                 $mastersInfo['updated_at'] = $now;
+                if ($request->hasFile('masters.certificate')) {
+                    $mastersCertificate = $request->file('masters.certificate');
+                    $mastersext = $mastersCertificate->getClientOriginalExtension();
+                    $mastersImageName = 'masters_certificate_'.rand(100,999)."_".date('ymdhis').".".$mastersext;
+
+                    $mastersCertificate->move($certificatDestination, $mastersImageName);
+                    $mastersInfo['certificate'] = $mastersImageName;;
+                }
 
                 AcademicInfo::insert($mastersInfo);
             }
 
 
-
-            AcademicInfo::insert($academicData);
-
-
-
             //Multiple Image upload
-
-            if ($image = $request->file('certificates')) {
-                foreach ($image as $files) {
-                    $destinationPath = 'public/images/certificates/'; // upload path
-                    $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-                    $files->move($destinationPath, $profileImage);
-                    $insert[]['certificates'] = "$profileImage";
-                }
-            }
-
-            $upload = Student::insert($insert);
-
-
-
-
-
-
 
         } catch(\Exception $exception) {
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
-
-
+        
         return redirect()->route('students.index')->with('successMessage', "Student is Created Successfully");
     }
 
@@ -290,8 +285,6 @@ class StudentController extends Controller
         ]);
 
 
-
-
         try {
 
             $student = Student::findOrFail($id);
@@ -346,13 +339,33 @@ class StudentController extends Controller
             $sscInfo['passing_year'] = isset($ssc['passing_year']) ? $ssc['passing_year']: '';
             $sscInfo['updated_at'] = $now;
 
+            $certficateDirectory = '/images/students/certificate';
+            $certificatDestination = public_path() . $certficateDirectory;
+
+            if ($request->hasFile('ssc.certificate')) {
+                $sscCertificate = $request->file('ssc.certificate');
+                $sscext = $sscCertificate->getClientOriginalExtension();
+                $sscImageName = 'ssc_certificate_'.rand(100,999)."_".date('ymdhis').".".$sscext;
+
+
+                $sscCertificate->move($certificatDestination, $sscImageName);
+                $sscInfo['certificate'] = $sscImageName;;
+            }
+
+
             $sscAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $ssc['examination'])->first();
 
             if ($sscAcInfo instanceof AcademicInfo) {
                 AcademicInfo::where('student_id', $student->id)->where('examination_id', $ssc['examination'])->update($sscInfo);
+//                File::delete("/images/students/certificate/".$sscAcInfo->certificate);
+                if ($request->hasFile('ssc.certificate') && file_exists($certificatDestination.'/'.$sscAcInfo->certificate)) {
+                    unlink($certificatDestination.'/'.$sscAcInfo->certificate);
+                }
+
             } else {
                 AcademicInfo::insert($sscInfo);
             }
+
 
 
 
@@ -367,9 +380,22 @@ class StudentController extends Controller
             $hscInfo['passing_year'] = isset($hsc['passing_year']) ? $hsc['passing_year']: '';
             $hscInfo['updated_at'] = $now;
 
+            if ($request->hasFile('hsc.certificate')) {
+                $hscCertificate = $request->file('hsc.certificate');
+                $hscext = $hscCertificate->getClientOriginalExtension();
+                $hscImageName = 'hsc_certificate_'.rand(100,999)."_".date('ymdhis').".".$hscext;
+
+                $hscCertificate->move($certificatDestination, $hscImageName);
+                $hscInfo['certificate'] = $hscImageName;;
+            }
+
             $hscAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $hsc['examination'])->first();
             if ($hscAcInfo instanceof AcademicInfo) {
                 AcademicInfo::where('student_id', $student->id)->where('examination_id', $hsc['examination'])->update($hscInfo);
+                if ($request->hasFile('hsc.certificate') && file_exists($certificatDestination.'/'.$hscAcInfo->certificate)) {
+                    unlink($certificatDestination.'/'.$hscAcInfo->certificate);
+                }
+
             } else {
                 AcademicInfo::insert($hscInfo);
             }
@@ -386,9 +412,23 @@ class StudentController extends Controller
             $honoursInfo['course_duration'] = isset($honours['course_duration']) ? $honours['course_duration']: '';
             $honoursInfo['updated_at'] = $now;
 
+            if ($request->hasFile('honours.certificate')) {
+                $honoursCertificate = $request->file('honours.certificate');
+                $honoursext = $honoursCertificate->getClientOriginalExtension();
+                $honoursImageName = 'honours_certificate_'.rand(100,999)."_".date('ymdhis').".".$honoursext;
+
+                $honoursCertificate->move($certificatDestination, $honoursImageName);
+                $honoursInfo['certificate'] = $honoursImageName;;
+            }
+
             $honoursAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $honours['examination'])->first();
             if ($honoursAcInfo instanceof AcademicInfo) {
                 AcademicInfo::where('student_id', $student->id)->where('examination_id', $honours['examination'])->update($honoursInfo);
+                if ($request->hasFile('honours.certificate') && file_exists($certificatDestination.'/'.$honoursAcInfo->certificate)) {
+                    unlink($certificatDestination.'/'.$honoursAcInfo->certificate);
+                }
+
+
             } else {
                 AcademicInfo::insert($honoursInfo);
             }
@@ -405,22 +445,28 @@ class StudentController extends Controller
                 $mastersInfo['passing_year'] = isset($masters['passing_year']) ? $masters['passing_year']: '';
                 $mastersInfo['course_duration'] = isset($masters['course_duration']) ? $masters['course_duration']: '';
                 $mastersInfo['updated_at'] = $now;
+                if ($request->hasFile('masters.certificate')) {
+                    $mastersCertificate = $request->file('masters.certificate');
+                    $mastersext = $mastersCertificate->getClientOriginalExtension();
+                    $mastersImageName = 'masters_certificate_'.rand(100,999)."_".date('ymdhis').".".$mastersext;
+
+                    $mastersCertificate->move($certificatDestination, $mastersImageName);
+                    $mastersInfo['certificate'] = $mastersImageName;;
+                }
 
                 $masterAcInfo = AcademicInfo::where('student_id', $student->id)->where('examination_id', $masters['examination'])->first();
                 if ($masterAcInfo instanceof AcademicInfo) {
                     AcademicInfo::where('student_id', $student->id)->where('examination_id', $masters['examination'])->update($mastersInfo);
+                    if ($request->hasFile('masters.certificate') && file_exists($certificatDestination.'/'.$masterAcInfo->certificate)) {
+                        unlink($certificatDestination.'/'.$masterAcInfo->certificate);
+                    }
                 } else {
                     AcademicInfo::insert($mastersInfo);
                 }
 
             }
 
-
-
-            AcademicInfo::insert($academicData);
-
         } catch(\Exception $exception) {
-            dd($exception->getMessage());
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
 
