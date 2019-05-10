@@ -56,18 +56,6 @@
 
                     {{Form::open(['route'=>'offer.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
-                   <div class="form-group">
-                            <label class="control-label col-md-3">Program</label>
-                            <div class="col-md-6">
-                                <select name="program" class="form-control program">
-                                    <option value="">Select Your Program</option>
-                                    @foreach($programs as $p)
-                                        <option value="{{ $p->id }}" @if(old('program') == $p->id) select @endif>{{ $p->program_name }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="text-danger">{{$errors->has('program') ? $errors->first('program') : ''}}</span>
-                            </div>
-                        </div>
 
                     <div class="form-group">
                             <label class="control-label col-md-3">Syllabus</label>
@@ -84,6 +72,7 @@
                             <div class="col-md-6">
                                 <select name="course" class="form-control course">
                                     <option value="">Select Course</option>
+                                    
                                 </select>
                                 <span class="text-danger">{{$errors->has('course') ? $errors->first('course') : ''}}</span>
                             </div>
@@ -91,9 +80,9 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Semester</label>
                         <div class="col-md-6">
-                            <select name="semester" class="form-control semester">
+                            <select name="semester" readonly class="form-control semester">
                                 <option value="{{ $semester->id }}">{{ $semester->semester_name }}</option>
-
+                                
                             </select>
                             <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
@@ -118,6 +107,27 @@
                             <div class="col-md-6">
                                 <input type="text" value="{{ old('course_fee') }}" name="course_fee" class="form-control" placeholder="Tk. 5000/-"/>
                                 <span class="text-danger">{{$errors->has('course_fee') ? $errors->first('course_fee') : ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" >Class Day</label>
+                            <div class="col-md-6">
+                                <select name="class_day" required class="form-control">
+                                    <option value="">Select Class Day</option>
+                                    @foreach($days as $d)
+                                        <option value="{{ $d}}" @if(old('class_day') == $d) selected @endif>{{ $d }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">{{$errors->has('course_fee') ? $errors->first('course_fee') : ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" >Class Time</label>
+                            <div class="col-md-6">
+                                <input type="time" required value="{{ old('class_time') }}" name="class_time" class="form-control" />
+                                <span class="text-danger">{{$errors->has('class_time') ? $errors->first('class_time') : ''}}</span>
                             </div>
                         </div>
 

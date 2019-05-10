@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\Enum\ClassDayEnum;
 use App\Helpers\Enum\MonthEnum;
 use App\Models\Semester;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class OfferController extends Controller
     {
         $data['programs'] = Program::all();
         $data['syllabus'] = $syllabus = Syllabus::active()->first();
-        $data['course'] = $course = Course::active()->first();
+        $data['course'] = $course = Course::active()->get();
+        $data['days'] = $course = ClassDayEnum::getValues();
 
         
         $data['semester'] = Semester::active()->first();
@@ -52,7 +54,6 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'program' => 'required|integer',
             'course' => 'required|integer',
             'syllabus' => 'required|integer',
             'teacher' => 'required|integer',
@@ -63,6 +64,7 @@ class OfferController extends Controller
         try {
             $hasOffer = Offer::where('syllabus_id', $request->input('course'))
                 ->where('course_id', $request->input('course'))
+                ->where('course_id', $request->input('course'))
                 ->where('semester_id', $request->input('semester'))
                 ->get();
 
@@ -71,11 +73,14 @@ class OfferController extends Controller
             }
 
             $offer = new Offer();
+            $offer->program_id = 1;
             $offer->course_id = $request->input('course');
             $offer->syllabus_id = $request->input('syllabus');
             $offer->semester_id = $request->input('semester');
             $offer->teacher_id = $request->input('teacher');
             $offer->course_fee = $request->input('course_fee');
+            $offer->class_day = $request->input('class_day');
+            $offer->class_time = $request->input('class_time');
             $offer->created_by = auth()->user()->id;
             $offer->status = $request->input('status');
             $offer->save();
@@ -106,12 +111,12 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-        $data['programs'] = Program::all();
         $data['semester'] = Semester::all();
         $data['teachers'] = Teacher::all();
         $data['course'] = Course::all();
         $data['syllabuses'] = Syllabus::all();
         $data['offer'] = Offer::find($id);
+        $data['days'] = ClassDayEnum::getValues();
         return view('backend.offer.edit', $data);
     }
 
@@ -131,7 +136,9 @@ class OfferController extends Controller
             'syllabus' => 'required|integer',
             'teacher' => 'required|integer',
             'semester' => 'required|integer',
-            'course_fee' => 'required|numeric'
+            'course_fee' => 'required|numeric',
+            'class_day' => 'required',
+            'class_time' => 'required'
         ]);
 
         try {
@@ -145,11 +152,14 @@ class OfferController extends Controller
             }
 
             $offer = Offer::findOrFail($id);
+            $offer->program_id = 1;
             $offer->course_id = $request->input('course');
             $offer->syllabus_id = $request->input('syllabus');
             $offer->semester_id = $request->input('semester');
             $offer->teacher_id = $request->input('teacher');
             $offer->course_fee = $request->input('course_fee');
+            $offer->class_day = $request->input('class_day');
+            $offer->class_time = $request->input('class_time');
             $offer->created_by = auth()->user()->id;
             $offer->status = $request->input('status');
             $offer->save();

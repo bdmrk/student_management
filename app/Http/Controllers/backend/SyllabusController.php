@@ -44,7 +44,6 @@ class SyllabusController extends Controller
     {
         $request->validate([
             'syllabus_name' => 'required|unique:syllabus|max:255',
-            'program' => 'required|integer',
             'status' => 'required'
         ]);
 
@@ -57,7 +56,7 @@ class SyllabusController extends Controller
             $syllabus->syllabus_name = $request->input('syllabus_name');
             $syllabus->description = $request->input('description');
             $syllabus->status = $request->input('status');
-            $syllabus->program_id = $request->input('program');
+            $syllabus->program_id = 1;
             $syllabus->created_by = Auth::user()->id;
             $syllabus->save();
         } catch(\Exception $exception) {
@@ -103,7 +102,6 @@ class SyllabusController extends Controller
         $request->validate([
             'syllabus_name' => 'required|max:255',
             'description' => 'max:500',
-            'program' => 'required|integer',
             'status' => 'required'
         ]);
 
@@ -116,7 +114,7 @@ class SyllabusController extends Controller
             }
             $syllabus->syllabus_name = $request->input('syllabus_name');
             $syllabus->description = $request->input('description');
-            $syllabus->program_id = $request->input('program');
+            $syllabus->program_id = 1;
             $syllabus->status = $request->input('status');
             $syllabus->save();
         } catch(\Exception $exception) {
