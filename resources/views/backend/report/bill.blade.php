@@ -59,7 +59,7 @@
                             <td>{{ $bill->bill_amount }}</td>
                             <td>
                                 @if(!$bill->payment_status)
-                                    <a href="{{route('bill.paid', $bill->id)}}" class="btn btn-info">Paid</a>
+                                    <a href="{{route('bill.paid', $bill->id)}}" class="btn btn-success" title="Click To Make Paid">Paid</a>
                                 @else
 {{--                                    <a href="{{route('bill.show', $bill->id)}}" class="btn btn-success">Show</a>--}}
                                     @endif

@@ -75,7 +75,7 @@ class SyllabusController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.syllabuses.details_syllabus');
     }
 
     /**
