@@ -86,7 +86,7 @@
     <div class="col-md-6 validation-grids validation-grids-right">
         <div class="widget-shadow" data-example-id="basic-forms">
             <div class="form-title">
-                <h4>Masters Level (if any)</h4>
+                <h4>Post Graduation Level (if any)</h4>
             </div>
             <div class="form-group" style="padding-top: 20px;">
                 <label class="control-label col-md-4">Examination : </label>
