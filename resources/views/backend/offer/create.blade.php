@@ -40,7 +40,7 @@
                         </div>
 
 
-                    @elseif(!$course)
+                    @elseif(!$courses)
 
                         <div class="row">
                             <div class="col-md-9 pull-right">
@@ -72,6 +72,9 @@
                             <div class="col-md-6">
                                 <select name="course" class="form-control course">
                                     <option value="">Select Course</option>
+                                    @foreach($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->course_name }}</option>
+                                    @endforeach
                                     
                                 </select>
                                 <span class="text-danger">{{$errors->has('course') ? $errors->first('course') : ''}}</span>

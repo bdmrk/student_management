@@ -20,57 +20,37 @@
                     {{Form::open(['route'=>['offer.update', $offer->id], 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Program</label>
-                        <div class="col-md-6">
-                            <select name="program" class="form-control program">
-
-                                <option value="">Select Your Program</option>
-                                @foreach($programs as $p)
-
-                                    <option @if($offer->syllabus->program_id == $p->id) selected @endif value="{{ $p->id }}">{{ $p->program_name }}</option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger">{{$errors->has('program') ? $errors->first('program') : ''}}</span>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Syllabus</label>
                         <div class="col-md-6">
-                            <select name="syllabus" class="form-control syllabus">
-                                <option value="">Select Syllabus</option>
-                                @foreach($syllabuses as $sy)
-                                    <option @if($offer->syllabus_id == $sy->id) selected @endif value="{{ $sy->id }}">{{ $sy->syllabus_name }}</option>
-                                @endforeach
+                            <select name="syllabus" readonly class="form-control syllabus">
+                                    <option @if($offer->syllabus_id == $syllabus->id) selected @endif value="{{ $syllabus->id }}">{{ $syllabus->syllabus_name }}</option>
                             </select>
                             <span class="text-danger">{{$errors->has('syllabus') ? $errors->first('syllabus') : ''}}</span>
                         </div>
                     </div>
 
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Semester</label>
+                        <div class="col-md-6">
+                            <select name="semester" readonly class="form-control semester">
+
+                                    <option @if($offer->semester_id == $semester->id) selected @endif value="{{ $semester->id }}">{{ $semester->semester_name }}</option></select>
+                            <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Course</label>
                         <div class="col-md-6">
                             <select name="course" class="form-control course">
                                 <option value="">Select Course</option>
-                                @foreach($course as $c)
+                                @foreach($courses as $c)
                                     <option @if($offer->course_id == $c->id) selected @endif value="{{ $c->id }}">{{ $c->course_name }}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">{{$errors->has('course_name') ? $errors->first('course_name') : ''}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Semester</label>
-                        <div class="col-md-6">
-                            <select name="semester" class="form-control semester">
-                                <option value="">Select Semester</option>
-                                @foreach($semester as $s)
-
-                                    <option @if($offer->semester_id == $s->id) selected @endif value="{{ $s->id }}">{{ $s->semester_name }}</option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
                     </div>
 
@@ -102,7 +82,7 @@
                             <select name="class_day" required class="form-control">
                                 <option value="">Select Class Day</option>
                                 @foreach($days as $d)
-                                    <option value="{{ $d}}" @if($offer->class_day == $d) selected @endif>{{ $d }}</option>
+                                    <option value="{{ $d }}" @if($offer->class_day == $d) selected @endif>{{ $d }}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">{{$errors->has('course_fee') ? $errors->first('course_fee') : ''}}</span>

@@ -11,7 +11,7 @@ namespace App\Helpers\Enum;
 
 class ClassDayEnum extends BasicEnum
 {
-    const Saturday = "Saturday";
     const Friday = "Friday";
+    const Saturday = "Saturday";
 
 }

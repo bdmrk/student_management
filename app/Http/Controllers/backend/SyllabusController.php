@@ -59,6 +59,7 @@ class SyllabusController extends Controller
             $syllabus->program_id = 1;
             $syllabus->created_by = Auth::user()->id;
             $syllabus->save();
+
         } catch(\Exception $exception) {
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
         }
