@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('course_code', 20);
             $table->string('course_name', 100);
             $table->integer('course_credit')->default(0);
-            $table->string('description', 500);
+            $table->string('description', 500)->nullable();
             $table->integer('syllabus_id');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();

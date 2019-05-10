@@ -96,6 +96,26 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >Class Day</label>
+                        <div class="col-md-6">
+                            <select name="class_day" required class="form-control">
+                                <option value="">Select Class Day</option>
+                                @foreach($days as $d)
+                                    <option value="{{ $d}}" @if($offer->class_day == $d) selected @endif>{{ $d }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{$errors->has('course_fee') ? $errors->first('course_fee') : ''}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >Class Time</label>
+                        <div class="col-md-6">
+                            <input type="time" required value="{{ $offer->class_time }}" name="class_time" class="form-control" />
+                            <span class="text-danger">{{$errors->has('class_time') ? $errors->first('class_time') : ''}}</span>
+                        </div>
+                    </div>
 
 
                     <div class="form-group">

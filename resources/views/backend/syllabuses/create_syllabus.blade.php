@@ -33,16 +33,7 @@
                             <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Program</label>
-                        <div class="col-md-6">
-                            <select name="program" class="form-control">
-                                @foreach($programs as $program)
-                                    <option value="{{ $program->id }}">{{ $program->program_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label class="control-label col-md-3">Status</label>
                         <div class="col-md-6">

@@ -34,17 +34,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Program</label>
-                        <div class="col-md-6">
-                            <select name="program" class="form-control program">
-                                <option value="">Select Your Program</option>
-                                @foreach($programs as $p)
-                                    <option @if($syllabus->program_id == $p->id) selected @endif value="{{ $p->id }}">{{ $p->program_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Status</label>
