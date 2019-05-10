@@ -15,6 +15,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('roll');
             $table->string('full_name', 100);
             $table->string('father_name', 100);
             $table->string('mother_name', 100);

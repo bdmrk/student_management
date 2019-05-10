@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\Enum\EnrollCourseStatusEnum;
 use App\Helpers\Enum\MonthEnum;
+use App\Models\EnrolledCourse;
 use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -93,7 +95,6 @@ class SemesterController extends Controller
             $semester->semester_name = $request->input('semester_name');
             $semester->start_date = $request->input('starting_date');
             $semester->end_date = $request->input('ending_date');
-            $semester->status = $request->input('status');
             $semester->save();
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
@@ -111,6 +112,13 @@ class SemesterController extends Controller
     {
         try {
             $semester = Semester::findOrFail($id);
+            $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
+                ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
+                ->where('offers.semester_id', $semester->id)->get();
+
+            if ($hasRunningCourse) {
+                return  redirect()->back()->with('errorMessage', "Failed. Some student enrolled under this semester");
+            }
             $semester->delete();
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
@@ -124,6 +132,16 @@ class SemesterController extends Controller
         try {
             $semester =  Semester::find($request->id);
             $semester->status = !$semester->status;
+
+            $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
+                ->whereIn('enrolled_course.status', [EnrollCourseStatusEnum::Running,EnrollCourseStatusEnum::Retake])
+                ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
+                ->where('offers.semester_id', $semester->id)->get();
+
+            if ($hasRunningCourse) {
+                return  redirect()->back()->with('errorMessage', "Failed. This Semester has some running student course");
+            }
+
             $semester->save();
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");

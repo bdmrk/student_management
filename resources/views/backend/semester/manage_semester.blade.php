@@ -12,7 +12,9 @@
                     <h4 class="text-center"> Manage Semester </h4>
                 </div>
                 <div class="panel-body">
-                    <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+                    <div class="col-md-9 pull-right">
+                        @include('backend.includes.message')
+                    </div>
                     <table class="table table-bordered">
                         <tr class="bg-primary">
                             <th>SL NO</th>

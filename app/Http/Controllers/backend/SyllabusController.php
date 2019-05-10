@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\Enum\EnrollCourseStatusEnum;
 use App\Http\Helpers;
+use App\Models\EnrolledCourse;
 use App\Models\Syllabus;
 use App\Models\Program;
 use Illuminate\Http\Request;
@@ -103,7 +105,6 @@ class SyllabusController extends Controller
         $request->validate([
             'syllabus_name' => 'required|max:255',
             'description' => 'max:500',
-            'status' => 'required'
         ]);
 
         try {
@@ -116,7 +117,6 @@ class SyllabusController extends Controller
             $syllabus->syllabus_name = $request->input('syllabus_name');
             $syllabus->description = $request->input('description');
             $syllabus->program_id = 1;
-            $syllabus->status = $request->input('status');
             $syllabus->save();
         } catch(\Exception $exception) {
             return redirect()->back()->withInput()->with('errorMessage', 'Something went wrong. please try again');
@@ -134,6 +134,13 @@ class SyllabusController extends Controller
     public function destroy($id)
     {
         $syllabus = Syllabus::find($id);
+        $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
+            ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
+            ->where('offers.syllabus_id', $syllabus->id)->get();
+
+        if ($hasRunningCourse) {
+            return  redirect()->back()->with('errorMessage', "Failed. Some Student enrolled under this syllabus.");
+        }
         $syllabus->delete();
         return redirect()->route('syllabus.index')->with('message', "Syllabus Deleted Successfully");
     }
@@ -142,9 +149,20 @@ class SyllabusController extends Controller
 
         $syllabus =  Syllabus::find($request->id);
         $isActiveSyllabus = Syllabus::where('id', '<>', $syllabus->id)->where('status', true)->first();
+
         if ($isActiveSyllabus instanceof Syllabus && !$syllabus->status) {
             return redirect()->back()->with('errorMessage', 'Failed. Another syllabus already active');
         }
+                                                            
+        $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
+            ->whereIn('enrolled_course.status', [EnrollCourseStatusEnum::Running,EnrollCourseStatusEnum::Retake])
+            ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
+            ->where('offers.syllabus_id', $syllabus->id)->get();
+
+        if ($hasRunningCourse) {
+          return  redirect()->back()->with('errorMessage', "Failed. This syllabus has some running student course");
+        }
+
         $syllabus->status = !$syllabus->status;
         $syllabus->save();
         return redirect()->back()->with('successMessage', 'Syllabus status change successfully');;

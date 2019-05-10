@@ -506,6 +506,8 @@ class StudentController extends Controller
             $student = Student::where('status', StudentStatus::Selected)->where('id', $id)->first();
             if ($student instanceof Student) {
                 $student->status = StudentStatus::Admitted;
+                $staudentRoll = time();
+                $student->roll = $staudentRoll;
                 $student->save();
                 return redirect()->back()->with('successMessage', "Student Admitted successfully");
             }
