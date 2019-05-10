@@ -46,29 +46,29 @@
                                 <td>{{$teacher->gender}}</td>
                                 <td>{{$teacher->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 
-                                <td>
+                                <td style="width: 150px">
 
                                     @if($teacher->status ==1)
-                                        <a href="{{route('teacher.inactive',['id'=>$teacher->id])}}" class="btn btn-info btn-xs">
-                                            <span class="glyphicon glyphicon-arrow-up"></span>
+                                        <a href="{{route('teacher.inactive',['id'=>$teacher->id])}}" class="btn btn-info btn-xs d-inline" title="Click to inactive teacher">
+                                            <span class="glyphicon glyphicon-arrow-up icon"></span>
                                         </a>
                                     @else
-                                        <a href="{{route('teacher.active',['id'=>$teacher->id])}}" class="btn btn-warning btn-xs">
-                                            <span class="glyphicon glyphicon-arrow-down"></span>
+                                        <a href="{{route('teacher.active',['id'=>$teacher->id])}}" class="btn btn-warning btn-xs d-inline" title="Click to inactive teacher">
+                                            <span class="glyphicon glyphicon-arrow-down icon icon"></span>
                                         </a>
                                     @endif
 
-                                    <a href="{{route('teachers.show',['id'=>$teacher->id])}}" class="btn btn-success btn-xs d-inline">
-                                        <span class="glyphicon glyphicon-zoom-in"></span>
+                                    <a href="{{route('teachers.show',['id'=>$teacher->id])}}" class="btn btn-success btn-xs d-inline" title="Click to see details">
+                                        <span class="glyphicon glyphicon-zoom-in icon"></span>
                                     </a>
 
-                                    <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-success btn-xs d-inline">
-                                        <span class="glyphicon glyphicon-edit"></span>
+                                    <a href="{{route('teachers.edit',['id'=>$teacher->id])}}" class="btn btn-primary btn-xs d-inline" title="Click to edit teacher">
+                                        <span class="glyphicon glyphicon-edit icon"></span>
                                     </a>
-                                    <form method="post" action="{{ route('teachers.destroy', ($teacher->id)) }}">
+                                    <form method="post" action="{{ route('teachers.destroy', ($teacher->id)) }}" style="display:inline" title="Click to delete teacher">
                                         {{ csrf_field() }}
                                         {{ method_field("delete") }}
-                                        <button class="btn btn-danger btn-xs d-inline"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
+                                        <button class="btn btn-danger btn-xs d-inline"> <span class="glyphicon glyphicon-trash icon" onclick="return confirm('Are you sure!!')"></span></button>
                                     </form>
                                 </td>
 

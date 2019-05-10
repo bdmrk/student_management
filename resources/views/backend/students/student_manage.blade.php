@@ -15,7 +15,9 @@ ManageStudent
             <div class="panel-body">
 
                 <h4 class="text-center text-success">{{Session::get('message')}}</h4>
+
                 {!! $dataTable->table() !!}
+
             </div>
         </div>
     </div>

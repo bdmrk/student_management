@@ -39,22 +39,22 @@
                                 <td>
 
                                     @if($offer->status ==1)
-                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-info btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-up"></span>
+                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-info btn-xs d-inline" title="Click to inactive this offer">
+                                            <span class="glyphicon glyphicon-arrow-up icon"></span>
                                         </a>
                                     @else
-                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-warning btn-xs pull-left">
-                                            <span class="glyphicon glyphicon-arrow-down"></span>
+                                        <a href="{{ route('offer.change-status', $offer->id) }}" class="btn btn-warning btn-xs d-inline" title="Click to active this offer">
+                                            <span class="glyphicon glyphicon-arrow-down icon"></span>
                                         </a>
                                     @endif
 
-                                    <a href="{{route('offer.edit',['id'=>$offer->id])}}" class="btn btn-success btn-xs pull-left">
-                                        <span class="glyphicon glyphicon-edit"></span>
+                                    <a href="{{route('offer.edit',['id'=>$offer->id])}}" class="btn btn-success btn-xs d-inline" title="Click to edit this offer">
+                                        <span class="glyphicon glyphicon-edit icon"></span>
                                     </a>
-                                    <form method="post" action="{{ route('offer.destroy', ($offer->id)) }}">
+                                    <form method="post" action="{{ route('offer.destroy', ($offer->id)) }}" style="display: inline" title="click to delete this offer">
                                         {{ csrf_field() }}
                                         {{ method_field("delete") }}
-                                        <button class="btn btn-danger btn-xs pull-left"> <span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure!!')"></span></button>
+                                        <button class="btn btn-danger btn-xs"> <span class="glyphicon glyphicon-trash icon" onclick="return confirm('Are you sure!!')"></span></button>
                                     </form>
                                 </td>
                             </tr>
