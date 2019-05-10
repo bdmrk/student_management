@@ -21,4 +21,9 @@ class Syllabus extends Model
     {
         return $query->where('status', true);
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'syllabus_id');
+    }
 }

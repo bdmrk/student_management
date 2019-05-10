@@ -4,7 +4,13 @@
     Marks Entry
 @endsection
 
+
+
+
 @section('body')
+
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -18,8 +24,13 @@
                         </div>
                     </div>
 
+
+
                     <div class="row">
                         <div lass="col-md-12">
+                            @if($course > 0)
+                                <p class="text-center"> No student is enrolled here! </p>
+                            @else
                             <table class="table">
                                 <tr>
                                     <th>Student Name</th>
@@ -54,11 +65,11 @@
                                
 
                             </table>
+                                @endif
                         </div>
                     </div>
-
-                    
                 </div>
+
 
             </div>
         </div>

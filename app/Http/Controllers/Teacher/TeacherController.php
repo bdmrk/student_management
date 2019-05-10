@@ -19,7 +19,7 @@ class TeacherController extends Controller
 {
     public function dashboard()
     {
-//        dd($data);
+
         $data['offers'] = Offer::with(['course', 'semester', 'syllabus' => function($query) {
             return $query->where('status', true);
         }])->where('teacher_id', auth()->user()->id)->get();
@@ -36,6 +36,7 @@ class TeacherController extends Controller
 
     public function marksEntry()
     {
+        $data['course'] = EnrolledCourse::all()->count();
         $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer' => function($query) {
             $query->with('course')->where('teacher_id', auth()->guard('teacher')->user()->id);
         }])->where('status', EnrollStatusEnum::Running)->get();

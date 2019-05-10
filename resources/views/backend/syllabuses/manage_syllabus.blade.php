@@ -49,6 +49,12 @@ ManageSyllabus
                             <a href="{{route('syllabus.edit',['id'=>$syllabus->id])}}" class="btn btn-success btn-xs d-inline" title="Click to edit this syllabus">
                                 <span class="glyphicon glyphicon-edit icon"></span>
                             </a>
+
+                                <a href="{{route('syllabus.show',['id'=>$syllabus->id])}}" class="btn btn-info btn-xs d-inline" title="Click to see details this syllabus">
+                                    <span class="glyphicon glyphicon-zoom-in icon"></span>
+                                </a>
+
+
                             <form method="post" action="{{ route('syllabus.destroy', ($syllabus->id)) }}" style="display: inline" title="Click to delete this syllabus">
                                 {{ csrf_field() }}
                                 {{ method_field("delete") }}

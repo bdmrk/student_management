@@ -2,7 +2,7 @@
 @extends('backend.admin_master')
 
 @section('title')
-    Teacher Details
+    Student Details
 @endsection
 
 @section('body')
@@ -44,8 +44,12 @@
                                                 Personal Information</a>
                                         </li>
                                         <li>
+                                            <a href="#tab_default_3" data-toggle="tab">
+                                                Present Course</a>
+                                        </li>
+                                        <li>
                                             <a href="#tab_default_4" data-toggle="tab">
-                                                Enrolled Course </a>
+                                                Previous Course </a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -54,12 +58,14 @@
 
                                             <div class="row">
                                                 <div class="col-sm-4">
+
                                                     <div class="form-group">
-                                                        <label for="name">Full Name:</label>
-                                                        <p> {{$teacher->full_name}}</p>
+                                                        <label for="father">Designation :</label>
+                                                        <p>{{$teacher->designation}}</p>
                                                     </div>
+
                                                     <div class="form-group">
-                                                        <label for="father">Father's Name :</label>
+                                                        <label for="father_name">Father's Name:</label>
                                                         <p>{{$teacher->father_name}}</p>
                                                     </div>
                                                     <div class="form-group">
@@ -93,20 +99,12 @@
 
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="permanent">Designation:</label>
-                                                        <p>{{$teacher->designation}}</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="religion">Status:</label>
-
-                                                        @if($teacher->status == 1)
-                                                        <p>Active</p>
-
+                                                        <label for="permanent">Status</label>
+                                                        @if($teacher == true)
+                                                            <p>Active</p>
                                                             @else
-                                                            <p>Terminated</p>
-
-
-                                                        @endif
+                                                        <p>Terminated</p>
+                                                            @endif
                                                     </div>
 
                                                 </div>
@@ -115,10 +113,79 @@
 
 
                                         </div>
+                                        <div class="tab-pane" id="tab_default_3">
 
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="bs-example widget-shadow" data-example-id="bordered-table">
+
+                                                        <table class="table table-bordered"> <thead>
+                                                            <tr>
+                                                                <th>#</th>
+
+                                                                <th>Course Name</th>
+                                                                <th>Semester</th>
+                                                                <th>Syllabus</th>
+                                                                <th>Result</th>
+                                                            </tr>
+
+                                                            </thead>
+                                                            <tbody>
+                                                            @php($i=1)
+                                                            @foreach($enroll as $en)
+                                                                <tr>
+                                                                    <th scope="row">{{$i++}}</th>
+                                                                    <td>{{$en->course->course_name}}</td>
+
+
+                                                                </tr>
+                                                            @endforeach
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
 
+                                        <div class="tab-pane" id="tab_default_4">
 
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <br>
+                                                    <table class="table table-bordered"> <thead>
+                                                        <tr>
+                                                            <th>#</th>
+
+                                                            <th>Course Name</th>
+                                                            <th>Incourse Mark</th>
+                                                            <th>Final Mark</th>
+                                                            <th>CGPA</th>
+                                                            <th>Grade</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @php($i=1)
+                                                        @foreach($enroll as $course)
+                                                            <tr>
+                                                                <th scope="row">{{$i++}}</th>
+                                                                <td>{{$course->offer->course->course_name}}</td>
+                                                                <td>{{$course->incourse_mark}}</td>
+                                                                <td>{{$course->final_mark}}</td>
+                                                                <td>{{$course->cgpa}}</td>
+                                                                <td>{{$course->grade}}</td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -129,8 +196,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 @endsection
 
 @section('scripts')
