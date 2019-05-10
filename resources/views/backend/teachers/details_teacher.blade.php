@@ -126,16 +126,18 @@
                                                                 <th>Course Name</th>
                                                                 <th>Semester</th>
                                                                 <th>Syllabus</th>
-                                                                <th>Result</th>
                                                             </tr>
 
                                                             </thead>
+
                                                             <tbody>
                                                             @php($i=1)
-                                                            @foreach($enroll as $en)
+                                                            @foreach($currentCourses as $course)
                                                                 <tr>
                                                                     <th scope="row">{{$i++}}</th>
-                                                                    <td>{{$en->course->course_name}}</td>
+                                                                    <td>{{$course->course_name}}</td>
+                                                                    <td>{{$course->semester_name}}</td>
+                                                                    <td>{{$course->syllabus_name}}</td>
 
 
                                                                 </tr>
@@ -159,23 +161,21 @@
                                                             <th>#</th>
 
                                                             <th>Course Name</th>
-                                                            <th>Incourse Mark</th>
-                                                            <th>Final Mark</th>
-                                                            <th>CGPA</th>
-                                                            <th>Grade</th>
+                                                            <th>Semester</th>
+                                                            <th>Syllabus</th>
+
 
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         @php($i=1)
-                                                        @foreach($enroll as $course)
+                                                        @foreach($previousCourses as $course)
                                                             <tr>
                                                                 <th scope="row">{{$i++}}</th>
-                                                                <td>{{$course->offer->course->course_name}}</td>
-                                                                <td>{{$course->incourse_mark}}</td>
-                                                                <td>{{$course->final_mark}}</td>
-                                                                <td>{{$course->cgpa}}</td>
-                                                                <td>{{$course->grade}}</td>
+                                                                <td>{{$course->course_name}}</td>
+                                                                <td>{{$course->semseter_name}}</td>
+                                                                <td>{{$course->syllabus_name}}</td>
+
                                                             </tr>
                                                         @endforeach
 

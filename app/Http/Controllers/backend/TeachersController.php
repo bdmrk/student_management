@@ -98,35 +98,35 @@ class TeachersController extends Controller
 
         $data['previousCourses'] = EnrolledCourse::select(
             'enrolled_course.*',
-            'semester.semester_name',
+            'semesters.semester_name',
             'courses.course_name',
             'syllabus.syllabus_name'
 
         )
             ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
-            ->leftJoin('semester', 'semester.id', '=', 'offers.semester_id')
+            ->leftJoin('semesters', 'semesters.id', '=', 'offers.semester_id')
             ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
-            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus')
+            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus_id')
             ->where('enrolled_course.teacher_id', $id)
             ->where('syllabus.status', false)
-            ->where('semester.status', false)
+            ->where('semesters.status', false)
             ->get();
 
 
         $data['currentCourses'] = EnrolledCourse::select(
             'enrolled_course.*',
-            'semester.semester_name',
+            'semesters.semester_name',
             'courses.course_name',
             'syllabus.syllabus_name'
 
         )
             ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
-            ->leftJoin('semester', 'semester.id', '=', 'offers.semester_id')
+            ->leftJoin('semesters', 'semesters.id', '=', 'offers.semester_id')
             ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
-            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus')
+            ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus_id')
             ->where('enrolled_course.teacher_id', $id)
             ->where('syllabus.status', true)
-            ->where('semester.status', true)
+            ->where('semesters.status', true)
             ->get();
 
         return view('backend.teachers.details_teacher', $data);
