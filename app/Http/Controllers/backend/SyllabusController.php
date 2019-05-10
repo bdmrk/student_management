@@ -136,7 +136,7 @@ class SyllabusController extends Controller
         $syllabus = Syllabus::find($id);
         $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
             ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-            ->where('offers.syllabus_id', $syllabus->id)->get();
+            ->where('offers.syllabus_id', $syllabus->id)->first();
 
         if ($hasRunningCourse) {
             return  redirect()->back()->with('errorMessage', "Failed. Some Student enrolled under this syllabus.");
@@ -157,7 +157,7 @@ class SyllabusController extends Controller
         $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
             ->whereIn('enrolled_course.status', [EnrollCourseStatusEnum::Running,EnrollCourseStatusEnum::Retake])
             ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-            ->where('offers.syllabus_id', $syllabus->id)->get();
+            ->where('offers.syllabus_id', $syllabus->id)->first();
 
         if ($hasRunningCourse) {
           return  redirect()->back()->with('errorMessage', "Failed. This syllabus has some running student course");

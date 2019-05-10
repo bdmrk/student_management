@@ -128,7 +128,7 @@ class SemesterController extends Controller
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
-        return redirect('backend/semester');
+        return redirect()->back()->with('successMessage', 'Semester deleted successfully');
 
     }
 

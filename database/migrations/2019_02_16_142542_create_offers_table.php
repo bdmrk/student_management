@@ -25,7 +25,6 @@ class CreateOffersTable extends Migration
             $table->time('class_time');
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
-            $table->softDeletes();
             $table->boolean('status');
 
 

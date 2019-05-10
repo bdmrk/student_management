@@ -21,7 +21,6 @@ class CreateSyllabusTable extends Migration
             $table->integer('program_id');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
