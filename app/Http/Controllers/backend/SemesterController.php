@@ -41,7 +41,13 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
+
+
         try {
+            $isActiveSemester = Semester::where('status', true)->first();
+            if ($isActiveSemester instanceof Semester) {
+                return redirect()->back()->withInput()->with('errorMessage', 'Failed. Please inactive old semester before creating new semester');
+            }
             $semester = new Semester();
             $semester->semester_name = $request->input('semester_name');
             $semester->start_date = $request->input('start_date');
@@ -50,7 +56,6 @@ class SemesterController extends Controller
             $semester->created_by = Auth::user()->id;
             $semester->save();
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
 
@@ -114,7 +119,7 @@ class SemesterController extends Controller
             $semester = Semester::findOrFail($id);
             $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
                 ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-                ->where('offers.semester_id', $semester->id)->get();
+                ->where('offers.semester_id', $semester->id)->first();
 
             if ($hasRunningCourse) {
                 return  redirect()->back()->with('errorMessage', "Failed. Some student enrolled under this semester");
@@ -131,16 +136,23 @@ class SemesterController extends Controller
     {
         try {
             $semester =  Semester::find($request->id);
-            $semester->status = !$semester->status;
 
             $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
                 ->whereIn('enrolled_course.status', [EnrollCourseStatusEnum::Running,EnrollCourseStatusEnum::Retake])
                 ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-                ->where('offers.semester_id', $semester->id)->get();
+                ->where('offers.semester_id', $semester->id)->first();
+
+            $activeSemester = Semester::where('status', true)->where('id',"<>",$request->id)->first();
+            if($activeSemester instanceof Semester && $semester->status == 0) {
+                return  redirect()->back()->with('errorMessage', "Failed. You can't a Semester while another is active");
+
+            }
 
             if ($hasRunningCourse) {
                 return  redirect()->back()->with('errorMessage', "Failed. This Semester has some running student course");
             }
+            $semester->status = !$semester->status;
+
 
             $semester->save();
         } catch (\Exception $exception) {
