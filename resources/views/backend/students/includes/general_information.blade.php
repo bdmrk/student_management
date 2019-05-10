@@ -48,7 +48,7 @@
     <div class="form-group">
         <label class="control-label col-md-4">Password : </label>
         <div class="col-md-6">
-            <input type="password" name="password" value="{{ old("password") }}" class="form-control" required placeholder="123456"/>
+            <input type="password" name="password"  class="form-control" required placeholder="123456"/>
             <span class="text-info">Min 6 characters and max 10 characters</span>
             <span class="text-danger">{{$errors->has('email') ? $errors->first('password') : ''}}</span>
         </div>
@@ -58,8 +58,8 @@
         <label class="control-label col-md-4">Gender : </label>
         <div class="col-sm-2">
             <select name="gender" value="{{ old("gender") }}" required id="gender" class="form-control1">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Male" @if(old('gender') == "Male") selected @endif>Male</option>
+                <option value="Female" @if(old('gender') == "Female") selected @endif>Female</option>
             </select>
             <span class="text-danger">{{$errors->has('gender') ? $errors->first('gender') : ''}}</span>
         </div>
@@ -67,12 +67,11 @@
 
         <label class="control-label col-md-2">Religion : </label>
         <div class="col-sm-2">
-            <select name="religion" value="{{ old("religion") }}" required id="religion" class="form-control1">
-                <option>Islam</option>
-                <option>Hindu</option>
-                <option>Christian</option>
-                <option>buddha</option>
-                <option>Other</option>
+            <select name="religion"  required id="religion" class="form-control1">
+                @foreach( $religions as $religion)
+                    <option value="{{ $religion }}" @if(old('religion') == $religion) selected @endif>{{ $religion }}</option>
+                @endforeach
+
             </select>
             <span class="text-danger">{{$errors->has('religion') ? $errors->first('religion') : ''}}</span>
         </div>
@@ -81,20 +80,16 @@
     <div class="form-group form-inline">
         <label class="control-label col-md-4">Blood Group : </label>
         <div class="col-sm-2">
-            <select name="blood_group" value="{{ old("blood_group") }}" id="blood_group" class="form-control1">
-                <option value="A+">A+</option>
-                <option alue="A-">A-</option>
-                <option alue="B+">B+</option>
-                <option alue="B-">B-</option>
-                <option alue="O+">O+-</option>
-                <option alue="O-">O--</option>
-                <option alue="AB+">AB+-</option>
-                <option alue="AB-">AB-</option>
+            <select name="blood_group" id="blood_group" class="form-control1">
+                @foreach( $bloods as $blood)
+                    <option value="{{ $blood }}" @if(old('blood_group') == $blood)  selected @endif>{{$blood}}</option>
+                @endforeach
             </select>
             <span class="text-danger">{{$errors->has('blood_group') ? $errors->first('blood_group') : ''}}</span>
         </div>
 
         <label class="control-label col-md-2">Nationality : </label>
+        
         <div class="col-md-2">
             <input type="text" required name="nationality" value="{{ old("nationality") }}" class="form-control1" placeholder="Nationality"/>
             <span class="text-danger">{{$errors->has('nationality') ? $errors->first('nationality') : ''}}</span>
@@ -111,21 +106,21 @@
     <div class="form-group">
         <label class="control-label col-md-4">Present Address : </label>
         <div class="col-md-6">
-            <textarea type="text" required name="present_address" value="{{ old("present_address") }}"  class="form-control"> </textarea>
+            <textarea type="text" required name="present_address"  class="form-control">{{ old("present_address") }}</textarea>
             <span class="text-danger">{{$errors->has('present_address') ? $errors->first('present_address') : ''}}</span>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-4">Permanent Address : </label>
         <div class="col-md-6">
-            <textarea type="text" required name="permanent_address" value="{{ old("permanent_address") }}" class="form-control"> </textarea>
+            <textarea type="text" required name="permanent_address" class="form-control">{{ old("permanent_address") }}</textarea>
             <span class="text-danger">{{$errors->has('permanent_address') ? $errors->first('permanent_address') : ''}}</span>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-4">Student Photo : </label>
         <div class="col-md-6">
-            <input type="file" required name="student_photo" accept="image/*"/>
+            <input type="file" required value="{{old('student_photo')}}" name="student_photo" accept="image/*"/>
             <span class="text-danger">{{$errors->has('student_photo') ? $errors->first('student_photo') : ''}}</span>
         </div>
     </div>

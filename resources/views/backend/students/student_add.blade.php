@@ -38,11 +38,49 @@
                     <div class="form-grids row widget-shadow " data-example-id="basic-forms">
                         <div class="form-title">
                             <h4>Upload Your Certificates  Here : </h4>
+
+                        </div>
+                                <br>
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-sm-6">
+                               <span class="text-muted">Max file size 512kb</span>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label class="control-label col-md-2">SSC <span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="file"  name="ssc[certificate]" required accept="image/*" placeholder="Please Upload Certificate"/>
+                                <span class="text-danger">{{$errors->has('ssc.certificate') ? $errors->first('ssc.certificate') : ''}}</span>
+
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <input type="file"  name="certificates[]" accept="image/*" placeholder="Please Upload Certificate" multiple/>
-                            <span class="text-danger">{{$errors->has('student_photo') ? $errors->first('student_photo') : ''}}</span>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">HSC <span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="file"  name="hsc[certificate]" required accept="image/*" placeholder="Please Upload Certificate"/>
+                                <span class="text-danger">{{$errors->has('hsc.certificate') ? $errors->first('hsc.certificate') : ''}}</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Graduation <span class="text-danger">*</span> </label>
+                            <div class="col-sm-6">
+                                <input type="file"  name="honours[certificate]" accept="image/*" required placeholder="Please Upload Certificate"/>
+                                <span class="text-danger">{{$errors->has('honours.certificate') ? $errors->first('honours.certificate') : ''}}</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Post Graduation</label>
+                            <div class="col-sm-6">
+                                <input type="file"  name="masters[certificate]" accept="image/*" placeholder="Please Upload Certificate"/>
+                                <span class="text-danger">{{$errors->has('masters.certificate') ? $errors->first('masters.certificate') : ''}}</span>
+
+                            </div>
                         </div>
 
 

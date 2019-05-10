@@ -25,6 +25,7 @@ class CreateAcademicInformationsTable extends Migration
             $table->string('group', 100)->nullable();
             $table->string('passing_year', 100)->nullable();
             $table->string('course_duration', 100)->nullable();
+            $table->string('certificate', 100)->nullable();
             $table->integer('crated_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
