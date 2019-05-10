@@ -40,22 +40,7 @@
                             <span class="text-danger">{{$errors->has('ending_date') ? $errors->first('ending_date') : ''}}</span>
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Status</label>
-                        <div class="col-md-6">
-
-                            @if($semester->status)
-                                <label><input type="radio"  checked name="status" value="1"/>Active</label>
-                                <label><input type="radio"  name="status" value="0"/>Inactive</label>
-                            @else
-                                <label><input type="radio"   name="status" value="1"/>Active</label>
-                                <label><input type="radio" checked name="status" value="0"/>Inactive</label>
-                            @endif
-
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-3">
