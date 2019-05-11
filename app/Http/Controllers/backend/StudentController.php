@@ -534,7 +534,18 @@ class StudentController extends Controller
         } catch (\Exception $exception) {
             return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
         }
-        return redirect('backend/students');
+        return redirect()->route('students.index')->with('successMessase', 'student removed successfully');
+    }
+
+    public function delete($id)
+    {
+        try {
+            $student = Student::findOrFail($id);
+            $student->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->with("errorMessage", "Failed. Something went wrong!");
+        }
+        return redirect()->route('students.index')->with('successMessase', 'student removed successfully');
     }
 
     public function changeStatus(Request $request)

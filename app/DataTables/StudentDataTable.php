@@ -36,9 +36,14 @@ class StudentDataTable extends DataTable
 
             }
 
+
             $action .= "<a title='Click to edit student' class='btn btn-warning btn-xs d-inline ' href='".route('students.edit', $student->id)."'> <span class=\"glyphicon glyphicon-edit icon\"></span></a>";
 
             $action .= "<a title='Click to see details' class='btn btn-success btn-xs d-inline ' href='".route('students.show', $student->id)."'><span class=\"glyphicon glyphicon-zoom-in icon\"></span></a>";
+           if($student->status !== StudentStatus::Admitted){
+               $action .= "<a title='Click to delete student' class='btn btn-danger btn-xs d-inline ' href='".route('student.delete', $student->id)."'> <span class=\"glyphicon glyphicon-trash icon\"></span></a>";
+           }
+
             return $action;
         });
 
@@ -68,7 +73,7 @@ class StudentDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '100px'])
+                    ->addAction(['width' => '130px'])
                     ->parameters($this->getBuilderParameters());
     }
 

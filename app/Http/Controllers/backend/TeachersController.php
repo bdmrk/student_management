@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\EnrolledCourse;
+use App\Models\Offer;
 use App\Models\Teacher;
 use function foo\func;
 use Illuminate\Http\Request;
@@ -95,36 +96,34 @@ class TeachersController extends Controller
     {
         $data['teacher'] = Teacher:: find($id);
 
-
-        $data['previousCourses'] = EnrolledCourse::select(
-            'enrolled_course.*',
+        $data['previousCourses'] = Offer::select(
+            'offers.*',
             'semesters.semester_name',
             'courses.course_name',
             'syllabus.syllabus_name'
 
         )
-            ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
             ->leftJoin('semesters', 'semesters.id', '=', 'offers.semester_id')
             ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
             ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus_id')
-            ->where('enrolled_course.teacher_id', $id)
+            ->where('offers.teacher_id', $id)
             ->where('syllabus.status', false)
             ->where('semesters.status', false)
             ->get();
 
 
-        $data['currentCourses'] = EnrolledCourse::select(
-            'enrolled_course.*',
+        $data['currentCourses'] = Offer::select(
+            'offers.*',
             'semesters.semester_name',
             'courses.course_name',
             'syllabus.syllabus_name'
 
         )
-            ->leftJoin('offers', 'offers.id', '=', 'enrolled_course.offer_id')
+
             ->leftJoin('semesters', 'semesters.id', '=', 'offers.semester_id')
             ->leftJoin('courses', 'courses.id', '=', 'offers.course_id')
             ->leftJoin('syllabus', 'syllabus.id', '=', 'offers.syllabus_id')
-            ->where('enrolled_course.teacher_id', $id)
+            ->where('offers.teacher_id', $id)
             ->where('syllabus.status', true)
             ->where('semesters.status', true)
             ->get();

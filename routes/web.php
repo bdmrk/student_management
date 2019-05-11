@@ -15,6 +15,7 @@ Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
         Route::get('/student/change-status/{id}', 'backend\StudentController@changeStatus')->name('student.change-status');
         Route::get('/student/select/{id}', 'backend\StudentController@selectStudent')->name('student.select');
         Route::get('/student/admitted/{id}', 'backend\StudentController@admittedStudent')->name('student.admitted');
+        Route::get('/student/delete/{id}', 'backend\StudentController@delete')->name('student.delete');
         Route::resource('/students', 'backend\StudentController');
 
 

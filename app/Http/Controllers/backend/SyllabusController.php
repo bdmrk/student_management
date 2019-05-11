@@ -77,7 +77,8 @@ class SyllabusController extends Controller
      */
     public function show($id)
     {
-        return view('backend.syllabuses.details_syllabus');
+        $data['syllabus'] = Syllabus::findOrFail($id);
+        return view('backend.syllabuses.details_syllabus', $data);
     }
 
     /**
@@ -104,7 +105,7 @@ class SyllabusController extends Controller
     {
         $request->validate([
             'syllabus_name' => 'required|max:255',
-            'description' => 'max:500',
+            'description' => 'max:1500',
         ]);
 
         try {
@@ -136,7 +137,7 @@ class SyllabusController extends Controller
         $syllabus = Syllabus::find($id);
         $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
             ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-            ->where('offers.syllabus_id', $syllabus->id)->get();
+            ->where('offers.syllabus_id', $syllabus->id)->first();
 
         if ($hasRunningCourse) {
             return  redirect()->back()->with('errorMessage', "Failed. Some Student enrolled under this syllabus.");
@@ -157,7 +158,7 @@ class SyllabusController extends Controller
         $hasRunningCourse = EnrolledCourse::select('enrolled_course.*')
             ->whereIn('enrolled_course.status', [EnrollCourseStatusEnum::Running,EnrollCourseStatusEnum::Retake])
             ->leftJoin('offers', 'offers.id', 'enrolled_course.offer_id')
-            ->where('offers.syllabus_id', $syllabus->id)->get();
+            ->where('offers.syllabus_id', $syllabus->id)->first();
 
         if ($hasRunningCourse) {
           return  redirect()->back()->with('errorMessage', "Failed. This syllabus has some running student course");

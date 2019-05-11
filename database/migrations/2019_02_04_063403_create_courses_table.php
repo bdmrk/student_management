@@ -22,7 +22,6 @@ class CreateCoursesTable extends Migration
             $table->integer('syllabus_id');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
-            $table->softDeletes();
             $table->boolean('status');
             $table->timestamps();
         });

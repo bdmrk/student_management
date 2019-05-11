@@ -80,7 +80,11 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="gender">Gender:</label>
-                                                        <p>{{$teacher->gender}}</p>
+                                                        @if ($teacher->gender == 1)
+                                                             <p>Male</p>
+                                                             @else
+                                                            <p>Female</p>
+                                                             @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="phone">Phone:</label>
@@ -100,7 +104,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="permanent">Status</label>
-                                                        @if($teacher == true)
+                                                        @if($teacher->status == 1)
                                                             <p>Active</p>
                                                             @else
                                                         <p>Terminated</p>
@@ -109,16 +113,15 @@
 
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                         <div class="tab-pane" id="tab_default_3">
 
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="bs-example widget-shadow" data-example-id="bordered-table">
-
+                                                        @if(!count($currentCourses))
+                                                            <p class="text-center" c>There is no offered course belong here</p>
+                                                        @else
                                                         <table class="table table-bordered"> <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -138,13 +141,12 @@
                                                                     <td>{{$course->course_name}}</td>
                                                                     <td>{{$course->semester_name}}</td>
                                                                     <td>{{$course->syllabus_name}}</td>
-
-
                                                                 </tr>
                                                             @endforeach
 
                                                             </tbody>
                                                         </table>
+                                                            @endif
                                                     </div>
 
                                                 </div>
@@ -156,6 +158,9 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <br>
+                                                    @if(!count($previousCourses))
+                                                        <p class="text-center">There is no previous course belogs to this teacher</p>
+                                                    @else
                                                     <table class="table table-bordered"> <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -181,6 +186,7 @@
 
                                                         </tbody>
                                                     </table>
+                                                        @endif
 
                                                 </div>
                                             </div>

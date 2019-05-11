@@ -21,7 +21,6 @@ class CreateSemestersTable extends Migration
             $table->tinyInteger('status');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

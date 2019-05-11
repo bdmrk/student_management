@@ -43,7 +43,15 @@
                                 <td>
                                     <img src="{{asset($teacher->teacher_photo)}}" alt="photo" height="70" width="70">
                                 </td>
-                                <td>{{$teacher->gender}}</td>
+                                <td>@if($teacher->gender == 1)
+
+                                    <p>Male</p>
+                                        @else
+                                    <p>Female</p>
+                                        @endif
+                                </td>
+
+
                                 <td>{{$teacher->status ==1 ? 'Active' : 'Inactive'}}</td>
                                 
                                 <td style="width: 150px">

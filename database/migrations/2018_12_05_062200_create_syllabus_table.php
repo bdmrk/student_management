@@ -16,12 +16,11 @@ class CreateSyllabusTable extends Migration
         Schema::create('syllabus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('syllabus_name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('status');
             $table->integer('program_id');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

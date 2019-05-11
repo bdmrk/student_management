@@ -33,8 +33,12 @@ class OfferController extends Controller
      */
     public function create()
     {
+
         $data['programs'] = Program::all();
         $data['syllabus'] = $syllabus = Syllabus::active()->first();
+        if(!$syllabus instanceof Syllabus) {
+            return redirect()->back()->with('errorMessase', 'Please Cerate an active syllabus');
+        }
         $data['courses'] = $course = Course::active()->where('syllabus_id', $syllabus->id)->get();
         $data['days'] = ClassDayEnum::getValues();
 
