@@ -28,7 +28,7 @@
 
                     <div class="row">
                         <div lass="col-md-12">
-                            @if($course <= 0)
+                            @if(!count($courses))
                                 <p class="text-center"> No student is enrolled here! </p>
                             @else
                             <table class="table">

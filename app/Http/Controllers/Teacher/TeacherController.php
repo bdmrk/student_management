@@ -36,10 +36,11 @@ class TeacherController extends Controller
 
     public function marksEntry()
     {
-        $data['course'] = EnrolledCourse::all()->count();
         $data['courses'] = EnrolledCourse::with(['enroll.semester','student','offer' => function($query) {
             $query->with('course')->where('teacher_id', auth()->guard('teacher')->user()->id);
         }])->where('status', EnrollStatusEnum::Running)->get();
+
+//        dd($data['courses']);
         return view('teacher.marks-entry', $data);
     }
 
