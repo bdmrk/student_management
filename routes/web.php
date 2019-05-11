@@ -18,14 +18,14 @@ Route::get('/dashboard', 'backend\AdminConroller@dashboard')->name('dash');
         Route::get('/student/delete/{id}', 'backend\StudentController@delete')->name('student.delete');
         Route::resource('/students', 'backend\StudentController');
 
-
+        Route::get('/semester/change-enrollment','backend\SemesterController@changeEnrollment')->name('semester.active_enrollment');
         Route::resource('/semester', 'backend\SemesterController');
         Route::get('/semester/change-status/{id}', 'backend\SemesterController@changeStatus')->name('semester.change-status');
-       
+
+
 
         Route::resource('/teachers', 'backend\TeachersController');
 
-       // Route::get('/teacher/change-status/{id}', 'backend\TeachersController@changeStatus')->name('teacher.change-status');
 
         Route::get('teacher/active/{id}','backend\TeachersController@activeStatus')->name('teacher.active');
         Route::get('teacher/inactive/{id}','backend\TeachersController@inactiveStatus')->name('teacher.inactive');
