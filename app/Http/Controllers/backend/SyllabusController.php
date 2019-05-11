@@ -77,7 +77,8 @@ class SyllabusController extends Controller
      */
     public function show($id)
     {
-        return view('backend.syllabuses.details_syllabus');
+        $data['syllabus'] = Syllabus::findOrFail($id);
+        return view('backend.syllabuses.details_syllabus', $data);
     }
 
     /**
@@ -104,7 +105,7 @@ class SyllabusController extends Controller
     {
         $request->validate([
             'syllabus_name' => 'required|max:255',
-            'description' => 'max:500',
+            'description' => 'max:1500',
         ]);
 
         try {
