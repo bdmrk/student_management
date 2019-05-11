@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Helpers\Enum\EnrollCourseStatusEnum;
 use App\Helpers\Enum\EnrollStatusEnum;
 use App\Models\Enroll;
 use App\Models\EnrolledCourse;
@@ -26,33 +27,134 @@ class StudentController extends Controller
 
     public function enroll()
     {
+
         $enrolledSemesterId = Enroll::where('student_id', Auth::guard('student')->user()->id)
             ->orderBy('id', 'desc')
             ->get()->pluck('semester_id');
 
-        $availbaleSemester = Semester::whereNotIn('id', $enrolledSemesterId)->orderBy('id', 'asc')->first();
+        $semester = Semester::active()->first();
+        $data['semester'] =  $semester;
 
-        $hasRunningCourse = Enroll::where('status', EnrollStatusEnum::Running)
+        $enrollCourse = EnrolledCourse::where('student_id', Auth::guard('student')->user()->id)->pluck('course_id');
+
+        $offers = Offer::with(['preRequisiteCourse', 'course'])->whereNotIn('course_id', $enrollCourse->toArray())->where('semester_id', $semester->id)->get();
+
+        $availableOffer = [];
+        foreach ($offers as $offer) {
+            if(count($offer->preRequisiteCourse))  {
+                $preRcourse = $offer->preRequisiteCourse->pluck('prerequisite_course_id')->toArray();
+                $matchcourse = array_intersect($preRcourse, $enrollCourse->toArray());
+                if($matchcourse != $preRcourse){
+                    continue;
+                }
+            }
+            array_push($availableOffer, $offer);
+        }
+        $failedCourses = EnrolledCourse::with(['course'])->where('status', EnrollCourseStatusEnum::Failed)->get();
+
+        $data['failedcourses']  = $failedCourses;
+
+        $hasEnrolledCurrentSemester = Enroll::where('semester_id', $semester->id)
                     ->where('student_id', Auth::guard('student')->user()->id)
-                    ->orderBy('id', 'desc')
                     ->first();
 
-        if ($hasRunningCourse  instanceof  Enroll) {
-            $errorMessage = "Sorry. You do not complete current semester courses.";
+
+        if ($hasEnrolledCurrentSemester  instanceof  Enroll) {
+            $errorMessage = "Sorry. You have already enrolled current semester.";
             return redirect()->back()->with('errorMessage', $errorMessage);
         }
         
-        if ($availbaleSemester instanceof  Semester) {
-           $data['semester'] = $availbaleSemester;
-           $data['offers'] = Offer::with(['course', 'course.syllabus' => function($query) {
-               $query->where('status', 1);
-           }])->where('semester_id', $availbaleSemester->id)->get();
-          
+        if ($semester instanceof  Semester) {
+            $data['offers'] = $availableOffer;
         } else {
-            $errorMessage = "Sorry. You have enrolled all semester courses.";
+            $errorMessage = "Sorry. There is no available course to enroll.";
             return redirect()->back()->with('errorMessage', $errorMessage);
         }
         return view('student.enroll_form', $data);
+    }
+
+    public function editEnrollment($semesterId) {
+
+        $data['semester'] = $semester = Semester::active()->first();
+
+        if (!$semester instanceof Semester) {
+              return redirect()->back()->with('errorMessage', "Sorry, You are not able to edit enrollment");
+        }
+
+        $enrollCourse = EnrolledCourse::where('student_id', Auth::guard('student')->user()->id)->where('semester_id', '<>', $semester->id)->pluck('course_id');
+
+        $offers = Offer::with(['preRequisiteCourse', 'course'])->whereNotIn('course_id', $enrollCourse->toArray())->where('semester_id', $semester->id)->get();
+
+        $availableOffer = [];
+        foreach ($offers as $offer) {
+            if(count($offer->preRequisiteCourse))  {
+                $preRcourse = $offer->preRequisiteCourse->pluck('prerequisite_course_id')->toArray();
+                $matchcourse = array_intersect($preRcourse, $enrollCourse->toArray());
+                if($matchcourse != $preRcourse){
+                    continue;
+                }
+            }
+            array_push($availableOffer, $offer);
+        }
+        $data['offers'] = $availableOffer;
+
+
+
+        return view('student.edit_enrollment', $data);
+    }
+
+    public function updateEnroll(Request $request)
+    {
+
+        $request->validate([
+            'course' => 'required',
+            'semester' => 'required'
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $enroll =  Enroll::where('semester_id', $request->input('semester'))
+                ->where('student_id', Auth::guard('student')->user()->id)->first();
+            $enroll->status = "Running";
+            $enroll->payment_status = false;
+            $enroll->save();
+            $count = count($request->input('course'));
+            $offers = Offer::with('course')->whereIn('id', $request->input('course'))->get();
+            $courses = [];
+            $now = Carbon::now();
+            $totalCourseFee = 0;
+
+            EnrolledCourse::where('semester_id', $enroll->semester_id)->delete();
+
+            foreach ($offers as $offer) {
+                $course = [];
+                $course['enroll_id'] = $enroll->id;
+                $course['student_id'] = $enroll->student_id;
+                $course['course_id'] = $offer->course_id;
+                $course['semester_id'] = $offer->semester_id;
+                $course['offer_id'] = $offer->id;
+                $course['course_fee'] = $offer->course_fee;
+                $totalCourseFee += $offer->course_fee;
+                $course['status'] = "Running";
+                $course['teacher_id'] = $offer->teacher_id;
+                $course['created_at'] = $now;
+                $course['updated_at'] = $now;
+                array_push($courses, $course);
+            }
+
+            EnrolledCourse::insert($courses);
+            $enroll->bill_amount = $totalCourseFee;
+            $enroll->save();
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->with('errorMessage', "Failed. Something went wrong.");
+
+        }
+        
+        return redirect()->back()->with('successMessage', "Enroll Updated successfully.");
     }
 
     public function store(Request $request)
@@ -83,6 +185,8 @@ class StudentController extends Controller
                 $course['enroll_id'] = $enroll->id;
                 $course['student_id'] = $enroll->student_id;
                 $course['offer_id'] = $offer->id;
+                $course['course_id'] = $offer->course_id;
+                $course['semester_id'] = $offer->semester_id;
                 $course['course_fee'] = $offer->course_fee;
                 $totalCourseFee += $offer->course_fee;
                 $course['status'] = "Running";

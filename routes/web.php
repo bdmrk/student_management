@@ -71,6 +71,8 @@ Route::prefix('student')->middleware('auth:student')->group (
     function() {
         Route::get('/dashboard', 'Student\StudentController@dashboard')->name('student-dash');
         Route::get('/enroll', 'Student\StudentController@enroll')->name('student-enroll');
+        Route::get('/edit-enroll/{semester_id}', 'Student\StudentController@editEnrollment')->name('student-edit-enroll');
+        Route::post('/update-enroll', 'Student\StudentController@updateEnroll')->name('student-update-enroll');
         Route::post('/enroll', 'Student\StudentController@store')->name('enroll.store');
         Route::get('/semester', 'Student\StudentController@enrolledSemester')->name('enroll.semester');
         Route::get('/print-payment-slip/{enroll_id}', 'Student\StudentController@printPaymentSlip')->name('student.print.payment-slip');

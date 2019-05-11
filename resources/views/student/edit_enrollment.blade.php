@@ -1,7 +1,7 @@
 @extends('student.student_master')
 
 @section('title')
-   Enroll New Course
+    Enroll New Course
 @endsection
 
 @section('body')
@@ -17,7 +17,7 @@
                             @include('backend.includes.message')
                         </div>
                     </div>
-                    {{Form::open(['route'=>'enroll.store', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
+                    {{Form::open(['route'=>'student-update-enroll', 'method'=>'POST', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])}}
 
                     <div class="form-group">
                         <label class="control-label col-md-3">Semester : </label>
@@ -28,16 +28,15 @@
                             <span class="text-danger">{{$errors->has('semester') ? $errors->first('semester') : ''}}</span>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="control-label col-md-3">Course : </label>
                         <div class="col-md-6">
+
                             @foreach($offers as $offer)
                                 <input type="checkbox" value="{{ $offer->id }}" name="course[]" />  {{ $offer->course->course_name }}
                             @endforeach
-                                @foreach($failedCourses as $enroll)
-                                    <input type="checkbox" value="{{ $enroll->offer_id }}" name="course[]" />  {{ $enroll->course->course_name }}
-                                @endforeach
+
                         </div>
                     </div>
 

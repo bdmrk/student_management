@@ -34,7 +34,13 @@
                                         <td>{{ $enroll->status }}</td>
                                         <td>{{ $enroll->cgpa }}</td>
                                         <td>{{ $enroll->grade }}</td>
-                                        <td class="text-center"><a href="{{route('student.print.payment-slip', $enroll->id)}}" class="btn btn-info">Print Payment Slip</a> </td>
+                                        <td class="text-center">
+                                            <a href="{{route('student.print.payment-slip', $enroll->id)}}" target="__blank" class="btn btn-info">Print Payment Slip</a>
+                                             @if($enroll->semester->status)
+                                                <a href="{{route('student-edit-enroll', $enroll->semester->id)}}" class="btn btn-primary">Edit Enrollment</a>
+                                             @endif
+                                        </td>
+
                                     </tr>
                                 @endforeach
 

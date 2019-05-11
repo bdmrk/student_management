@@ -17,6 +17,8 @@ class CreateEnrolledCourseTable extends Migration
             $table->increments('id');
             $table->integer('student_id');
             $table->integer('enroll_id');
+            $table->integer('course_id');
+            $table->integer('semester_id');
             $table->integer('offer_id');
             $table->integer('incourse_mark')->default(0);
             $table->integer('final_mark')->default(0);

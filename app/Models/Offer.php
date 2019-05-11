@@ -24,5 +24,8 @@ class Offer extends Model
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
+    public function preRequisiteCourse() {
+        return $this->hasMany(  CoursePrerequisite::class, 'course_id','course_id');
+    }
 
 }
