@@ -19,6 +19,7 @@ class CreateSemestersTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->tinyInteger('status');
+            $table->boolean('active_enrollment')->default(false);
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
             $table->timestamps();

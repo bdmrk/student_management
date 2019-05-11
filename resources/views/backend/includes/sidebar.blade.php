@@ -90,29 +90,6 @@
                     </ul>
                 </li>
 
-                {{--<li class="treeview">--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="far fa-clipboard"></i>--}}
-                        {{--<span>Exam</span>--}}
-                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
-                    {{--</a>--}}
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="#"><i class="fa fa-angle-right"></i> Add Exam</a></li>--}}
-                        {{--<li><a href="#"><i class="fa fa-angle-right"></i> Manage Exam </a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-
-                {{--<li class="treeview">--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fas fa-marker"></i>--}}
-                        {{--<span>Marks</span>--}}
-                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
-                    {{--</a>--}}
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="#"><i class="fa fa-angle-right"></i> Add Marks</a></li>--}}
-                        {{--<li><a href="#"><i class="fa fa-angle-right"></i> Manage Marks </a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
 
                 <li class="treeview">
                     <a href="#">
@@ -123,6 +100,12 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ route('report.show-bill') }}"><i class="fa fa-angle-right"></i>Show Bill</a></li>
                     </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="{{route('semester.active_enrollment')}}">
+                        <i class="fas fa-tachometer-alt"></i> <span>Enroll</span>
+                    </a>
                 </li>
 
             </ul>

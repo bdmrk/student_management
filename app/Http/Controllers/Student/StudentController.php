@@ -52,7 +52,7 @@ class StudentController extends Controller
         }
         $failedCourses = EnrolledCourse::with(['course'])->where('status', EnrollCourseStatusEnum::Failed)->get();
 
-        $data['failedcourses']  = $failedCourses;
+        $data['failedCourses']  = $failedCourses;
 
         $hasEnrolledCurrentSemester = Enroll::where('semester_id', $semester->id)
                     ->where('student_id', Auth::guard('student')->user()->id)

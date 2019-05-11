@@ -161,5 +161,19 @@ class SemesterController extends Controller
         return redirect()->route('semester.index');
     }
 
+    public function changeEnrollment() {
+        $aciveEnrollment = Semester::active()->first();
+
+        if($aciveEnrollment instanceof Semester) {
+            $aciveEnrollment->active_enrollment = !$aciveEnrollment->active_enrollment;
+            $aciveEnrollment->save();
+
+        }
+        return redirect()->back()->with('sucessMessage', 'Enrolled status changed successfully');
+
+    }
+
+
+
 }
 
