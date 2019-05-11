@@ -212,7 +212,7 @@ class StudentController extends Controller
 
     public function enrolledSemester()
     {
-        $data['enrolledSemester'] = Enroll::all();
+        $data['enrolledSemester'] = Enroll::where('student_id', auth()->guard('student')->user()->id)->get();
         return view('student.student_semester', $data);
     }
 
