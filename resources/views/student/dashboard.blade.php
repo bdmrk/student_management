@@ -12,7 +12,9 @@
                     <h3 class=""> Enrolled Course </h3>
                 </div>
                 <div class="panel-body">
-                    <a href="{{route('student-enroll')}}" class="btn btn-success pull-right">Enroll a New Course</a>
+                    @if(auth()->guard('student')->user()->status == \App\Helpers\Enum\StudentStatus::Admitted)
+                        <a href="{{route('student-enroll')}}" class="btn btn-success pull-right">Enroll a New Course</a>
+                    @endif
                     <div class="row">
                         <div class="col-md-9 pull-right">
                             @include('backend.includes.message')
